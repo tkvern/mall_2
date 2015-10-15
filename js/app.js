@@ -12,13 +12,15 @@
 		loginInfo = loginInfo || {};
 		loginInfo.account = loginInfo.account || '';
 		loginInfo.password = loginInfo.password || '';
-		if (loginInfo.account.length < 5) {
-			return callback('账号最短为 5 个字符');
+		if (loginInfo.account.length < 11) {
+			return callback('账号最短为 11 个字符');
 		}
 		if (loginInfo.password.length < 6) {
 			return callback('密码最短为 6 个字符');
 		}
-		var users = JSON.parse(localStorage.getItem('$users') || '[]');
+		
+		//连接服务器验证账号密码
+		var users = JSON.parse(localStorage.getItem(loginInfo.account) || '[]');
 		var authed = users.some(function(user) {
 			return loginInfo.account == user.account && loginInfo.password == user.password;
 		});
@@ -45,19 +47,29 @@
 		regInfo = regInfo || {};
 		regInfo.account = regInfo.account || '';
 		regInfo.password = regInfo.password || '';
-		if (regInfo.account.length < 5) {
-			return callback('用户名最短需要 5 个字符');
+		regInfo.verifyCode = regInfo.verifyCode || '';
+		if (regInfo.account.length < 11) {
+			return callback('手机号最短需要 11 个字符');
 		}
 		if (regInfo.password.length < 6) {
 			return callback('密码最短需要 6 个字符');
 		}
-		if (!checkEmail(regInfo.email)) {
-			return callback('邮箱地址不合法');
+		if (regInfo.verifyCode != "123456") {
+			return callback('请输入验证码: 123456');
 		}
-		var users = JSON.parse(localStorage.getItem('$users') || '[]');
-		users.push(regInfo);
-		localStorage.setItem('$users', JSON.stringify(users));
-		return callback();
+		
+		//连接服务器验证账号密码
+		var users = JSON.parse(localStorage.getItem(regInfo.account) || '[]');
+		var authed = users.some(function(user) {
+			return regInfo.account == user.account;
+		});
+		if (!authed) {
+			users.push(regInfo);
+			localStorage.setItem(regInfo.account, JSON.stringify(users));
+			return callback();
+		} else {
+			return callback('手机号已被注册');
+		}
 	};
 
 	/**
@@ -79,21 +91,57 @@
 		//owner.setSettings(settings);
 	};
 
-	var checkEmail = function(email) {
-		email = email || '';
-		return (email.length > 3 && email.indexOf('@') > -1);
+	var checkAccount = function(account) {
+		account = account || '';
+		return (account.length >= 11);
 	};
 
 	/**
 	 * 找回密码
 	 **/
-	owner.forgetPassword = function(email, callback) {
+	owner.forgetPassword = function(account, callback) {
 		callback = callback || $.noop;
-		if (!checkEmail(email)) {
-			return callback('邮箱地址不合法');
+		if (!checkAccount(account)) {
+			return callback('手机号码不合法');
 		}
-		return callback(null, '新的随机密码已经发送到您的邮箱，请查收邮件。');
+		$.openWindow({
+			url: 'reset_password.html',
+			id: account,
+			show: {
+				aniShow: 'pop-in'
+			},
+			styles: {
+				popGesture: 'hide'
+			},
+			waiting: {
+				autoShow: false
+			}
+		});
+		//此处调用服务器API发送验证码
+		return callback(null, '验证码：123456 \n已经发送到您的手机，请查收。');
 	};
+		
+	/**
+	 * 重置密码
+	 **/
+	owner.resetPassword = function(resetInfo, callback){
+		callback = callback || $.noop;
+		resetInfo = resetInfo || {};
+		resetInfo.account = resetInfo.account || '';
+		resetInfo.password = resetInfo.password || '';
+		resetInfo.verifyCode = resetInfo.verifyCode || '';
+		if (resetInfo.account.length < 11) {
+			return callback('手机号出现错误');
+		}
+		if (resetInfo.password.length < 6) {
+			return callback('密码最短需要 6 个字符');
+		}
+		if (resetInfo.verifyCode != "123456") {
+			return callback('请输入验证码: 123456');
+		}
+		//连接服务器做修改同时验证API返回的验证码
+		return callback();
+	}
 
 	/**
 	 * 获取应用本地配置

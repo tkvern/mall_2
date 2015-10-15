@@ -125,6 +125,18 @@ body {
 .mui-btn {
 	padding: 10px;
 }
+.mui-input-row #verifyCode{
+	width: 60%;
+}
+.mui-input-row #sendCode{
+	width: 38%;
+	padding: 9px 15px 10px 15px;
+	font-size: 15px;
+	margin: 1px 1px 1px 1px;
+}
+.mui-input-row.sendCode .mui-icon.mui-icon-clear{
+	right: 38%;
+}
 
 /* setting */
 html,
