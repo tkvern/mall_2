@@ -443,6 +443,20 @@ body {
 }
 
 /* main */
+.mui-content {
+	padding-top: 60px!important;
+}
+.scontent{
+	padding-top: 60px!important;
+}
+.mui-bar.mui-bar-tab.bottom{
+	position: fixed;
+	z-index: 10;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 99;
+}
 .mui-bar .mui-btn-link i{
 	line-height: 44px;
 }

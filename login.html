@@ -53,7 +53,17 @@
 		<script>
 			(function($, doc) {
 				$.init({
-					statusBarBackground: '#f7f7f7'
+					statusBarBackground: '#f7f7f7',
+					preloadPages:[
+				    {
+				      url: "reg.html",
+				      id: "reg",
+				    },
+				    {
+				      url: "forget_password.html",
+				      id: "forget_password",
+				    }
+				  ]
 				});
 				$.plusReady(function() {
 					var showGuide = plus.storage.getItem("lauchFlag");
@@ -80,7 +90,13 @@
 					var state = app.getState();
 					var mainPage = $.preload({
 						"id": 'main',
-						"url": 'main.html'
+						"url": 'main.html',
+						extras:{
+							subpages:[{
+								"id": 'home',
+								"url": 'plus/home.html',
+							}]
+						}
 					});
 					var toMain = function() {
 						$.fire(mainPage, 'show', null);
@@ -88,7 +104,7 @@
 							$.openWindow({
 								id: 'main',
 								show: {
-									aniShow: 'fade-in'
+									aniShow: 'pop-in'
 								},
 								waiting: {
 									autoShow: false
