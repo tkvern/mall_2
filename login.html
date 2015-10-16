@@ -56,6 +56,25 @@
 					statusBarBackground: '#f7f7f7'
 				});
 				$.plusReady(function() {
+					var showGuide = plus.storage.getItem("lauchFlag");
+					if(showGuide){
+						//有值，说明已经显示过了，无需显示；
+						//关闭splash页面；
+						plus.navigator.closeSplashscreen();
+						plus.navigator.setFullscreen(false);
+					}else{
+						//显示启动导航
+						mui.openWindow({
+							id:'guide',
+							url:'plus/guide.html',
+							show:{
+								aniShow:'fade-in'
+							},
+							waiting:{
+								autoShow:false
+							}
+						});
+					}
 					plus.screen.lockOrientation("portrait-primary");
 					var settings = app.getSettings();
 					var state = app.getState();
