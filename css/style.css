@@ -441,3 +441,86 @@ body {
 		transform: none;
 	}
 }
+
+/* main */
+.mui-bar .mui-btn-link i{
+	line-height: 44px;
+}
+.post{
+	position: relative;
+	margin-bottom: 30px;
+	padding-bottom: 40px;
+	background-color: #fff;
+	-webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
+	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
+}
+.post-title{
+	position:absolute;
+	font-size:24px;
+	z-index:9;
+	bottom:12px;
+	left:0;
+	right:0;
+	text-align:center;
+	margin:0;
+}
+.post-title a{
+	color: #777;
+}
+.tag-ad .post-featured-image{
+	padding-top: 75%;
+}
+.post-featured-image{
+	position: relative;
+	padding-top: 62.5%;
+	overflow: hidden;
+}
+.post-featured-image .thumbnail{
+	margin-bottom:0;
+	padding:12px;
+	border-top-right-radius:0;
+	border-top-left-radius:0;
+	border-bottom-right-radius:0;
+	border-bottom-left-radius:0;
+	border:none;
+	position:absolute;
+	width:100%;
+	top:0;
+	left:0
+}
+.mui-bar-tab .tab-item {
+	display: table-cell;
+	overflow: hidden;
+	width: 1%;
+	height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #929292
+}
+.mui-bar-tab .tab-item.active {
+	color: #007aff
+}
+.mui-bar-tab .tab-item .mui-icon {
+	top: 3px;
+	width: 24px;
+	height: 24px;
+	padding-top: 0;
+	padding-bottom: 0
+}
+.mui-bar-tab .tab-item .mui-icon~.mui-tab-label {
+	font-size: 11px;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis
+}
+.mui-bar-tab .tab-item .mui-icon:active {
+	background: 0 0
+}
+.mui-content-padded p{
+	padding: 0px 15px;
+}
+.mui-bar.mui-bar-tab{
+	box-shadow: 0 -1px 6px #ccc;
+}
