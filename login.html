@@ -58,10 +58,28 @@
 				    {
 				      url: "reg.html",
 				      id: "reg",
+				      show: {
+								aniShow: 'pop-in'
+							},
+							styles: {
+								popGesture: 'hide'
+							},
+							waiting: {
+								autoShow: false
+							}
 				    },
 				    {
 				      url: "forget_password.html",
 				      id: "forget_password",
+				      show: {
+								aniShow: 'pop-in'
+							},
+							styles: {
+								popGesture: 'hide'
+							},
+							waiting: {
+								autoShow: false
+							}
 				    }
 				  ]
 				});
@@ -100,17 +118,15 @@
 					});
 					var toMain = function() {
 						$.fire(mainPage, 'show', null);
-						setTimeout(function() {
-							$.openWindow({
-								id: 'main',
-								show: {
-									aniShow: 'pop-in'
-								},
-								waiting: {
-									autoShow: false
-								}
-							});
-						}, 0);
+						$.openWindow({
+							id: 'main',
+							show: {
+								aniShow: 'pop-in'
+							},
+							waiting: {
+								autoShow: false
+							}
+						});
 					};
 					// close splash
 					setTimeout(function() {
@@ -177,7 +193,7 @@
 								autoShow: false
 							}
 						});
-					}, false);
+					}, true);
 
 					var backButtonPress = 0;
 					$.back = function(event) {
