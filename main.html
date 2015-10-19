@@ -19,25 +19,25 @@
 	</head>
 
 	<body>
-		
-		<nav class="mui-bar mui-bar-tab bottom">
-		  <li class="tab-item active">
+		<nav class="mui-bar mui-bar-tab">
+		  <li class="mui-tab-item mui-active" id="home">
 				<span class="mui-icon fa fa-home fa-2x"></span>
 				<span class="mui-tab-label">首页</span>
 			</li>
-			<li class="tab-item" id="walk">
+			<li class="mui-tab-item" id="walk">
 				<span class="mui-icon fa fa-rocket fa-2x"></span>
 				<span class="mui-tab-label">走街串巷</span>
 			</li>
-			<li class="tab-item" id="coupons">
+			<li class="mui-tab-item" id="coupons">
 				<span class="mui-icon fa fa-credit-card fa-2x"></span>
 				<span class="mui-tab-label">优惠券</span>
 			</li>
-			<li class="tab-item" id="setting">
+			<li class="mui-tab-item" id="setting">
 				<span class="mui-icon fa fa-user fa-2x"></span>
 				<span class="mui-tab-label">我的</span>
 			</li>
 		</nav>
+
 		<script src="js/mui.min.js"></script>
 		<script src="js/app.js"></script>
 		<script>
@@ -47,49 +47,58 @@
 					statusBarBackground: '#f7f7f7',
 					gestureConfig: {
 						doubletap: true
-					},
-					subpages: [{
+					}
+				});
+				var settings = app.getSettings();
+				var account = doc.getElementById('account');
+
+				
+				$.plusReady(function() {
+					var self = plus.webview.currentWebview();
+					var pages = [{
 						id: 'home',
 						url: 'plus/home.html',
 						styles: {
 							top: '0px',
 							bottom: '50px'
 						}
-					}]
-				});
-				
-				var settings = app.getSettings();
-				var account = doc.getElementById('account');
-				$.plusReady(function() {
-					var walkPage = $.preload({
-						"id" : 'walk',
-						"url" : 'plus/walk.html'
-					})
-					var couponsPage = $.preload({
-						"id" : 'coupons',
-						"url" : 'plus/coupons.html'
-					})
-					var settingPage = $.preload({
-						"id": 'setting',
-						"url": 'plus/setting.html'
-					});
-					//设置
+					},{
+						id: 'setting',
+						url: 'plus/setting.html',
+						styles: {
+							top: '0px',
+							bottom: '50px'
+						}
+					}];
+					for (var i = 0; i < 2; i++){
+						var sub = plus.webview.create(pages[i].url, pages[i].id, pages[i].styles);
+						if (i > 0){
+							sub.hide();
+						}
+						self.append(sub);
+					}
+
+					var homeButton = doc.getElementById('home');
 					var walkButton = doc.getElementById('walk');
 					var couponsButton = doc.getElementById('coupons');
 					var settingButton = doc.getElementById('setting');
+					homeButton.addEventListener('tap', function(event) {
+						plus.webview.show('home');
+						plus.webview.hide('setting');
+						
+					});
 					walkButton.addEventListener('tap', function(event) {
-						console.log("walk");
+						
 						
 					});
 					couponsButton.addEventListener('tap', function(event) {
-						console.log("coupons");
 						
 					});
 					settingButton.addEventListener('tap', function(event) {
-						console.log("setting");
-						
+						plus.webview.show('setting');
+						plus.webview.hide('home');
 					});
-					//--
+					
 					$.oldBack = mui.back;
 					var backButtonPress = 0;
 					$.back = function(event) {
