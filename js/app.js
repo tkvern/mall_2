@@ -19,7 +19,7 @@
 			return callback('密码最短为 6 个字符');
 		}
 		
-		//连接服务器验证账号密码
+		//连接服务器验证账号密码 同时设置缓存
 		var users = JSON.parse(localStorage.getItem(loginInfo.account) || '[]');
 		var authed = users.some(function(user) {
 			return loginInfo.account == user.account && loginInfo.password == user.password;
@@ -86,9 +86,9 @@
 	owner.setState = function(state) {
 		state = state || {};
 		localStorage.setItem('$state', JSON.stringify(state));
-		//var settings = owner.getSettings();
-		//settings.gestures = '';
-		//owner.setSettings(settings);
+		var settings = owner.getSettings();
+		settings.gestures = '';
+		owner.setSettings(settings);
 	};
 
 	var checkAccount = function(account) {

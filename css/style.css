@@ -562,9 +562,6 @@ body {
 .mui-bar-tab .tab-item .mui-icon:active {
 	background: 0 0
 }
-.mui-content-padded p{
-	padding: 0px 15px;
-}
 .mui-bar.mui-bar-tab{
 	box-shadow: 0 -1px 6px #ccc;
 }
