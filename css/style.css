@@ -528,14 +528,23 @@ body {
 }
 .collect .badge.type{
 	position: absolute;
-	right: 10px;
+	right: -3px;
 	top: 15px;
-	font-size: 30px;
+	font-size: 28px;
 	transform:rotate(19deg);
 	-webkit-transform: rotate(19deg);
 }
+.collect .title{
+	max-width: 75px;
+}
 .badge-danger{
 	background-color: #dd524d;
+}
+.badge-warning{
+	background-color: #f0ad4e;
+}
+.badge-primary{
+	background-color: #007aff;
 }
 .post-title a{
 	color: #777;

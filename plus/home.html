@@ -9,6 +9,8 @@
 		<link rel="stylesheet" href="../css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../css/bootstrap-theme.min.css" />
 		<link rel="stylesheet" href="../css/font-awesome.min.css" />
+		<link rel="stylesheet" href="css/mui.listpicker.css" />
+		<link rel="stylesheet" href="css/mui.poppicker.css" />
 		<link rel="stylesheet" href="../css/style.css" />
 		<script>
 			function imgLoaded(img) {
@@ -26,37 +28,38 @@
 		</header>
 		<div class="mui-content" id="content">
 			<div class="container">
-				<div class="row" id="post-list">
+				<div class="row" id="plist">
 					<div class="col-xs-12 col-md-6">
-				    <article class="post tag-ad">
+				    <article class="post tag-ad" id="grap.html?shop=1" onclick="clicked(this.id);">
 				    	<h2 class="post-title">
-				    		<a href="#" target="_blank">大足印象</a>
+				    		<a target="_blank">大足印象</a>
 				    	</h2>
-				        <div class="post-featured-image">
-			            <a class="thumbnail loaded" href="#" target="_blank">
-			              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
-			            </a>
-				        </div>
+			        <div class="post-featured-image">
+		            <a class="thumbnail loaded" target="_blank">
+		              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
+		            </a>
+			        </div>
+				    </article>
+					</div>
+					<div class="col-xs-12 col-md-6">
+				    <article class="post tag-ad" id="grap.html?shop=2" onclick="clicked(this.id);">
+				    	<h2 class="post-title">
+				    		<a target="_blank">茂田家园</a>
+				    	</h2>
+			        <div class="post-featured-image">
+		            <a class="thumbnail loaded" target="_blank">
+		              <img src="http://static.bootcss.com/expo/img/e/93/06ce7866570d459fc6132b823d9f2.png" width="800" height="600" alt="猎聘网" onload="imgLoaded(this)">
+		            </a>
+			        </div>
 				    </article>
 					</div>
 					<div class="col-xs-12 col-md-6">
 				    <article class="post tag-ad">
 				    	<h2 class="post-title">
-				    		<a href="#" target="_blank">茂田家园</a>
+				    		<a target="_blank">建设中...</a>
 				    	</h2>
 			        <div class="post-featured-image">
-		            <a class="thumbnail loaded" href="#" target="_blank">
-		              <img src="http://static.bootcss.com/expo/img/e/93/06ce7866570d459fc6132b823d9f2.png" width="800" height="600" alt="猎聘网" onload="imgLoaded(this)">
-		            </a>
-			        </div>
-				    </article>
-					</div><div class="col-xs-12 col-md-6">
-				    <article class="post tag-ad">
-				    	<h2 class="post-title">
-				    		<a href="#" target="_blank">建设中...</a>
-				    	</h2>
-			        <div class="post-featured-image">
-		            <a class="thumbnail loaded" href="#" target="_blank">
+		            <a class="thumbnail loaded" target="_blank">
 		              <img src="http://static.bootcss.com/expo/img/1/fe/f36d7232d5e063f2de4f144c6749a.png" width="800" height="600" alt="Bootstrap求职招聘" onload="imgLoaded(this)">
 		            </a>
 			        </div>
@@ -65,10 +68,14 @@
 				</div>
 			</div>
 		</div>
-		
+				
 		<script src="js/mui.min.js"></script>
 		<script src="js/app.js"></script>
 		<script>
+			function imgLoaded(img) {
+        var imgWrapper = img.parentNode;
+        imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
+      }
 			// H5 plus事件处理
 			var as='fade-in';// 默认窗口动画
 			function plusReady(){
@@ -105,6 +112,79 @@
 				setTimeout(function(){
 					plus.navigator.closeSplashscreen();
 				},500);
+			}
+			
+			function preateWebivew(id){
+				if(!preate[id]){
+					var w=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
+					preate[id]=w;
+					w.addEventListener('close',function(){//页面关闭后可再次打开
+						_openw=null;
+						preate[id]&&(preate[id]=null);//兼容窗口的关闭
+					},false);
+				}
+			}
+			// 处理点击事件
+			var _openw=null;
+			function clicked(id,a,s){
+				if(_openw){return;}
+				a||(a=as);
+				_openw=preate[id];
+				if(_openw){
+					_openw.showded=true;
+					_openw.show(a,null,function(){
+						_openw=null;//避免快速点击打开多个页面
+					});
+				}else{
+					var wa=plus.nativeUI.showWaiting();
+					_openw=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
+					preate[id]=_openw;
+					_openw.addEventListener('loaded',function(){//叶面加载完成后才显示
+						setTimeout(function(){//延后显示可避免低端机上动画时白屏
+							wa.close();
+							_openw.showded=true;
+							s||_openw.show(a,null,function(){
+								_openw=null;//避免快速点击打开多个页面
+							});
+							s&&(_openw=null);//避免s模式下变量无法重置
+						},10);
+					},false);
+					_openw.addEventListener('close',function(){//页面关闭后可再次打开
+						_openw=null;
+						preate[id]&&(preate[id]=null);//兼容窗口的关闭
+					},false);
+				}
+			}
+			// 预创建二级页面
+			var preate={};
+			function preateWebviews(){
+				preateWebivew('plus/grap.html');
+				var plist=document.getElementById('plist').children;
+				// 由于启动是预创建过多Webview窗口会消耗较长的时间，所以这里限制仅创建5个
+				for( var i=0;i<plist.length&&i<2;i++){
+					var id=plist[i].id;
+					id&&(id.length>0)&&preateWebivew(id);
+				}
+			}
+			function preateWebivew(id){
+				if(!preate[id]){
+					var w=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
+					preate[id]=w;
+					w.addEventListener('close',function(){//页面关闭后可再次打开
+						_openw=null;
+						preate[id]&&(preate[id]=null);//兼容窗口的关闭
+					},false);
+				}
+			}
+			// 清除预创建页面(仅)
+			function preateClear(){
+				for(var p in preate){
+					var w=preate[p];
+					if(w&&w.showded&&!w.isVisible()){
+						w.close();
+						preate[p]=null;
+					}
+				}
 			}
 		</script>
 	</body>

@@ -30,6 +30,12 @@
 			return callback('用户名或密码错误');
 		}
 	};
+	
+	owner.loginTest = function(name,callback) {
+		//游客测试
+		//连接服务器验证账号密码 同时设置缓存
+		return owner.createState(name,callback);
+	};
 
 	owner.createState = function(name, callback) {
 		var state = owner.getState();

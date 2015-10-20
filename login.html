@@ -39,7 +39,8 @@
 				</ul>
 			</form>
 			<div class="mui-content-padded">
-				<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
+				<button id='login' class="mui-btn mui-btn-block mui-btn-primary col-sm-6">登录</button>
+				<button id='login_test' class="mui-btn mui-btn-block mui-btn-warning">游客模式</button>
 				<div class="link-area"><a id='reg'>注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
 				</div>
 			</div>
@@ -87,7 +88,10 @@
 				      subpages:[{
 					    	url: "plus/home.html",
 					      id: "home",
-				      }]
+				      }],
+							waiting: {
+								autoShow: false
+							}
 				    }
 				  ]
 				});
@@ -104,10 +108,10 @@
 							id:'guide',
 							url:'plus/guide.html',
 							show:{
-								aniShow:'pop-in'
+								aniShow:'fade-in'
 							},
 							waiting:{
-								autoShow:true
+								autoShow:false
 							}
 						});
 					}
@@ -131,7 +135,10 @@
 							},
 							preloadPages:[{
 								url: "plus/home.html",
-							  id: "home"
+							  id: "home",
+								waiting: {
+									autoShow: false
+								}
 							}]
 						});
 					};
@@ -145,6 +152,7 @@
 						plus.navigator.closeSplashscreen();
 					}, 600);
 					var loginButton = doc.getElementById('login');
+					var loginTestButton = doc.getElementById('login_test');
 					var accountBox = doc.getElementById('account');
 					var passwordBox = doc.getElementById('password');
 					var autoLoginButton = doc.getElementById("autoLogin");
@@ -160,6 +168,11 @@
 								plus.nativeUI.toast(err);
 								return;
 							}
+							toMain();
+						});
+					});
+					loginTestButton.addEventListener('tap', function(event) {
+						app.loginTest("游客", function(err) {
 							toMain();
 						});
 					});
