@@ -12,6 +12,12 @@
 		<link rel="stylesheet" href="../css/bootstrap.min.css" />
 		<link rel="stylesheet" href="../css/style.css" />
 		<link rel="stylesheet" type="text/css" href="../css/feedback-page.css" />
+		<script>
+			function imgLoaded(img) {
+        var imgWrapper = img.parentNode;
+        imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
+      }
+		</script>
 	</head>
 
 	<body>
@@ -45,37 +51,27 @@
 									<img class="mui-media-object mui-pull-left head-img" id="head-img" src="../images/cc.jpg">
 									<div class="mui-media-body">
 										小帽
-										<p class='mui-ellipsis'>茂号:<span id="account1"></span></p>
+										<p class='mui-ellipsis'>茂号:&nbsp;<span id="account1"></span></p>
 									</div>
 								</a>
+								<span class="mui-pull-right mui-icon fa fa-qrcode fa-2x qrcode">
+								</span>
 							</li>
 						</ul>
+						
 						<ul class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
-								<a href="#account" class="mui-navigate-right">账号与安全</a>
+								<a href="#collect" class="mui-navigate-right">优惠券</a>
 							</li>
 						</ul>
+						
 						<ul class="mui-table-view mui-table-view-chevron">
 							<li class="mui-table-view-cell">
-								<a href="#notifications" class="mui-navigate-right">新消息通知</a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a href="#privacy" class="mui-navigate-right">隐私</a>
-							</li>
-							<li class="mui-table-view-cell">
-								<a href="#general" class="mui-navigate-right">通用</a>
+								<a href="#set" class="mui-navigate-right">设置</a>
 							</li>
 						</ul>
-						<ul class="mui-table-view mui-table-view-chevron">
-							<li class="mui-table-view-cell">
-								<a href="#about" class="mui-navigate-right">关于茂号 <i class="mui-pull-right update">V1.0.0</i></a>
-							</li>
-						</ul>
-						<ul class="mui-table-view">
-							<li class="mui-table-view-cell" style="text-align: center;" id="exit">
-								<a>退出登录</a>
-							</li>
-						</ul>
+						
+						
 					</div>
 				</div>
 			</div>
@@ -181,6 +177,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<div id="notifications_disturb" class="mui-page">
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
@@ -206,6 +203,69 @@
 				</div>
 			</div>
 		</div>
+				
+		<div id="collect" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>我的
+				</button>
+				<h1 class="mui-center mui-title">优惠券</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll container">
+						<div class="row" id="post-list">
+							<div class="col-xs-12 col-sm-6">
+						    <article class="post tag-ad collect">
+						    	<h2 class="post-title" style="padding: 0px 10px;">
+						    		<span class="pull-left mui-badge mui-badge-danger">肯德基</span>
+						    		<span class="mui-badge mui-badge-danger">&nbsp;2015-09-09&nbsp;10:10</span>
+						    		<span class="pull-right">剩余<span class="mui-badge mui-badge-danger">500</span>张</span>
+						    	</h2>
+					        <div class="post-featured-image">
+				            <a class="thumbnail loaded" href="#" target="_blank">
+				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
+				            </a>
+					        </div>
+					        <span class="badge badge-danger type">￥50</span>
+						    </article>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+						    <article class="post tag-ad collect">
+						    	<h2 class="post-title" style="padding: 0px 10px;">
+						    		<span class="pull-left mui-badge mui-badge-danger">肯德基</span>
+						    		<span class="mui-badge mui-badge-danger">&nbsp;2015/09/09&nbsp;10:10</span>
+						    		<span class="pull-right">剩余<span class="mui-badge mui-badge-danger">50</span>张</span>
+						    	</h2>
+					        <div class="post-featured-image">
+				            <a class="thumbnail loaded" href="#" target="_blank">
+				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
+				            </a>
+					        </div>
+					        <span class="badge badge-danger type">￥500</span>
+						    </article>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+						    <article class="post tag-ad collect">
+						    	<h2 class="post-title" style="padding: 0px 10px;">
+						    		<span class="pull-left mui-badge">肯德基</span>
+						    		<span class="mui-badge">&nbsp;2015/09/09&nbsp;10:10</span>
+						    		<span class="pull-right">剩余<span class="mui-badge">50</span>张</span>
+						    	</h2>
+					        <div class="post-featured-image">
+				            <a class="thumbnail loaded" href="#" target="_blank">
+				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
+				            </a>
+					        </div>
+					        <span class="badge type">5折</span>
+						    </article>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 		<div id="privacy" class="mui-page">
 			<div class="mui-navbar-inner mui-bar mui-bar-nav">
 				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
@@ -297,6 +357,44 @@
 								功能
 							</li>
 						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="set" class="mui-page">
+			<div class="mui-navbar-inner mui-bar mui-bar-nav">
+				<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+					<span class="mui-icon mui-icon-left-nav"></span>我的
+				</button>
+				<h1 class="mui-center mui-title">设置</h1>
+			</div>
+			<div class="mui-page-content">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<a href="#notifications" class="mui-navigate-right">新消息通知</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="#privacy" class="mui-navigate-right">隐私</a>
+							</li>
+							<li class="mui-table-view-cell">
+								<a href="#general" class="mui-navigate-right">通用</a>
+							</li>
+						</ul>
+						<ul class="mui-table-view mui-table-view-chevron">
+							<li class="mui-table-view-cell">
+								<a href="#about" class="mui-navigate-right">关于茂号 <i class="mui-pull-right update">V1.0.0</i></a>
+							</li>
+						</ul>
+						<ul class="mui-table-view">
+							<li class="mui-table-view-cell" style="text-align: center;" id="exit">
+								<a>退出登录</a>
+							</li>
+						</ul>
+						
+						
 					</div>
 				</div>
 			</div>

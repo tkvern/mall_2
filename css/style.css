@@ -261,16 +261,23 @@ body {
 #head {
 	line-height: 40px;
 }
-.head-img {
-	width: 40px;
-	height: 40px;
-}
 #head-img1 {
 	position: absolute;
 	bottom: 10px;
 	right: 40px;
 	width: 40px;
 	height: 40px;
+}
+.head-code{
+	position: absolute;
+	height: 20px!important;
+	width: 20px!important;;	
+	bottom: 20px;
+	right: 50px;
+	z-index: 9;
+}
+.qrcode{
+	margin-top: -32px;
 }
 .update {
 	font-style: normal;
@@ -507,6 +514,28 @@ body {
 	right:0;
 	text-align:center;
 	margin:0;
+}
+
+.collect .post-title{
+	position:absolute;
+	font-size:13px;
+	z-index:9;
+	bottom:12px;
+	left:0;
+	right:0;
+	text-align:center;
+	margin:0;
+}
+.collect .badge.type{
+	position: absolute;
+	right: 10px;
+	top: 15px;
+	font-size: 30px;
+	transform:rotate(19deg);
+	-webkit-transform: rotate(19deg);
+}
+.badge-danger{
+	background-color: #dd524d;
 }
 .post-title a{
 	color: #777;

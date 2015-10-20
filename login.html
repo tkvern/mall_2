@@ -80,6 +80,14 @@
 							waiting: {
 								autoShow: false
 							}
+				    },
+				    {
+				    	url: "main.html",
+				      id: "main",
+				      subpages:[{
+					    	url: "plus/home.html",
+					      id: "home",
+				      }]
 				    }
 				  ]
 				});
@@ -111,15 +119,20 @@
 						"url": 'main.html'
 					});
 					var toMain = function() {
-						$.fire(mainPage, 'show', null);
+						//$.fire(mainPage, 'show', null);
 						$.openWindow({
 							id: 'main',
+							url: 'main.html',
 							show: {
 								aniShow: 'pop-in'
 							},
 							waiting: {
-								autoShow: true
-							}
+								autoShow: false
+							},
+							preloadPages:[{
+								url: "plus/home.html",
+							  id: "home"
+							}]
 						});
 					};
 					//检查 "登录状态" 开始
