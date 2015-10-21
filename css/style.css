@@ -536,10 +536,10 @@ body {
 .collect .type{
 	position: absolute;
 	right: -3px;
-	top: 15px;
+	top: 45px;
 	font-size: 28px;
-	transform:rotate(19deg);
-	-webkit-transform: rotate(19deg);
+	/*transform:rotate(19deg);
+	-webkit-transform: rotate(19deg);*/
 }
 .collect .title{
 	max-width: 75px;
@@ -554,13 +554,32 @@ body {
 	left: 10px;
 	bottom: 55px;
 }
-.badge-danger{
+.danger .mui-badge{
+	background-color: #dd524d;
+	color: #fff;
+}
+.success .mui-badge{
+	background-color: #5cb85c;
+	color: #fff;
+}
+.warning .mui-badge{
+	background-color: #f0ad4e;
+	color: #fff;
+}
+.primary .mui-badge{
+	background-color: #007aff;
+	color: #fff;
+}
+.danger .badge{
 	background-color: #dd524d;
 }
-.badge-warning{
+.success .badge{
+	background-color: #5cb85c;
+}
+.warning .badge{
 	background-color: #f0ad4e;
 }
-.badge-primary{
+.primary .badge{
 	background-color: #007aff;
 }
 .post-title a{

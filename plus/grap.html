@@ -16,7 +16,69 @@
         var imgWrapper = img.parentNode;
         imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
       }
-
+			var as='pop-in';// 默认窗口动画
+			// 处理点击事件
+			var _openw=null;
+			function clicked(id,a,s){
+				if(_openw){return;}
+				a||(a=as);
+				_openw=preate[id];
+				if(_openw){
+					_openw.showded=true;
+					_openw.show(a,null,function(){
+						_openw=null;//避免快速点击打开多个页面
+					});
+				}else{
+					var wa=plus.nativeUI.showWaiting();
+					_openw=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
+					preate[id]=_openw;
+					_openw.addEventListener('loaded',function(){//叶面加载完成后才显示
+						setTimeout(function(){//延后显示可避免低端机上动画时白屏
+							wa.close();
+							_openw.showded=true;
+							s||_openw.show(a,null,function(){
+								_openw=null;//避免快速点击打开多个页面
+							});
+							s&&(_openw=null);//避免s模式下变量无法重置
+						},10);
+					},false);
+					_openw.addEventListener('close',function(){//页面关闭后可再次打开
+						_openw=null;
+						preate[id]&&(preate[id]=null);//兼容窗口的关闭
+					},false);
+				}
+			}
+			// 预创建二级页面
+			var preate={};
+			function preateWebviews(){
+				preateWebivew('plus/grap.html');
+				var plist=document.getElementById('plist').children;
+				// 由于启动是预创建过多Webview窗口会消耗较长的时间，所以这里限制仅创建5个
+				for( var i=0;i<plist.length&&i<2;i++){
+					var id=plist[i].id;
+					id&&(id.length>0)&&preateWebivew(id);
+				}
+			}
+			function preateWebivew(id){
+				if(!preate[id]){
+					var w=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
+					preate[id]=w;
+					w.addEventListener('close',function(){//页面关闭后可再次打开
+						_openw=null;
+						preate[id]&&(preate[id]=null);//兼容窗口的关闭
+					},false);
+				}
+			}
+			// 清除预创建页面(仅)
+			function preateClear(){
+				for(var p in preate){
+					var w=preate[p];
+					if(w&&w.showded&&!w.isVisible()){
+						w.close();
+						preate[p]=null;
+					}
+				}
+			}
 		</script>
 	</head>
 
@@ -34,77 +96,77 @@
 					<div class="container">
 						<div class="row" id="post-list">
 							<div class="col-xs-12 col-sm-6">
-						    <article class="post tag-ad collect">
+						    <article class="post tag-ad collect danger">
 						    	<h2 class="post-title" style="padding: 0px 10px;">
-						    		<span class="pull-left mui-badge mui-badge-danger mui-ellipsis title">肯德基大新店</span>
-						    		<span class="mui-badge mui-badge-danger">&nbsp;09-09&nbsp;10:10</span>
-						    		<span class="pull-right">剩余<span class="mui-badge mui-badge-danger">500</span>张</span>
+						    		<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=1" onclick="clicked(this.id);">肯德基大新店</span>
+						    		<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
+						    		<span class="pull-right">剩余<span class="mui-badge">500</span>张</span>
 						    	</h2>
 					        <div class="post-featured-image">
 				            <a class="thumbnail loaded" href="#" target="_blank">
 				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
 				            </a>
 					        </div>
-					        <span class="badge badge-danger type">立即抢券</span>
-					        <span class="badge badge-danger price">￥50</span>
-					        <span class="badge badge-danger description">满100使用</span>
+					        <span class="badge type">立即抢券</span>
+					        <span class="badge price">￥50</span>
+					        <span class="badge description">满100使用</span>
 						    </article>
 							</div>
 							<div class="col-xs-12 col-sm-6">
-						    <article class="post tag-ad collect">
+						    <article class="post tag-ad collect danger">
 						    	<h2 class="post-title" style="padding: 0px 10px;">
-						    		<span class="pull-left mui-badge mui-badge-danger mui-ellipsis title">肯德基大新店</span>
-						    		<span class="mui-badge mui-badge-danger">&nbsp;09-09&nbsp;10:10</span>
-						    		<span class="pull-right">剩余<span class="mui-badge mui-badge-danger">500</span>张</span>
+						    		<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=1" onclick="clicked(this.id);">肯德基大新店</span>
+						    		<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
+						    		<span class="pull-right">剩余<span class="mui-badge">500</span>张</span>
 						    	</h2>
 					        <div class="post-featured-image">
 				            <a class="thumbnail loaded" href="#" target="_blank">
 				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
 				            </a>
 					        </div>
-					        <span class="badge badge-danger type">立即抢券</span>
-					        <span class="badge badge-danger price">￥50</span>
-					        <span class="badge badge-danger description">满100使用</span>
+					        <span class="badge type">立即抢券</span>
+					        <span class="badge price">￥50</span>
+					        <span class="badge description">满100使用</span>
 						    </article>
 							</div>
 							<div class="col-xs-12 col-sm-6">
-						    <article class="post tag-ad collect">
+						    <article class="post tag-ad collect danger">
 						    	<h2 class="post-title" style="padding: 0px 10px;">
-						    		<span class="pull-left mui-badge mui-badge-danger mui-ellipsis title">肯德基大新店</span>
-						    		<span class="mui-badge mui-badge-danger">&nbsp;09-09&nbsp;10:10</span>
-						    		<span class="pull-right">剩余<span class="mui-badge mui-badge-danger">500</span>张</span>
+						    		<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=2" onclick="clicked(this.id);">肯德基大新店</span>
+						    		<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
+						    		<span class="pull-right">剩余<span class="mui-badge">500</span>张</span>
 						    	</h2>
 					        <div class="post-featured-image">
 				            <a class="thumbnail loaded" href="#" target="_blank">
 				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
 				            </a>
 					        </div>
-					        <span class="badge badge-danger type">立即抢券</span>
-					        <span class="badge badge-danger price">￥50</span>
-					        <span class="badge badge-danger description">满100使用</span>
+					        <span class="badge type">立即抢券</span>
+					        <span class="badge price">￥50</span>
+					        <span class="badge description">满100使用</span>
 						    </article>
 							</div>
 							<div class="col-xs-12 col-sm-6">
-						    <article class="post tag-ad collect">
+						    <article class="post tag-ad collect warning">
 						    	<h2 class="post-title" style="padding: 0px 10px;">
-						    		<span class="pull-left mui-badge mui-badge-warning mui-ellipsis title">马云烧烤店</span>
-						    		<span class="mui-badge mui-badge-warning">&nbsp;09-09&nbsp;10:10</span>
-						    		<span class="pull-right">剩余<span class="mui-badge mui-badge-warning">200</span>张</span>
+						    		<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=3" onclick="clicked(this.id);">马云烧烤店</span>
+						    		<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
+						    		<span class="pull-right">剩余<span class="mui-badge">200</span>张</span>
 						    	</h2>
 					        <div class="post-featured-image">
 				            <a class="thumbnail loaded" href="#" target="_blank">
 				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
 				            </a>
 					        </div>
-					        <span class="badge badge-warning type">未开始</span>
-					        <span class="badge badge-warning price">￥50</span>
-					        <span class="badge badge-warning description">满100使用</span>
+					        <span class="badge type">未开始</span>
+					        <span class="badge price">￥50</span>
+					        <span class="badge description">满100使用</span>
 						    </article>
 							</div>
 							<div class="col-xs-12 col-sm-6">
 						    <article class="post tag-ad collect">
 						    	<h2 class="post-title" style="padding: 0px 10px;">
-						    		<span class="pull-left mui-badge mui-ellipsis title">马化腾叉烧</span>
+						    		<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=4" onclick="clicked(this.id);">马化腾叉烧</span>
 						    		<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
 						    		<span class="pull-right">剩余<span class="mui-badge">0</span>张</span>
 						    	</h2>
@@ -168,19 +230,28 @@
 						plus.navigator.closeSplashscreen();
 					},500);
 				}
-				mui.plusReady(function() {
-					var heart = document.getElementById('heart');
-					heart.addEventListener('click', function(event){
-						if (heart.status == 0){
-							heart.status = 1;
-							heart.innerHTML = "<i class='fa fa-heart-o'></i>";
-							plus.nativeUI.toast('已取消收藏！');
-						} else {
-							heart.status = 0;
-							heart.innerHTML = "<i class='fa fa-heart'></i>";
-							plus.nativeUI.toast('收藏成功！');
-						}
-					})
+				var heart = document.getElementById('heart');
+				heart.addEventListener('click', function(event){
+					if (heart.status == 0){
+						heart.status = 1;
+						heart.innerHTML = "<i class='fa fa-heart-o'></i>";
+						plus.nativeUI.toast('已取消收藏！');
+					} else {
+						heart.status = 0;
+						heart.innerHTML = "<i class='fa fa-heart'></i>";
+						plus.nativeUI.toast('收藏成功！');
+					}
+				});
+				//抢券
+				mui('#post-list').on('tap', '.collect .type', function(event) {
+					var elem = this;
+					if(elem.innerText!="已抢" && elem.innerText!="未开始" && elem.innerText!="已抢完"){
+						elem.className = elem.className.replace("badge-danger", "badge-success");
+						var parent = elem.parentNode;
+						parent.className = parent.className.replace("danger", "success");
+						elem.innerText = "已抢";
+						plus.nativeUI.toast('抢券成功！');
+					}
 				});
 			});
 		</script>
