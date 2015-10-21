@@ -263,6 +263,10 @@ body {
 #head {
 	line-height: 40px;
 }
+#head-img {
+	width: 40px;
+	height: 40px;
+}
 #head-img1 {
 	position: absolute;
 	bottom: 10px;
@@ -543,12 +547,12 @@ body {
 .collect .price{
 	position: absolute;
 	left: 10px;
-	bottom: 85px;
+	bottom: 90px;
 }
 .collect .description{
 	position: absolute;
 	left: 10px;
-	bottom: 50px;
+	bottom: 55px;
 }
 .badge-danger{
 	background-color: #dd524d;
@@ -615,4 +619,45 @@ body {
 }
 .mui-bar.mui-bar-tab{
 	box-shadow: 0 -1px 6px #ccc;
+}
+/* merchant */
+.header {
+	background: #222;
+	background-repeat: no-repeat;
+	background-position: center 0;
+	background-size: cover;
+	text-align: center;
+	min-height: 200px;
+	position: relative
+}
+
+.logoimg {
+	position: absolute;
+	left: 1%;
+	right: 1%;
+	bottom: -34px
+}
+
+.logotxt {
+	margin-top: 20px;
+	border: 0
+}
+
+.logotxt a {
+	font-weight: 700;
+	color: #fff;
+	font-size: 50px
+}
+
+.header h2 {
+	margin: 10px 0px;
+	color: #fff;
+	padding: 0;
+	font-weight: 100;
+	font-size: 24px;
+	font-weight: 100;
+}
+
+.shop-phone  a{
+	color: #fff;
 }

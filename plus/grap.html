@@ -45,7 +45,9 @@
 				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
 				            </a>
 					        </div>
-					        <span class="badge badge-danger type">正在疯抢</span>
+					        <span class="badge badge-danger type">立即抢券</span>
+					        <span class="badge badge-danger price">￥50</span>
+					        <span class="badge badge-danger description">满100使用</span>
 						    </article>
 							</div>
 							<div class="col-xs-12 col-sm-6">
@@ -60,7 +62,9 @@
 				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
 				            </a>
 					        </div>
-					        <span class="badge badge-danger type">正在疯抢</span>
+					        <span class="badge badge-danger type">立即抢券</span>
+					        <span class="badge badge-danger price">￥50</span>
+					        <span class="badge badge-danger description">满100使用</span>
 						    </article>
 							</div>
 							<div class="col-xs-12 col-sm-6">
@@ -75,7 +79,9 @@
 				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
 				            </a>
 					        </div>
-					        <span class="badge badge-danger type">正在疯抢</span>
+					        <span class="badge badge-danger type">立即抢券</span>
+					        <span class="badge badge-danger price">￥50</span>
+					        <span class="badge badge-danger description">满100使用</span>
 						    </article>
 							</div>
 							<div class="col-xs-12 col-sm-6">
@@ -91,6 +97,8 @@
 				            </a>
 					        </div>
 					        <span class="badge badge-warning type">未开始</span>
+					        <span class="badge badge-warning price">￥50</span>
+					        <span class="badge badge-warning description">满100使用</span>
 						    </article>
 							</div>
 							<div class="col-xs-12 col-sm-6">
@@ -106,6 +114,8 @@
 				            </a>
 					        </div>
 					        <span class="badge type">已抢完</span>
+					        <span class="badge price">￥50</span>
+					        <span class="badge description">满100使用</span>
 						    </article>
 							</div>
 						</div>
@@ -121,45 +131,44 @@
 			//初始化单页的区域滚动
 			mui('.mui-scroll-wrapper').scroll();
 			mui.init();
-			
-			// H5 plus事件处理
-			function plusReady(){
-				// 隐藏滚动条
-				plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
-				// Android处理返回键
-				
-				compatibleAdjust();
-			}
-			if(window.plus){
-				plusReady();
-			}else{
-				document.addEventListener('plusready',plusReady,false);
-			}
-			// DOMContentLoaded事件处理
-			var _domReady=false;
-			document.addEventListener('DOMContentLoaded',function(){
-				_domReady=true;
-				compatibleAdjust();
-			},false);
-			var _adjust=false;
-			function compatibleAdjust(){
-				if(_adjust||!window.plus||!_domReady){
-					return;
+			mui.plusReady(function() {
+				// H5 plus事件处理
+				function plusReady(){
+					// 隐藏滚动条
+					plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
+					// Android处理返回键
+					
+					compatibleAdjust();
 				}
-				_adjust=true;
-				// iOS平台使用div的滚动条
-				if('iOS'==plus.os.name){
-					document.getElementById('content').className='scontent';
+				if(window.plus){
+					plusReady();
+				}else{
+					document.addEventListener('plusready',plusReady,false);
 				}
-				// 预创建二级窗口
-			//	preateWebviews();
-				// 关闭启动界面
-				setTimeout(function(){
-					plus.navigator.closeSplashscreen();
-				},500);
-			}
-			(function($, doc) {
-				$.plusReady(function() {
+				// DOMContentLoaded事件处理
+				var _domReady=false;
+				document.addEventListener('DOMContentLoaded',function(){
+					_domReady=true;
+					compatibleAdjust();
+				},false);
+				var _adjust=false;
+				function compatibleAdjust(){
+					if(_adjust||!window.plus||!_domReady){
+						return;
+					}
+					_adjust=true;
+					// iOS平台使用div的滚动条
+					if('iOS'==plus.os.name){
+						document.getElementById('content').className='scontent';
+					}
+					// 预创建二级窗口
+				//	preateWebviews();
+					// 关闭启动界面
+					setTimeout(function(){
+						plus.navigator.closeSplashscreen();
+					},500);
+				}
+				mui.plusReady(function() {
 					var heart = document.getElementById('heart');
 					heart.addEventListener('click', function(event){
 						if (heart.status == 0){
@@ -173,8 +182,7 @@
 						}
 					})
 				});
-			}(mui, document));
-			
+			});
 		</script>
 	</body>
 

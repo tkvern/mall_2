@@ -829,7 +829,6 @@
 						root.getFile("head.jpg", {}, function(file) {
 							//文件已存在
 							file.remove(function() {
-								console.log("file remove success");
 								entry.copyTo(root, 'head.jpg', function(e) {
 										var e = e.fullPath + "?version=" + new Date().getTime();
 										document.getElementById("head-img").src = e;
@@ -924,7 +923,15 @@
 				}
 			});
 		});
-		
+		$('#OA_task_2').on('tap', '.mui-btn.mui-icon-trash', function(event) {
+			var elem = this;
+			mui.confirm('确认删除该条记录？', '提示', btnArray, function(e) {
+				if (e.index == 0) {
+					var li = elem.parentNode.parentNode;
+					li.parentNode.removeChild(li);
+				}
+			});
+		});
 		//退出操作
 		var settings = app.getSettings();
 		document.getElementById('exit').addEventListener('tap', function() {

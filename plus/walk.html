@@ -11,11 +11,11 @@
 		<link rel="stylesheet" href="../css/font-awesome.min.css" />
 		<link rel="stylesheet" href="../css/style.css" />
 		
-		<script src="js/mui.min.js"></script>
-		<script src="js/app.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
 		<script>
 			// H5 plus事件处理
-			var as='fade-in';// 默认窗口动画
+			var as='pop-in';// 默认窗口动画
 			function plusReady(){
 				// 隐藏滚动条
 				plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
@@ -41,9 +41,9 @@
 				}
 				_adjust=true;
 				// iOS平台使用div的滚动条
-				if('iOS'==plus.os.name){
-					document.getElementById('content').className='scontent';
-				}
+//				if('iOS'==plus.os.name){
+//					document.getElementById('content').className='scontent';
+//				}
 				// 预创建二级窗口
 			//	preateWebviews();
 				// 关闭启动界面
@@ -99,7 +99,7 @@
 			// 预创建二级页面
 			var preate={};
 			function preateWebviews(){
-				preateWebivew('plus/grap.html');
+				preateWebivew('plus/merchant.html');
 				var plist=document.getElementById('plist').children;
 				// 由于启动是预创建过多Webview窗口会消耗较长的时间，所以这里限制仅创建5个
 				for( var i=0;i<plist.length&&i<2;i++){
@@ -134,30 +134,29 @@
 		<header class="mui-bar mui-bar-nav">
 			<h1 class="mui-title">走街串巷</h1>
 		</header>
-		<div class="main mui-content" id="content">
-			<div class="mui-content-padded" style="display: none;"></div>
-			<div class="container">
+		<div class="main mui-scroll-wrapper">
+			<div class="container" style="padding-top: 60px;">
 				<div class="row" id="plist">
 					<div class="col-xs-12 col-md-6">
-				    <article class="post tag-ad" id="grap.html?shop=1" onclick="clicked(this.id);">
+				    <article class="post tag-ad" id="merchant.html?shop=2" onclick="clicked(this.id);">
 				    	<h2 class="post-title">
-				    		<a target="_blank">大足印象</a>
+				    		<a target="_blank">麦当劳</a>
 				    	</h2>
 			        <div class="post-featured-image">
 		            <a class="thumbnail loaded" target="_blank">
-		              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
+		              <img src="http://static.bootcss.com/expo/img/e/93/06ce7866570d459fc6132b823d9f2.png" width="800" height="600" alt="猎聘网" onload="imgLoaded(this)">
 		            </a>
 			        </div>
 				    </article>
 					</div>
 					<div class="col-xs-12 col-md-6">
-				    <article class="post tag-ad" id="grap.html?shop=2" onclick="clicked(this.id);">
+				    <article class="post tag-ad" id="merchant.html?shop=1" onclick="clicked(this.id);" title="肯德基">
 				    	<h2 class="post-title">
-				    		<a target="_blank">茂田家园</a>
+				    		<a target="_blank">肯德基</a>
 				    	</h2>
 			        <div class="post-featured-image">
 		            <a class="thumbnail loaded" target="_blank">
-		              <img src="http://static.bootcss.com/expo/img/e/93/06ce7866570d459fc6132b823d9f2.png" width="800" height="600" alt="猎聘网" onload="imgLoaded(this)">
+		              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
 		            </a>
 			        </div>
 				    </article>
@@ -177,7 +176,9 @@
 				</div>
 			</div>
 		</div>
-		
+		<script>
+			mui('.mui-scroll-wrapper').scroll();
+		</script>
 	</body>
 
 </html>
