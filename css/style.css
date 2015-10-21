@@ -184,6 +184,8 @@ body {
 	z-index: 10;
 	height: 44px;
 	background-color: #f7f7f8;
+	box-shadow:0 0 1px rgba(0,0,0,.85);
+	-webkit-box-shadow:0 1px 6px #ccc;
 }
 .mui-navbar .mui-bar {
 	position: absolute;
@@ -260,6 +262,10 @@ body {
 }
 #head {
 	line-height: 40px;
+}
+#head-img {
+	width: 40px;
+	height: 40px;
 }
 #head-img1 {
 	position: absolute;
@@ -514,6 +520,7 @@ body {
 	right:0;
 	text-align:center;
 	margin:0;
+	padding: 0px 10px;
 }
 
 .collect .post-title{
@@ -526,24 +533,53 @@ body {
 	text-align:center;
 	margin:0;
 }
-.collect .badge.type{
+.collect .type{
 	position: absolute;
 	right: -3px;
-	top: 15px;
+	top: 45px;
 	font-size: 28px;
-	transform:rotate(19deg);
-	-webkit-transform: rotate(19deg);
+	/*transform:rotate(19deg);
+	-webkit-transform: rotate(19deg);*/
 }
 .collect .title{
 	max-width: 75px;
 }
-.badge-danger{
+.collect .price{
+	position: absolute;
+	left: 10px;
+	bottom: 90px;
+}
+.collect .description{
+	position: absolute;
+	left: 10px;
+	bottom: 55px;
+}
+.danger .mui-badge{
+	background-color: #dd524d;
+	color: #fff;
+}
+.success .mui-badge{
+	background-color: #5cb85c;
+	color: #fff;
+}
+.warning .mui-badge{
+	background-color: #f0ad4e;
+	color: #fff;
+}
+.primary .mui-badge{
+	background-color: #007aff;
+	color: #fff;
+}
+.danger .badge{
 	background-color: #dd524d;
 }
-.badge-warning{
+.success .badge{
+	background-color: #5cb85c;
+}
+.warning .badge{
 	background-color: #f0ad4e;
 }
-.badge-primary{
+.primary .badge{
 	background-color: #007aff;
 }
 .post-title a{
@@ -602,4 +638,45 @@ body {
 }
 .mui-bar.mui-bar-tab{
 	box-shadow: 0 -1px 6px #ccc;
+}
+/* merchant */
+.header {
+	background: #222;
+	background-repeat: no-repeat;
+	background-position: center 0;
+	background-size: cover;
+	text-align: center;
+	min-height: 200px;
+	position: relative
+}
+
+.logoimg {
+	position: absolute;
+	left: 1%;
+	right: 1%;
+	bottom: -34px
+}
+
+.logotxt {
+	margin-top: 20px;
+	border: 0
+}
+
+.logotxt a {
+	font-weight: 700;
+	color: #fff;
+	font-size: 50px
+}
+
+.header h2 {
+	margin: 10px 0px;
+	color: #fff;
+	padding: 0;
+	font-weight: 100;
+	font-size: 24px;
+	font-weight: 100;
+}
+
+.shop-phone  a{
+	color: #fff;
 }
