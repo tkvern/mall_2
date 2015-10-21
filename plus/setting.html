@@ -14,9 +14,9 @@
 		<link rel="stylesheet" type="text/css" href="../css/feedback-page.css" />
 		<script>
 			function imgLoaded(img) {
-        var imgWrapper = img.parentNode;
-        imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
-      }
+				var imgWrapper = img.parentNode;
+				imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
+			}
 		</script>
 	</head>
 
@@ -465,14 +465,16 @@
 
 	</body>
 	<script src="../js/mui.min.js "></script>
-	<script type="text/javascript" src="../js/app.js" ></script>
+	<script src="../js/app.js" ></script>
 	<script src="../js/mui.view.js "></script>
-	<script src='../libs/easymob-webim-sdk/jquery-1.11.1.js'></script>
+	<script src="../js/app.ajax.extend.js"></script>
+	<script src="../js/service.js"></script>
+	<!--<script src='../libs/easymob-webim-sdk/jquery-1.11.1.js'></script>
 	<script src='../libs/easymob-webim-sdk/strophe-custom-2.0.0.js'></script>
 	<script src='../libs/easymob-webim-sdk/json2.js'></script>
-	<script src="../libs/easymob-webim-sdk/easemob.im-1.0.5.js"></script>
+	<script src="../libs/easymob-webim-sdk/easemob.im-1.0.5.js"></script>-->
 	<script src='../js/feedback.js'></script>
-	<script src="../js/feedback-page.js"></script>-->
+	<script src="../js/feedback-page.js"></script>
 	<script>
 		mui.init();
 		 //初始化单页view
@@ -765,55 +767,63 @@
 		
 		//退出操作
 		var settings = app.getSettings();
+		mui.plusReady(function(){
+			
 		document.getElementById('exit').addEventListener('tap', function() {
-			if (mui.os.ios) {
-				settings.autoLogin = false;
-				app.setSettings(settings);
-				app.setState({});
-				mui.openWindow({
-					url: '../login.html',
-					id: 'login',
-					show: {
-						aniShow: 'pop-in'
-					},
-					waiting: {
-						autoShow: false
+			console.log('logout');
+			mui.delete('http://localhost:8080/api/v1/user/token', null, function(){
+				app.clearLoginInfo();
+				if (mui.os.ios) {
+					settings.autoLogin = false;
+					app.setSettings(settings);
+					app.setState({});
+					mui.openWindow({
+						url: '../login.html',
+						id: 'login',
+						show: {
+							aniShow: 'pop-in'
+						},
+						waiting: {
+							autoShow: false
+						}
+					});
+					return;
+				}
+				var btnArray = [{
+					title: "注销当前账号"
+				}, {
+					title: "直接关闭应用"
+				}];
+				plus.nativeUI.actionSheet({
+					cancel: "取消",
+					buttons: btnArray
+				}, function(event) {
+					var index = event.index;
+					switch (index) {
+						case 1:
+							settings.autoLogin = false;
+							app.setSettings(settings);
+							app.setState({});
+							mui.openWindow({
+								url: '../login.html',
+								id: 'login',
+								show: {
+									aniShow: 'pop-in'
+								},
+								waiting: {
+									autoShow: false
+								}
+							});
+							break;
+						case 2:
+							plus.runtime.quit();
+							break;
 					}
 				});
-				return;
-			}
-			var btnArray = [{
-				title: "注销当前账号"
-			}, {
-				title: "直接关闭应用"
-			}];
-			plus.nativeUI.actionSheet({
-				cancel: "取消",
-				buttons: btnArray
-			}, function(event) {
-				var index = event.index;
-				switch (index) {
-					case 1:
-						settings.autoLogin = false;
-						app.setSettings(settings);
-						app.setState({});
-						mui.openWindow({
-							url: '../login.html',
-							id: 'login',
-							show: {
-								aniShow: 'pop-in'
-							},
-							waiting: {
-								autoShow: false
-							}
-						});
-						break;
-					case 2:
-						plus.runtime.quit();
-						break;
-				}
 			});
+			
 		}, false);
+		})
 
 		function initImgPreview() {
 			var imgs = document.querySelectorAll("img.mui-action-preview");

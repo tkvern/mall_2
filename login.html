@@ -28,16 +28,16 @@
 					<input id='password' type="password" maxlength="25" class="mui-input-clear mui-input" placeholder="请输入密码">
 				</div>
 			</form>
-			<form class="mui-input-group">
+			<div class="mui-input-group">
 				<ul class="mui-table-view mui-table-view-chevron">
 					<li class="mui-table-view-cell">
 						自动登录
-						<div id="autoLogin" class="mui-switch">
+						<div id="autoLogin" class="mui-switch mui-active">
 							<div class="mui-switch-handle"></div>
 						</div>
 					</li>
 				</ul>
-			</form>
+			</div>
 			<div class="mui-content-padded">
 				<button id='login' class="mui-btn mui-btn-block mui-btn-primary col-sm-6">登录</button>
 				<button id='login_test' class="mui-btn mui-btn-block mui-btn-warning">游客模式</button>
@@ -51,6 +51,8 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/mui.enterfocus.js"></script>
 		<script src="js/app.js"></script>
+		<script src="js/app.ajax.extend.js"></script>
+		<script src="js/service.js"></script>
 		<script>
 			(function($, doc) {
 				$.init({
@@ -89,9 +91,9 @@
 					    	url: "plus/home.html",
 					      id: "home",
 				      }],
-							waiting: {
-								autoShow: false
-							}
+						waiting: {
+							autoShow: false
+						}
 				    }
 				  ]
 				});
@@ -143,7 +145,7 @@
 						});
 					};
 					//检查 "登录状态" 开始
-					if (settings.autoLogin){
+					if (app.isLogin()){
 						toMain();
 					}
 					// close splash
@@ -158,18 +160,39 @@
 					var autoLoginButton = doc.getElementById("autoLogin");
 					var regButton = doc.getElementById('reg');
 					var forgetButton = doc.getElementById('forgetPassword');
+					
+					function validateLoginForm() {
+						var telPattern = /^1[\d]{10}$/;
+						if(!!accountBox.value.match(telPattern) == false) {
+							return '请正确填写手机号码';
+						}
+						if(passwordBox.value.length == 0) {
+							return '密码不能为空';
+						}
+						return '';
+					}
+					
+					accountBox.value = app.getLastMobile();
+					
 					loginButton.addEventListener('tap', function(event) {
-						var loginInfo = {
-							account: accountBox.value,
-							password: passwordBox.value
-						};
-						app.login(loginInfo, function(err) {
-							if (err) {
-								plus.nativeUI.toast(err);
-								return;
+						var message = validateLoginForm();
+						if(message != '') {
+							plus.nativeUI.toast(message);
+							return false;
+						}
+						var params = {
+							session: {
+								mobile: accountBox.value,
+								password: passwordBox.value
 							}
+						};
+						$.MaoAPI.login(params, function(data){
+							console.log(JSON.stringify(data));
+							app.rememberLoginUser(data.access_token.token, data.access_token.user);
 							toMain();
-						});
+						}).onerror = function() {
+							
+						};
 					});
 					loginTestButton.addEventListener('tap', function(event) {
 						app.loginTest("游客", function(err) {
@@ -179,7 +202,7 @@
 					$.enterfocus('#login-form input', function() {
 						$.trigger(loginButton, 'tap');
 					});
-					autoLoginButton.classList[settings.autoLogin ? 'add' : 'remove']('mui-active')
+					// autoLoginButton.classList[settings.autoLogin ? 'add' : 'remove']('mui-active')
 					autoLoginButton.addEventListener('toggle', function(event) {
 						setTimeout(function() {
 							var isActive = event.detail.isActive;

@@ -5,6 +5,78 @@
  **/
 (function($, owner) {
 	/**
+	 *  基础功能
+	 */
+	$.jumpToLoginWindow = function() {
+		$.openWindow({
+			id: 'login',
+			url: 'login.html',
+			show: {
+				aniShow: 'pop-in'
+			},
+			waiting: {
+				autoShow: false
+			},
+			preloadPages:[{
+				url: "plus/home.html",
+			  id: "home",
+				waiting: {
+					autoShow: false
+				}
+			}]
+		});
+	}
+	
+	/*
+	 * 登录信息存储
+	 */
+	owner.rememberLoginUser = function(token, user) {
+		localStorage.setItem("accessToken", token);
+		localStorage.setItem("currentUser", JSON.stringify(user));
+		//记录最后登录的手机号
+		localStorage.setItem("lastMobile", user.mobile);
+	}
+	
+	/*
+	 * 检查当前用户是否登录
+	 */
+	owner.isLogin = function() {
+		return !!owner.getAccessToken();
+	}
+	
+	/*
+	 * 获取token
+	 */
+	owner.getAccessToken = function() {
+		return localStorage.getItem("accessToken");
+	}
+	
+	/*
+	 * 获取最后登录人的手机号
+	 */
+	owner.getLastMobile = function() {
+		return localStorage.getItem("lastMobile") || '';
+	}
+	
+	/*
+	 * 清除登录相关信息
+	 */
+	owner.clearLoginInfo = function() {
+		localStorage.removeItem("accessToken");
+		localStorage.removeItem("currentUser");
+	}
+	
+	/*
+	 * 获取当前登录用户
+	 */
+	owner.getCurrentUser = function() {
+		var item = localStorage.getItem("currentUser")
+		if(item) {
+			return JSON.parse(item);
+		}
+		return null;
+	}
+	/**
 	 * 用户登录
 	 **/
 	owner.login = function(loginInfo, callback) {
@@ -164,4 +236,5 @@
 		var settingsText = localStorage.getItem('$settings') || "{}";
 		return JSON.parse(settingsText);
 	}
+	
 }(mui, window.app = {}));
