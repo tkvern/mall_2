@@ -514,6 +514,7 @@ body {
 	right:0;
 	text-align:center;
 	margin:0;
+	padding: 0px 10px;
 }
 
 .collect .post-title{
@@ -526,7 +527,7 @@ body {
 	text-align:center;
 	margin:0;
 }
-.collect .badge.type{
+.collect .type{
 	position: absolute;
 	right: -3px;
 	top: 15px;
@@ -536,6 +537,16 @@ body {
 }
 .collect .title{
 	max-width: 75px;
+}
+.collect .price{
+	position: absolute;
+	left: 10px;
+	bottom: 85px;
+}
+.collect .description{
+	position: absolute;
+	left: 10px;
+	bottom: 50px;
 }
 .badge-danger{
 	background-color: #dd524d;
