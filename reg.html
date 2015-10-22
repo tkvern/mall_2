@@ -42,6 +42,8 @@
 		</div>
 		<script src="js/mui.min.js"></script>
 		<script src="js/app.js"></script>
+		<script src="js/app.ajax.extend.js"></script>
+		<script src="js/service.js"></script>
 		<script>
 			(function($, doc) {
 				$.init({
@@ -56,16 +58,23 @@
 					var verifyCodeBox = doc.getElementById('verifyCode');
 					var second , timer;
 					sendCodeButton.addEventListener('tap', function(event){
+						console.log('sc');
 						if (second > 0) {
 							return
 						} else {
 							second = 60;
-							plus.nativeUI.toast("测试程序验证码: 123456",{duration:"long"});
+							$.MaoAPI.securityCode(
+								{mobile: accountBox.value},
+								function(data) {
+									plus.nativeUI.toast(data.message, {duration:"long"});
+									console.log(JSON.stringify(data));
+								}
+							);
 							sendCodeButton.className = sendCodeButton.className + " mui-disabled";
 							sendCodeButton.innerText = "重新获取(" + second + "s)";
 							timer = setInterval(function(){
 								second -= 1;
-								if(second >0 ){
+								if(second > 0 ){
 									sendCodeButton.innerText = "重新获取(" + second + "s)";
 								}else{
 									clearInterval(timer);
@@ -75,18 +84,38 @@
 							},1000);
 						}
 					});
+					
+					function validateRegisterForm() {
+						var telPattern = /^1[\d]{10}$/;
+						var scPattern = /^[\d]{6}$/;
+						if(!!accountBox.value.match(telPattern) == false) {
+							return '请正确填写手机号码';
+						}
+						if(passwordBox.value.length < 6) {
+							return '密码长度不能小于6位';
+						}
+						if(!!verifyCodeBox.value.match(scPattern) == false) {
+							return '验证码必须为6位数字';
+						}
+						return '';
+					}
+					
 					regButton.addEventListener('tap', function(event) {
-						var regInfo = {
-							account: accountBox.value,
-							password: passwordBox.value,
-							verifyCode: verifyCodeBox.value
+						var message = validateRegisterForm();
+						if(message != '') {
+							plus.nativeUI.toast(message, {duration: "long"});
+							return false;
+						}
+						regButton.className += " mui-disabled";
+						var params = {
+							user: {
+								mobile: accountBox.value,
+								password: passwordBox.value
+							},
+							security_code: verifyCodeBox.value
 						};
-						app.reg(regInfo, function(err) {
-							if (err) {
-								plus.nativeUI.toast(err);
-								return;
-							}
-							plus.nativeUI.toast('注册成功');
+						$.MaoAPI.register(params, function(data) {
+							console.log(JSON.stringify(data));
 							$.openWindow({
 								url: 'login.html',
 								id: 'login',
@@ -98,7 +127,9 @@
 								clearTimeout(this)
 								$("#myform")[0].reset();
 							},500);
-						});
+						}).onerror = function() {
+							regButton.className.replace('mui-disabled', '');
+						}
 					});
 				});
 			}(mui, document));

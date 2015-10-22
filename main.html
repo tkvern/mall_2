@@ -12,15 +12,15 @@
 		<link rel="stylesheet" href="css/style.css" />
 		<script>
 			function imgLoaded(img) {
-        var imgWrapper = img.parentNode;
-        imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
-      }
+				var imgWrapper = img.parentNode;
+				imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
+			  }
 		</script>
 	</head>
 
 	<body>
 		<nav class="mui-bar mui-bar-tab">
-		  <li class="mui-tab-item mui-active" id="home">
+		  	<li class="mui-tab-item mui-active" id="home">
 				<span class="mui-icon fa fa-home fa-2x"></span>
 				<span class="mui-tab-label">首页</span>
 			</li>
@@ -49,34 +49,29 @@
 					  id: "home"
 					}]
 				});
-				var settings = app.getSettings();
-				var account = doc.getElementById('account');
-
 				
 				$.plusReady(function() {
 					var self = plus.webview.currentWebview();
+					var subpage_style = {
+						top: '0px',
+						bottom: '50px'
+					};
 					var pages = [{
 						id: 'home',
 						url: 'plus/home.html',
-						styles: {
-							top: '0px',
-							bottom: '50px'
-						}
+						styles: subpage_style
 					},{
 						id: 'walk',
 						url: 'plus/walk.html',
-						styles: {
-							top: '0px',
-							bottom: '50px'
-						}
+						styles: subpage_style
 					},{
 						id: 'setting',
 						url: 'plus/setting.html',
-						styles: {
-							top: '0px',
-							bottom: '50px'
-						}
+						styles: subpage_style
 					}];
+					
+					var activeTabID = pages[0].id;
+					
 					for (var i = 0; i < 3; i++){
 						var sub = plus.webview.create(pages[i].url, pages[i].id, pages[i].styles);
 						if (i > 0){
@@ -84,31 +79,16 @@
 						}
 						self.append(sub);
 					}
-
-					var homeButton = doc.getElementById('home');
-					var walkButton = doc.getElementById('walk');
-//					var couponsButton = doc.getElementById('coupons');
-					var settingButton = doc.getElementById('setting');
-					homeButton.addEventListener('tap', function(event) {
-						plus.webview.show('home');
-						plus.webview.hide('walk');
-						plus.webview.hide('setting');
-						
-					});
-					walkButton.addEventListener('tap', function(event) {
-						plus.webview.show('walk');
-						plus.webview.hide('home');
-						plus.webview.hide('setting');
-						
-					});
-//					couponsButton.addEventListener('tap', function(event) {
-//						
-//					});
-					settingButton.addEventListener('tap', function(event) {
-						plus.webview.show('setting');
-						plus.webview.hide('walk');
-						plus.webview.hide('home');
-					});
+					
+					$('.mui-bar-tab').on('tap', 'li', function(e){
+						var targetTabId = this.getAttribute('id');
+						if(targetTabId == activeTabID) {
+							return;
+						}
+						plus.webview.show(targetTabId, "auto");
+						plus.webview.hide(activeTabID);
+						activeTabID = targetTabId;
+					})
 					
 					$.oldBack = mui.back;
 					var backButtonPress = 0;
