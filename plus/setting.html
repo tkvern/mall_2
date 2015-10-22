@@ -221,7 +221,7 @@
 							<div class="col-xs-12 col-sm-6">
 						    <article class="post tag-ad collect danger">
 						    	<h2 class="post-title">
-						    		<span class="pull-left mui-badge  mui-ellipsis title">肯德基大新店</span>
+						    		<span class="pull-left mui-badge  mui-ellipsis title" id="merchant.html?shop=1" onclick="clicked(this.id);">肯德基大新店</span>
 						    		<span class="pull-right"><span class="mui-badge">2015-09-09&nbsp;10:10</span>截止</span>
 						    	</h2>
 					        <div class="post-featured-image">
@@ -229,15 +229,16 @@
 				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
 				            </a>
 					        </div>
-					        <span class="badge type">立即使用</span>
+					        <span class="badge type">未使用</span>
 					        <span class="badge price">￥50</span>
 					        <span class="badge description">满100使用</span>
+					        <span class="code"><img src="../images/code.png"></span>
 						    </article>
 							</div>
 							<div class="col-xs-12 col-sm-6">
 						    <article class="post tag-ad collect danger">
 						    	<h2 class="post-title">
-						    		<span class="pull-left mui-badge mui-ellipsis title">肯德基大新店</span>
+						    		<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=2" onclick="clicked(this.id);">肯德基大新店</span>
 						    		<span class="pull-right"><span class="mui-badge">2015-09-09&nbsp;10:10</span>截止</span>
 						    	</h2>
 					        <div class="post-featured-image">
@@ -245,15 +246,16 @@
 				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
 				            </a>
 					        </div>
-					        <span class="badge type">立即使用</span>
+					        <span class="badge type">未使用</span>
 					        <span class="badge price">￥50</span>
 					        <span class="badge description">满100使用</span>
+					        <span class="code"><img src="../images/code.png"></span>
 						    </article>
 							</div>
 							<div class="col-xs-12 col-sm-6">
 						    <article class="post tag-ad collect danger">
 						    	<h2 class="post-title">
-						    		<span class="pull-left mui-badge mui-ellipsis title">肯德基大新店</span>
+						    		<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=3" onclick="clicked(this.id);">肯德基大新店</span>
 						    		<span class="pull-right"><span class="mui-badge">2015-09-09&nbsp;10:10</span>截止</span>
 						    	</h2>
 					        <div class="post-featured-image">
@@ -261,15 +263,16 @@
 				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
 				            </a>
 					        </div>
-					        <span class="badge type">立即使用</span>
+					        <span class="badge type">未使用</span>
 					        <span class="badge price">￥50</span>
 					        <span class="badge description">满100使用</span>
+					        <span class="code"><img src="../images/code.png"></span>
 						    </article>
 							</div>
 							<div class="col-xs-12 col-sm-6">
 						    <article class="post tag-ad collect">
 						    	<h2 class="post-title">
-						    		<span class="pull-left mui-badge mui-ellipsis title">马化腾叉烧</span>
+						    		<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=4" onclick="clicked(this.id);">马化腾叉烧</span>
 						    		<span class="pull-right"><span class="mui-badge">已使用</span></span>
 						    	</h2>
 					        <div class="post-featured-image">
@@ -280,12 +283,13 @@
 					        <span class="badge type">已使用</span>
 					        <span class="badge price">￥50</span>
 					        <span class="badge description">满100使用</span>
+					        <span class="code disabled"><img src="../images/code.png"></span>
 						    </article>
 							</div>
 							<div class="col-xs-12 col-sm-6">
 						    <article class="post tag-ad collect">
 						    	<h2 class="post-title">
-						    		<span class="pull-left mui-badge mui-ellipsis title">马化腾叉烧</span>
+						    		<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=5" onclick="clicked(this.id);">马化腾叉烧</span>
 						    		<span class="pull-right"><span class="mui-badge">已过期</span></span>
 						    	</h2>
 					        <div class="post-featured-image">
@@ -296,6 +300,7 @@
 					        <span class="badge type">已过期</span>
 					        <span class="badge price">￥50</span>
 					        <span class="badge description">满100使用</span>
+					        <span class="code disabled"><img src="../images/code.png"></span>
 						    </article>
 							</div>
 						</div>
@@ -998,16 +1003,15 @@
 			});
 		});
 		
-		//抢券
+		//使用优惠券
 		mui('#post-list').on('tap', '.collect .type', function(event) {
 			var elem = this;
 			if(elem.innerText!="已过期" && elem.innerText!="已使用"){
-				var parent = elem.parentNode;
-				parent.className = parent.className.replace("danger", "");
-				elem.innerText = "已使用";
 				plus.nativeUI.toast('建设中...');
 			}
 		});
+		
+		
 		//退出操作
 		var settings = app.getSettings();
 		document.getElementById('exit').addEventListener('tap', function() {
