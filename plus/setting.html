@@ -17,69 +17,7 @@
         var imgWrapper = img.parentNode;
         imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
       }
-			var as='pop-in';// 默认窗口动画
-			// 处理点击事件
-			var _openw=null;
-			function clicked(id,a,s){
-				if(_openw){return;}
-				a||(a=as);
-				_openw=preate[id];
-				if(_openw){
-					_openw.showded=true;
-					_openw.show(a,null,function(){
-						_openw=null;//避免快速点击打开多个页面
-					});
-				}else{
-					var wa=plus.nativeUI.showWaiting();
-					_openw=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
-					preate[id]=_openw;
-					_openw.addEventListener('loaded',function(){//叶面加载完成后才显示
-						setTimeout(function(){//延后显示可避免低端机上动画时白屏
-							wa.close();
-							_openw.showded=true;
-							s||_openw.show(a,null,function(){
-								_openw=null;//避免快速点击打开多个页面
-							});
-							s&&(_openw=null);//避免s模式下变量无法重置
-						},10);
-					},false);
-					_openw.addEventListener('close',function(){//页面关闭后可再次打开
-						_openw=null;
-						preate[id]&&(preate[id]=null);//兼容窗口的关闭
-					},false);
-				}
-			}
-			// 预创建二级页面
-			var preate={};
-			function preateWebviews(){
-				preateWebivew('plus/grap.html');
-				var plist=document.getElementById('plist').children;
-				// 由于启动是预创建过多Webview窗口会消耗较长的时间，所以这里限制仅创建5个
-				for( var i=0;i<plist.length&&i<2;i++){
-					var id=plist[i].id;
-					id&&(id.length>0)&&preateWebivew(id);
-				}
-			}
-			function preateWebivew(id){
-				if(!preate[id]){
-					var w=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
-					preate[id]=w;
-					w.addEventListener('close',function(){//页面关闭后可再次打开
-						_openw=null;
-						preate[id]&&(preate[id]=null);//兼容窗口的关闭
-					},false);
-				}
-			}
-			// 清除预创建页面(仅)
-			function preateClear(){
-				for(var p in preate){
-					var w=preate[p];
-					if(w&&w.showded&&!w.isVisible()){
-						w.close();
-						preate[p]=null;
-					}
-				}
-			}
+			
 		</script>
 	</head>
 
@@ -681,6 +619,72 @@
 		act2.innerText = state.account;
 		 //初始化单页的区域滚动
 		mui('.mui-scroll-wrapper').scroll();
+		
+		
+		var as='pop-in';// 默认窗口动画
+			// 处理点击事件
+		var _openw=null;
+		function clicked(id,a,s){
+			if(_openw){return;}
+			a||(a=as);
+			_openw=preate[id];
+			if(_openw){
+				_openw.showded=true;
+				_openw.show(a,null,function(){
+					_openw=null;//避免快速点击打开多个页面
+				});
+			}else{
+				var wa=plus.nativeUI.showWaiting();
+				_openw=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
+				preate[id]=_openw;
+				_openw.addEventListener('loaded',function(){//叶面加载完成后才显示
+					setTimeout(function(){//延后显示可避免低端机上动画时白屏
+						wa.close();
+						_openw.showded=true;
+						s||_openw.show(a,null,function(){
+							_openw=null;//避免快速点击打开多个页面
+						});
+						s&&(_openw=null);//避免s模式下变量无法重置
+					},10);
+				},false);
+				_openw.addEventListener('close',function(){//页面关闭后可再次打开
+					_openw=null;
+					preate[id]&&(preate[id]=null);//兼容窗口的关闭
+				},false);
+			}
+		}
+		// 预创建二级页面
+		var preate={};
+		function preateWebviews(){
+			preateWebivew('plus/grap.html');
+			var plist=document.getElementById('plist').children;
+			// 由于启动是预创建过多Webview窗口会消耗较长的时间，所以这里限制仅创建5个
+			for( var i=0;i<plist.length&&i<2;i++){
+				var id=plist[i].id;
+				id&&(id.length>0)&&preateWebivew(id);
+			}
+		}
+		function preateWebivew(id){
+			if(!preate[id]){
+				var w=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
+				preate[id]=w;
+				w.addEventListener('close',function(){//页面关闭后可再次打开
+					_openw=null;
+					preate[id]&&(preate[id]=null);//兼容窗口的关闭
+				},false);
+			}
+		}
+		// 清除预创建页面(仅)
+		function preateClear(){
+			for(var p in preate){
+				var w=preate[p];
+				if(w&&w.showded&&!w.isVisible()){
+					w.close();
+					preate[p]=null;
+				}
+			}
+		}
+		
 		 //分享操作
 		var shares = {};
 		mui.plusReady(function() {
@@ -805,7 +809,7 @@
 						}
 					}, data.title, ["立即更新", "取　　消"]);
 				} else {
-					mui.toast('惠玩已是最新版本~')
+					mui.toast('茂号已是最新版本~')
 				}
 			});
 		});

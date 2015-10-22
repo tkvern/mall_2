@@ -32,6 +32,7 @@
 	padding: 6px;
 	font-size: 14px;
 	color: #888;
+	z-index: 999;
 }
 .mui-poppicker-header .mui-btn {
 	font-size: 12px;

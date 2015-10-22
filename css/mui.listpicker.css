@@ -21,7 +21,7 @@
 	position: absolute;
 	left: 0px;
 	top: 0px;
-	z-index: 1;
+	z-index: 999;
 	border-radius: 3px;
 	-webkit-mask-box-image: -webkit-linear-gradient(bottom, transparent, transparent 5%, #fff 20%, #fff 80%, transparent 95%, transparent);
 	-webkit-mask-box-image: linear-gradient(to top, transparent, transparent 5%, #fff 20%, #fff 80%, transparent 95%, transparent);

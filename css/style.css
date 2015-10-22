@@ -161,8 +161,8 @@ body {
 	top: 46px;
 	height: auto;
 }
-.mui-scroll-wrapper,
-.mui-scroll {
+#setting .mui-scroll-wrapper,
+#setting .mui-scroll {
 	background-color: #efeff4;
 }
 .mui-page.mui-transitioning {
@@ -679,4 +679,8 @@ body {
 
 .shop-phone  a{
 	color: #fff;
+}
+/* home */
+.mui-content.mui-scroll-wrapper .container{
+	z-index: 1;
 }
