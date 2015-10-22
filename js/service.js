@@ -1,7 +1,7 @@
 (function($){
 	$.MaoAPI = {
 		'router': function(url) {
-			return 'http://192.168.1.16:8080/api/v1/' + url;
+			return 'http://127.0.0.1:8080/api/v1/' + url;
 		},
 		
 		'securityCode': function(params, callback) {
@@ -30,7 +30,7 @@
 		
 		'logout': function(params, callback) {
 			return mui.delete(
-				this.router('authorizations'),
+				this.router('user/token'),
 				params,
 				callback
 			)

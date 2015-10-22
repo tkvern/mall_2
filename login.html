@@ -187,7 +187,6 @@
 							}
 						};
 						$.MaoAPI.login(params, function(data){
-							console.log(JSON.stringify(data));
 							app.rememberLoginUser(data.access_token.token, data.access_token.user);
 							toMain();
 						}).onerror = function() {

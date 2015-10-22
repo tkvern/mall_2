@@ -9,6 +9,7 @@
 				url: url,
 				headers: {'X-HTTP-METHOD-OVERRIDE': methodName.toUpperCase()},
 				data: data,
+				success: success,	
 				dataType: dataType
 			}
 			return $.ajax(options);
@@ -23,12 +24,16 @@
         $.ajaxSettings = $.extend($.ajaxSettings, {
             beforeSend: function(xhr, settings) {
             		if(app.isLogin()) {
-            			console.log('before');
             			xhr.setRequestHeader('X-ACCESS-TOKEN', app.getAccessToken());
             		}
-            }, 
+            },
+            // 调试使用
+            complete: function(xhr, status) {
+            		console.log(status, xhr.responseText);
+            },
             // type: "timeout", "error", "abort", "parsererror"
             error: function(xhr, type, error) {
+            		console.log(type, error);
             		if(type == "timeout") {
             			plus.nativeUI.toast('网络请求超时, 请确保网络连接正常后重试');
             		} else if(type == "error") {

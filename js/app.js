@@ -10,7 +10,7 @@
 	$.jumpToLoginWindow = function() {
 		$.openWindow({
 			id: 'login',
-			url: 'login.html',
+			url: '/login.html',
 			show: {
 				aniShow: 'pop-in'
 			},
@@ -35,6 +35,7 @@
 		localStorage.setItem("currentUser", JSON.stringify(user));
 		//记录最后登录的手机号
 		localStorage.setItem("lastMobile", user.mobile);
+		console.log('记录登录信息');
 	}
 	
 	/*
@@ -64,6 +65,7 @@
 	owner.clearLoginInfo = function() {
 		localStorage.removeItem("accessToken");
 		localStorage.removeItem("currentUser");
+		console.log('删除登录信息');
 	}
 	
 	/*
