@@ -4,10 +4,15 @@
  * 请注意将相关方法调整成 “基于服务端Service” 的实现。
  **/
 (function($, owner) {
+	$.plusReady(function(){
+		console.log("webview's count: ", plus.webview.all().length);
+	});
+	
+	owner.BASEURL = 'http://localhost:8080/api/v1/';
 	/**
 	 *  基础功能
 	 */
-	$.jumpToLoginWindow = function() {
+	owner.jumpToLoginWindow = function() {
 		$.openWindow({
 			id: 'login',
 			url: '/login.html',
@@ -25,6 +30,16 @@
 				}
 			}]
 		});
+	}
+	
+	/*
+	 * ajax 调用地址
+	 */
+	owner.apiUrl = function(uri) {
+		if(uri.startsWith('/')) {
+			uri = uri.splice(1);
+		}
+		return owner.BASEURL + uri;
 	}
 	
 	/*
@@ -78,32 +93,6 @@
 		}
 		return null;
 	}
-	/**
-	 * 用户登录
-	 **/
-	owner.login = function(loginInfo, callback) {
-		callback = callback || $.noop;
-		loginInfo = loginInfo || {};
-		loginInfo.account = loginInfo.account || '';
-		loginInfo.password = loginInfo.password || '';
-		if (loginInfo.account.length < 11) {
-			return callback('账号最短为 11 个字符');
-		}
-		if (loginInfo.password.length < 6) {
-			return callback('密码最短为 6 个字符');
-		}
-		
-		//连接服务器验证账号密码 同时设置缓存
-		var users = JSON.parse(localStorage.getItem(loginInfo.account) || '[]');
-		var authed = users.some(function(user) {
-			return loginInfo.account == user.account && loginInfo.password == user.password;
-		});
-		if (authed) {
-			return owner.createState(loginInfo.account, callback);
-		} else {
-			return callback('用户名或密码错误');
-		}
-	};
 	
 	owner.loginTest = function(name,callback) {
 		//游客测试
@@ -117,39 +106,6 @@
 		state.token = "token123456789";
 		owner.setState(state);
 		return callback();
-	};
-
-	/**
-	 * 新用户注册
-	 **/
-	owner.reg = function(regInfo, callback) {
-		callback = callback || $.noop;
-		regInfo = regInfo || {};
-		regInfo.account = regInfo.account || '';
-		regInfo.password = regInfo.password || '';
-		regInfo.verifyCode = regInfo.verifyCode || '';
-		if (regInfo.account.length < 11) {
-			return callback('手机号最短需要 11 个字符');
-		}
-		if (regInfo.password.length < 6) {
-			return callback('密码最短需要 6 个字符');
-		}
-		if (regInfo.verifyCode != "123456") {
-			return callback('请输入验证码: 123456');
-		}
-		
-		//连接服务器验证账号密码
-		var users = JSON.parse(localStorage.getItem(regInfo.account) || '[]');
-		var authed = users.some(function(user) {
-			return regInfo.account == user.account;
-		});
-		if (!authed) {
-			users.push(regInfo);
-			localStorage.setItem(regInfo.account, JSON.stringify(users));
-			return callback();
-		} else {
-			return callback('手机号已被注册');
-		}
 	};
 
 	/**
@@ -171,58 +127,7 @@
 		owner.setSettings(settings);
 	};
 
-	var checkAccount = function(account) {
-		account = account || '';
-		return (account.length >= 11);
-	};
-
-	/**
-	 * 找回密码
-	 **/
-	owner.forgetPassword = function(account, callback) {
-		callback = callback || $.noop;
-		if (!checkAccount(account)) {
-			return callback('手机号码不合法');
-		}
-		$.openWindow({
-			url: 'reset_password.html',
-			id: account,
-			show: {
-				aniShow: 'pop-in'
-			},
-			styles: {
-				popGesture: 'hide'
-			},
-			waiting: {
-				autoShow: false
-			}
-		});
-		//此处调用服务器API发送验证码
-		return callback(null, '验证码：123456 \n已经发送到您的手机，请查收。');
-	};
 		
-	/**
-	 * 重置密码
-	 **/
-	owner.resetPassword = function(resetInfo, callback){
-		callback = callback || $.noop;
-		resetInfo = resetInfo || {};
-		resetInfo.account = resetInfo.account || '';
-		resetInfo.password = resetInfo.password || '';
-		resetInfo.verifyCode = resetInfo.verifyCode || '';
-		if (resetInfo.account.length < 11) {
-			return callback('手机号出现错误');
-		}
-		if (resetInfo.password.length < 6) {
-			return callback('密码最短需要 6 个字符');
-		}
-		if (resetInfo.verifyCode != "123456") {
-			return callback('请输入验证码: 123456');
-		}
-		//连接服务器做修改同时验证API返回的验证码
-		return callback();
-	}
-
 	/**
 	 * 获取应用本地配置
 	 **/

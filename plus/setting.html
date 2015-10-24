@@ -17,6 +17,7 @@
 				var imgWrapper = img.parentNode;
 				imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
 			}
+			
 			var as='pop-in';// 默认窗口动画
 			// 处理点击事件
 			var _openw=null;
@@ -79,7 +80,6 @@
 						preate[p]=null;
 					}
 				}
->>>>>>> eac2c7340dbe27f73a27aae649b5367db1c25e20
 			}
 		</script>
 	</head>
@@ -961,11 +961,11 @@
 		});
 		
 		//切换收藏
-		$('#scroll').scroll({
+		mui('#scroll').scroll({
 			indicators: true //是否显示滚动条
 		});
 		var segmentedControl = document.getElementById('segmentedControl');
-		$('.mui-input-group').on('change', 'input', function() {
+		mui('.mui-input-group').on('change', 'input', function() {
 			if (this.checked) {
 				var styleEl = document.querySelector('input[name="style"]:checked');
 				var colorEl = document.querySelector('input[name="color"]:checked');
@@ -978,7 +978,7 @@
 		});
 		//收藏删除
 		var btnArray = ['确认', '取消'];
-		$('#OA_task_1').on('tap', '.mui-btn.mui-icon-trash', function(event) {
+		mui('#OA_task_1').on('tap', '.mui-btn.mui-icon-trash', function(event) {
 			var elem = this;
 			mui.confirm('确认删除该条记录？', '提示', btnArray, function(e) {
 				if (e.index == 0) {
@@ -987,7 +987,7 @@
 				}
 			});
 		});
-		$('#OA_task_2').on('tap', '.mui-btn.mui-icon-trash', function(event) {
+		mui('#OA_task_2').on('tap', '.mui-btn.mui-icon-trash', function(event) {
 			var elem = this;
 			mui.confirm('确认删除该条记录？', '提示', btnArray, function(e) {
 				if (e.index == 0) {
