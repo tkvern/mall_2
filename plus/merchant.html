@@ -39,7 +39,7 @@
 				<span class="mui-icon mui-icon-left-nav"></span>返回
 			</button>
 			<h1 class="mui-center mui-title">商铺优惠</h1>
-			<button type="button" id="heart" status="0" class="mui-pull-right mui-btn-link" style="width: 30px;"><i class="fa fa-heart-o"></i></button>
+			<button type="button" id="heart" status="0" class="mui-pull-right mui-btn-link" style="font-size: 12px; padding-right: 2px;"><i class="fa fa-heart-o fa-2x"></i></button>
 		</header>
 		<div class="mui-content">
 			<div class="mui-scroll-wrapper" style="padding-top: 45px;">
@@ -195,11 +195,11 @@
 					heart.addEventListener('click', function(event){
 						if (heart.status == 0){
 							heart.status = 1;
-							heart.innerHTML = "<i class='fa fa-heart-o'></i>";
+							heart.innerHTML = "<i class='fa fa-heart-o fa-2x'></i>";
 							plus.nativeUI.toast('已取消收藏！');
 						} else {
 							heart.status = 0;
-							heart.innerHTML = "<i class='fa fa-heart'></i>";
+							heart.innerHTML = "<i class='fa fa-heart fa-2x'></i>";
 							plus.nativeUI.toast('收藏成功！');
 						}
 					});
