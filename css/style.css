@@ -510,6 +510,42 @@ body {
 .mui-bar .mui-btn-link i{
 	line-height: 44px;
 }
+
+body.niceui .post{
+	position: relative;
+	margin-bottom: 30px;
+	padding: 10px 0px;
+	background-color: #EFEFF4;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	color: #51080D;
+}
+.collect .stop.top{
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	height: 10px;
+	background: radial-gradient( transparent 0px, transparent 5px, #FCDCD9 5px, #FCDCD9 );
+	background-size: 20px 20px;
+	background-position: -10px -10px;
+}
+.collect .stop.bottom{
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	height: 10px;
+	background: radial-gradient( transparent 0px, transparent 5px, #FCDCD9 5px, #FCDCD9 );
+	background-size: 20px 20px;
+	background-position: -10px -10px;
+	transform: rotate(180deg);
+}
+body.niceui .tag-ad .post-featured-image{
+	padding-top: 42%;
+	background-image: url(../images/grapgb.png);
+}
+body.niceui .post-featured-image .thumbnail{
+	padding: 0px;
+}
 .post{
 	position: relative;
 	margin-bottom: 30px;
@@ -540,21 +576,52 @@ body {
 	text-align:center;
 	margin:0;
 }
+.collect .time{
+	position: absolute;
+	right: 7px;
+	bottom: 11px;
+}
+.collect .count{
+	position: absolute;
+	right: 100px;
+  bottom: 11px;
+}
 .collect .type{
 	position: absolute;
-	right: -3px;
-	top: 45px;
-	font-size: 28px;
+	right: 15px;
+	top: 50%;
+	border-radius: 50%;
+	height: 60px;
+	width: 60px;
+	text-align: center;
+	line-height: 60px;
+	background-color: #FB93AD;
+	color: #fff;
+	font-size: 30px;
+	margin-top: -30px;
 	/*transform:rotate(19deg);
 	-webkit-transform: rotate(19deg);*/
+}
+.setting .collect .type{
+	font-size: 14px;
 }
 .collect .title{
 	max-width: 75px;
 }
 .collect .price{
 	position: absolute;
-	left: 10px;
-	bottom: 90px;
+	left: 7px;
+	top: 30%;
+	font-size: 40px;
+	padding: 0px 5px;
+	margin-top: -28px;
+}
+.collect .dash{
+	position: absolute;
+	right: 90px;
+	top: 10%;
+	height: 80%;
+	border-left: 1px dashed;
 }
 .collect .code{
 	position: absolute;
@@ -573,8 +640,13 @@ body {
 }
 .collect .description{
 	position: absolute;
-	left: 10px;
-	bottom: 55px;
+	left: 15px;
+	top: 54%;
+}
+.collect .name{
+	position: absolute;
+	left: 14px;
+	bottom: 11px;
 }
 .danger .mui-badge{
 	background-color: #dd524d;
@@ -593,7 +665,7 @@ body {
 	color: #fff;
 }
 .danger .badge{
-	background-color: #dd524d;
+	background-color: #FB93AD;
 }
 .success .badge{
 	background-color: #5cb85c;
