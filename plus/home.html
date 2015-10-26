@@ -28,7 +28,7 @@
 			<button id='showCityPicker' class="mui-pull-left mui-btn-link"><span id="city">重庆</span>&nbsp;<i class="fa fa-map-marker"></i></button>
 			<div id='cityResult' class="ui-alert"></div>
 		</header>
-		<div class="mui-content mui-scroll-wrapper">
+		<div class="mui-content mui-scroll-wrapper" id="pullrefresh">
 			<div class="container">
 				<div class="row" id="plist">
 					<div class="col-xs-12 col-md-6">
@@ -38,7 +38,7 @@
 				    	</h2>
 			        <div class="post-featured-image">
 		            <a class="thumbnail loaded" target="_blank">
-		              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
+		              <img src="../images/dazhu.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
 		            </a>
 			        </div>
 				    </article>
@@ -50,7 +50,7 @@
 				    	</h2>
 			        <div class="post-featured-image">
 		            <a class="thumbnail loaded" target="_blank">
-		              <img src="http://static.bootcss.com/expo/img/e/93/06ce7866570d459fc6132b823d9f2.png" width="800" height="600" alt="猎聘网" onload="imgLoaded(this)">
+		              <img src="../images/maohao.jpg" width="800" height="600" alt="猎聘网" onload="imgLoaded(this)">
 		            </a>
 			        </div>
 				    </article>
@@ -62,7 +62,7 @@
 				    	</h2>
 			        <div class="post-featured-image">
 		            <a class="thumbnail loaded" target="_blank">
-		              <img src="http://static.bootcss.com/expo/img/1/fe/f36d7232d5e063f2de4f144c6749a.png" width="800" height="600" alt="Bootstrap求职招聘" onload="imgLoaded(this)">
+		              <img src="../images/working.gif" width="800" height="600" alt="Bootstrap求职招聘" onload="imgLoaded(this)">
 		            </a>
 			        </div>
 				    </article>
@@ -76,6 +76,26 @@
 		<script src="../js/mui.poppicker.js"></script>
 		<script src="../js/app.js"></script>
 		<script>
+			//启用双击监听
+			mui.init({
+				gestureConfig:{
+					doubletap:true
+				}
+			});
+			var contentWebview = null;
+			document.querySelector('header').addEventListener('doubletap',function () {
+				if(contentWebview==null){
+					contentWebview = plus.webview.currentWebview();
+				}
+				contentWebview.evalJS('mui.scrollTo(0, 100)');
+//				console.log("double")
+//				if(mui.os.ios){
+//					contentWebview.evalJS("mui('#pullrefresh').pullRefresh().scrollTo(0,0,100)");
+//				}else{
+//					contentWebview.evalJS('mui.scrollTo(0, 100)');
+//				}
+			});
+			
 			function imgLoaded(img) {
         var imgWrapper = img.parentNode;
         imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';

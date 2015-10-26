@@ -515,7 +515,7 @@ body {
 	position:absolute;
 	font-size:24px;
 	z-index:9;
-	bottom:12px;
+	bottom:10px;
 	left:0;
 	right:0;
 	text-align:center;
@@ -680,7 +680,7 @@ body {
 .logotxt a {
 	font-weight: 700;
 	color: #fff;
-	font-size: 50px
+	font-size: 40px
 }
 
 .header h2 {
@@ -688,12 +688,18 @@ body {
 	color: #fff;
 	padding: 0;
 	font-weight: 100;
-	font-size: 24px;
+	font-size: 20px;
 	font-weight: 100;
 }
 
 .shop-phone  a{
 	color: #fff;
+}
+.shop-phone  i.fa {
+	padding-right: 10px;
+}
+.shop-phone  i.fa.fa-map-marker{
+	padding-right: 13px;
 }
 /* home */
 .mui-content.mui-scroll-wrapper .container{
