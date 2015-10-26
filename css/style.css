@@ -590,17 +590,27 @@ body.niceui .post-featured-image .thumbnail{
 	position: absolute;
 	right: 15px;
 	top: 50%;
+	padding: 0px;
 	border-radius: 50%;
 	height: 60px;
 	width: 60px;
 	text-align: center;
 	line-height: 60px;
-	background-color: #FB93AD;
+	background-color: #777;
 	color: #fff;
-	font-size: 30px;
+	font-size: 26px;
 	margin-top: -30px;
 	/*transform:rotate(19deg);
 	-webkit-transform: rotate(19deg);*/
+}
+.danger.collect .type{
+	background-color: #FB93AD;
+}
+.success.collect .type{
+	background-color: #5cb85c;
+}
+.warning.collect .type{
+	background-color: #f0ad4e;
 }
 .setting .collect .type{
 	font-size: 14px;
@@ -735,15 +745,28 @@ body.niceui .post-featured-image .thumbnail{
 }
 /* merchant */
 .header {
-	background: #222;
 	background-repeat: no-repeat;
 	background-position: center 0;
 	background-size: cover;
 	text-align: center;
-	min-height: 200px;
+	min-height: 175px;
 	position: relative
 }
-
+.header_img {
+	background-color: #fff;
+	color: #fff;
+	min-height: 175px;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	overflow: hidden;
+	-webkit-filter: blur(5px);
+	filter: blur(5px);
+}
+.header_img img{
+	width: 100%;
+}
 .logoimg {
 	position: absolute;
 	left: 1%;
@@ -758,21 +781,26 @@ body.niceui .post-featured-image .thumbnail{
 
 .logotxt a {
 	font-weight: 700;
-	color: #fff;
+	color: rgba(81, 8, 13, 0.85);
 	font-size: 40px
 }
 
 .header h2 {
 	margin: 10px 0px;
-	color: #fff;
+	color: rgba(81, 8, 13, 0.85);
 	padding: 0;
 	font-weight: 100;
 	font-size: 20px;
 	font-weight: 100;
 }
-
+.header .heart{
+	position: absolute;
+	right: 15px;
+	bottom: 7px;
+	color: rgba(81, 8, 13, 0.85);
+}
 .shop-phone  a{
-	color: #fff;
+	color: rgba(81, 8, 13, 0.85);
 }
 .shop-phone  i.fa {
 	padding-right: 10px;
