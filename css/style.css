@@ -299,12 +299,19 @@ body {
 .mui-ios .mui-navbar .mui-bar .mui-title {
 	position: static;
 }
-.img-mask{
+.img-mask-right{
 	position: absolute;
 	width: 40px;
 	height: 40px;
 	right: 40px;
 	bottom: 10px;
+}
+.img-mask-left{
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	left: 15px;
+	bottom: 11px;
 }
 
 /* unlock */
