@@ -161,8 +161,8 @@ body {
 	top: 46px;
 	height: auto;
 }
-.mui-scroll-wrapper,
-.mui-scroll {
+#setting .mui-scroll-wrapper,
+#setting .mui-scroll {
 	background-color: #efeff4;
 }
 .mui-page.mui-transitioning {
@@ -265,7 +265,7 @@ body {
 }
 #head-img {
 	width: 40px;
-	height: 40px;
+	max-height: 40px;
 }
 #head-img1 {
 	position: absolute;
@@ -299,12 +299,19 @@ body {
 .mui-ios .mui-navbar .mui-bar .mui-title {
 	position: static;
 }
-.img-mask{
+.img-mask-right{
 	position: absolute;
 	width: 40px;
 	height: 40px;
 	right: 40px;
 	bottom: 10px;
+}
+.img-mask-left{
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	left: 15px;
+	bottom: 11px;
 }
 
 /* unlock */
@@ -503,9 +510,46 @@ body {
 .mui-bar .mui-btn-link i{
 	line-height: 44px;
 }
-.post{
+
+body.niceui .post{
 	position: relative;
 	margin-bottom: 30px;
+	padding: 10px 0px;
+	background-color: #EFEFF4;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	color: #51080D;
+}
+.collect .stop.top{
+	position: absolute;
+	top: 0px;
+	width: 100%;
+	height: 10px;
+	background: radial-gradient( transparent 0px, transparent 5px, #FCDCD9 5px, #FCDCD9 );
+	background-size: 20px 20px;
+	background-position: -10px -10px;
+}
+.collect .stop.bottom{
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	height: 10px;
+	background: radial-gradient( transparent 0px, transparent 5px, #FCDCD9 5px, #FCDCD9 );
+	background-size: 20px 20px;
+	background-position: -10px -10px;
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+body.niceui .tag-ad .post-featured-image{
+	padding-top: 42%;
+	background-image: url(../images/grapgb.png);
+}
+body.niceui .post-featured-image .thumbnail{
+	padding: 0px;
+}
+.post{
+	position: relative;
+	margin-bottom: 10px;
 	padding-bottom: 40px;
 	background-color: #fff;
 	-webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
@@ -515,7 +559,7 @@ body {
 	position:absolute;
 	font-size:24px;
 	z-index:9;
-	bottom:12px;
+	bottom:10px;
 	left:0;
 	right:0;
 	text-align:center;
@@ -533,26 +577,105 @@ body {
 	text-align:center;
 	margin:0;
 }
+.collect .time{
+	position: absolute;
+	right: 7px;
+	bottom: 11px;
+}
+.collect .count{
+	position: absolute;
+	right: 100px;
+  bottom: 11px;
+}
 .collect .type{
 	position: absolute;
-	right: -3px;
-	top: 45px;
-	font-size: 28px;
+	right: 15px;
+	top: 50%;
+	padding: 0px;
+	border-radius: 50%;
+	height: 60px;
+	width: 60px;
+	text-align: center;
+	line-height: 60px;
+	background-color: #777;
+	color: #fff;
+	font-size: 26px;
+	margin-top: -30px;
 	/*transform:rotate(19deg);
 	-webkit-transform: rotate(19deg);*/
+}
+.danger.collect .type{
+	background-color: #FB93AD;
+}
+.success.collect .type{
+	background-color: #5cb85c;
+}
+.warning.collect .type{
+	background-color: #f0ad4e;
+}
+.setting .collect .type{
+	font-size: 14px;
 }
 .collect .title{
 	max-width: 75px;
 }
 .collect .price{
 	position: absolute;
-	left: 10px;
-	bottom: 90px;
+	left: 7px;
+	top: 30%;
+	font-size: 40px;
+	padding: 0px 5px;
+	margin-top: -28px;
+}
+.collect .dash{
+	position: absolute;
+	right: 90px;
+	top: 10%;
+	height: 80%;
+	border-left: 1px dashed;
+}
+.collect .code{
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	left: 50%;
+	top: 50%;
+	margin: -40px 0px 0px -40px;
+}
+.collect .code.disabled{
+	display: none;
+}
+.collect .code img{
+	height: 100%;
+	width: 100%;
 }
 .collect .description{
 	position: absolute;
-	left: 10px;
-	bottom: 55px;
+	left: 15px;
+	top: 54%;
+}
+.collect .name{
+	position: absolute;
+	left: 14px;
+	bottom: 11px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+@media only screen and (min-width: 320px) and (max-width: 320px) {
+	.collect .name{
+		width: 90px;
+	}
+}
+@media only screen and (min-width: 360px) and (max-width: 413px) {
+	.collect .name{
+		width: 120px;
+	}
+}
+@media only screen and (min-width: 414px){
+	.collect .name{
+		width: 150px;
+	}
 }
 .danger .mui-badge{
 	background-color: #dd524d;
@@ -571,7 +694,7 @@ body {
 	color: #fff;
 }
 .danger .badge{
-	background-color: #dd524d;
+	background-color: #FB93AD;
 }
 .success .badge{
 	background-color: #5cb85c;
@@ -586,7 +709,7 @@ body {
 	color: #777;
 }
 .tag-ad .post-featured-image{
-	padding-top: 75%;
+	padding-top: 50%;
 }
 .post-featured-image{
 	position: relative;
@@ -641,15 +764,28 @@ body {
 }
 /* merchant */
 .header {
-	background: #222;
 	background-repeat: no-repeat;
 	background-position: center 0;
 	background-size: cover;
 	text-align: center;
-	min-height: 200px;
+	min-height: 175px;
 	position: relative
 }
-
+.header_img {
+	background-color: #fff;
+	color: #fff;
+	min-height: 175px;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0px;
+	overflow: hidden;
+	-webkit-filter: blur(5px);
+	filter: blur(5px);
+}
+.header_img img{
+	width: 100%;
+}
 .logoimg {
 	position: absolute;
 	left: 1%;
@@ -664,19 +800,37 @@ body {
 
 .logotxt a {
 	font-weight: 700;
-	color: #fff;
-	font-size: 50px
+	color: rgba(81, 8, 13, 0.85);
+	font-size: 40px
 }
 
 .header h2 {
 	margin: 10px 0px;
-	color: #fff;
+	color: rgba(81, 8, 13, 0.85);
 	padding: 0;
 	font-weight: 100;
-	font-size: 24px;
+	font-size: 20px;
 	font-weight: 100;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
-
+.header .heart{
+	position: absolute;
+	right: 15px;
+	bottom: 7px;
+	color: rgba(81, 8, 13, 0.85);
+}
 .shop-phone  a{
-	color: #fff;
+	color: rgba(81, 8, 13, 0.85);
+}
+.shop-phone  i.fa {
+	padding-right: 10px;
+}
+.shop-phone  i.fa.fa-map-marker{
+	padding-right: 13px;
+}
+/* home */
+.mui-content.mui-scroll-wrapper .container{
+	z-index: 1;
 }

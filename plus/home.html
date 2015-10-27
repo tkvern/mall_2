@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
@@ -14,206 +13,183 @@
 		<link rel="stylesheet" href="../css/mui.listpicker.css" />
 		<link rel="stylesheet" href="../css/mui.poppicker.css" />
 		<link rel="stylesheet" href="../css/style.css" />
-		<script>
-			function imgLoaded(img) {
-        var imgWrapper = img.parentNode;
-        imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
-      }
-		</script>
 	</head>
 
 	<body>
 		<header class="mui-bar mui-navbar">
-			<h1 class="mui-title">逛商场</h1>
+			<h1 class="mui-title">茂号</h1>
 			<button id='showCityPicker' class="mui-pull-left mui-btn-link"><span id="city">重庆</span>&nbsp;<i class="fa fa-map-marker"></i></button>
 			<div id='cityResult' class="ui-alert"></div>
 		</header>
-		<div class="mui-content mui-scroll-wrapper">
-			<div class="container">
-				<div class="row" id="plist">
-					<div class="col-xs-12 col-md-6">
-						<article class="post tag-ad" id="grap.html?shop=1" onclick="clicked(this.id);">
-							<h2 class="post-title">
-								<a target="_blank">大足印象</a>
-							</h2>
-							<div class="post-featured-image">
-							<a class="thumbnail loaded" target="_blank">
-							  <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
-							</a>
-							</div>
-						</article>
-					</div>
-					<div class="col-xs-12 col-md-6">
-						<article class="post tag-ad" id="grap.html?shop=2" onclick="clicked(this.id);">
-							<h2 class="post-title">
-								<a target="_blank">茂田家园</a>
-							</h2>
-							<div class="post-featured-image">
-							<a class="thumbnail loaded" target="_blank">
-							  <img src="http://static.bootcss.com/expo/img/e/93/06ce7866570d459fc6132b823d9f2.png" width="800" height="600" alt="猎聘网" onload="imgLoaded(this)">
-							</a>
-							</div>
-						</article>
-					</div>
-					<div class="col-xs-12 col-md-6">
-				    <article class="post tag-ad">
-				    	<h2 class="post-title">
-				    		<a target="_blank">建设中...</a>
-				    	</h2>
-			        <div class="post-featured-image">
-		            <a class="thumbnail loaded" target="_blank">
-		              <img src="http://static.bootcss.com/expo/img/1/fe/f36d7232d5e063f2de4f144c6749a.png" width="800" height="600" alt="Bootstrap求职招聘" onload="imgLoaded(this)">
-		            </a>
-			        </div>
-				    </article>
+		<div class="mui-content">
+      <div class="mui-scroll-wrapper" style="padding-top: 45px;" id="refreshContainer">
+        <div class="mui-scroll">
+          <div class="container">
+            <div class="row" id="plist">
+
 					</div>
 				</div>
 			</div>
 		</div>
-				
+		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/mui.listpicker.js"></script>
 		<script src="../js/mui.poppicker.js"></script>
 		<script src="../js/app.js"></script>
+		<!--<script src="../js/mui.lazyload.js"></script>
+		<script src="../js/mui.lazyload.img.js"></script>-->
 		<script>
-			function imgLoaded(img) {
-				var imgWrapper = img.parentNode;
-				imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
-			}
 			mui('.mui-scroll-wrapper').scroll();
+			function mallTemplate(mall) {
+				return ( 
+					'<article class="post tag-ad" id="shop:' + mall.id +  '">' +
+						'<h2 class="post-title">' +  
+							'<a target="_blank">' + mall.name + '</a>' + 
+						'</h2>' +
+						'<div class="post-featured-image">' + 
+						'<a class="thumbnail " target="_blank">' + 
+						  '<img class="mui-media-object"  src="' + mall.image_url + '" width="100%" height="400" alt="">' +
+						'</a>' +
+						'</div>' +
+					'</article>'
+				);
+			}
+			
+			var createFragment = function(malls) {
+				var fragment = document.createDocumentFragment();
+				var div;
+				for (var i = 0; i < malls.length; i++) {
+					div = document.createElement('div');
+					div.className = 'col-xs-12 col-md-6';
+					div.innerHTML = mallTemplate(malls[i]);
+					fragment.appendChild(div);
+				}
+				return fragment;
+			};
+			
+			function loadMalls() {
+				console.log('loadmalls scroll');
+				var malls = [
+					{id: 1, name: '大足印象', image_url: 'http://p1.pccoo.cn/sell/20130822/201308220948223913s.jpg'},
+					{id: 2, name: '洋人街', image_url: 'http://images.517best.com/UploadFiles/images/s/20131127/188023855320131127112217881351671.jpg'},
+					{id: 3, name: '大足印象', image_url: 'http://p1.pccoo.cn/sell/20130822/201308220948223913s.jpg'},
+					{id: 4, name: '洋人街', image_url: 'http://images.517best.com/UploadFiles/images/s/20131127/188023855320131127112217881351671.jpg'},
+					{id: 5, name: '大足印象', image_url: 'http://p1.pccoo.cn/sell/20130822/201308220948223913s.jpg'},
+					{id: 6, name: '洋人街', image_url: 'http://images.517best.com/UploadFiles/images/s/20131127/188023855320131127112217881351671.jpg'},
+					{id: 7, name: '大足印象', image_url: '../images/mall-holder.png'},
+					{id: 8, name: '洋人街', image_url: '../images/mall-holder.png'}
+				];
+				mui.get(
+					window.app.apiUrl('cities/cq/malls'),
+					null,
+					function(data) {
+						//malls = data.malls;
+						window.MallData = {};
+						for(var i = 0; i < malls.length; i++) {
+							window.MallData[malls[i].id] = malls[i];
+						}
+						mui('#plist')[0].appendChild(createFragment(malls));
+						
+//						mui(document).imageLazyload({
+//							placeholder: '../images/mall-holder.png',
+//							duration: 50
+//						});
+						malls = null;
+					}
+				);
+			}
+			
+			function addEventForMall() {
+				mui('#plist').on('tap', 'article', function() {
+					console.log('tap on', this.id);
+					var targetView = plus.webview.getWebviewById('plus/grap');
+					targetView.show();
+					var shopId = parseInt(this.id.split(':')[1]);
+					mui.fire(targetView, 'grapRefresh', {shop: window.MallData[shopId]});
+				});
+			}
+			
+			function refresh() {
+				console.log('refresh');
+				loadMalls();
+				setTimeout(function() {
+						mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+					}, 3000);
+			}
 			// H5 plus事件处理
-			var as='pop-in';// 默认窗口动画
-			function plusReady(){
+			mui.plusReady(function(){
+				
+			//function plusReady(){
+				mui.init({
+				  pullRefresh : {
+					container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					down : {
+					  contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+					  contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+					  contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+					  callback : refresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				  }
+				});
+				mui.preload({
+					id: 'plus/grap',
+					url: '/plus/grap.html'
+				})
+				loadMalls();
+				addEventForMall();
 				// 隐藏滚动条
 				plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
 				// Android处理返回键
 				
-				compatibleAdjust();
-			}
-			if(window.plus){
-				plusReady();
-			}else{
-				document.addEventListener('plusready',plusReady,false);
-			}
+				//compatibleAdjust();
+			//}
+			})
+
+//			if(window.plus){
+//				plusReady();
+//			}else{
+//				document.addEventListener('plusready',plusReady,false);
+//			}
 			// DOMContentLoaded事件处理
-			var _domReady=false;
-			document.addEventListener('DOMContentLoaded',function(){
-				_domReady=true;
-				compatibleAdjust();
-			},false);
-			var _adjust=false;
-			function compatibleAdjust(){
-				if(_adjust||!window.plus||!_domReady){
-					return;
-				}
-				_adjust=true;
-				// 预创建二级窗口
-			//	preateWebviews();
-				// 关闭启动界面
-				setTimeout(function(){
-					plus.navigator.closeSplashscreen();
-				},500);
-			}
+//			var _domReady=false;
+//			document.addEventListener('DOMContentLoaded',function(){
+//				_domReady=true;
+//				compatibleAdjust();
+//			},false);
+//			var _adjust=false;
+//			function compatibleAdjust(){
+//				if(_adjust||!window.plus||!_domReady){
+//					return;
+//				}
+//				_adjust=true;
+//				// 预创建二级窗口
+//			//	preateWebviews();
+//				// 关闭启动界面
+//				setTimeout(function(){
+//					plus.navigator.closeSplashscreen();
+//				},500);
+//			}
 			
-			function preateWebivew(id){
-				if(!preate[id]){
-					var w=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
-					preate[id]=w;
-					w.addEventListener('close',function(){//页面关闭后可再次打开
-						_openw=null;
-						preate[id]&&(preate[id]=null);//兼容窗口的关闭
-					},false);
-				}
-			}
-			// 处理点击事件
-			var _openw=null;
-			function clicked(id,a,s){
-				if(_openw){return;}
-				a||(a=as);
-				_openw=preate[id];
-				if(_openw){
-					_openw.showded=true;
-					_openw.show(a,null,function(){
-						_openw=null;//避免快速点击打开多个页面
-					});
-				}else{
-					var wa=plus.nativeUI.showWaiting();
-					_openw=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
-					preate[id]=_openw;
-					_openw.addEventListener('loaded',function(){//叶面加载完成后才显示
-						setTimeout(function(){//延后显示可避免低端机上动画时白屏
-							wa.close();
-							_openw.showded=true;
-							s||_openw.show(a,null,function(){
-								_openw=null;//避免快速点击打开多个页面
-							});
-							s&&(_openw=null);//避免s模式下变量无法重置
-						},10);
-					},false);
-					_openw.addEventListener('close',function(){//页面关闭后可再次打开
-						_openw=null;
-						preate[id]&&(preate[id]=null);//兼容窗口的关闭
-					},false);
-				}
-			}
-			// 预创建二级页面
-			var preate={};
-			function preateWebviews(){
-				preateWebivew('plus/grap.html');
-				var plist=document.getElementById('plist').children;
-				// 由于启动是预创建过多Webview窗口会消耗较长的时间，所以这里限制仅创建5个
-				for( var i=0;i<plist.length&&i<2;i++){
-					var id=plist[i].id;
-					id&&(id.length>0)&&preateWebivew(id);
-				}
-			}
-			function preateWebivew(id){
-				if(!preate[id]){
-					var w=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
-					preate[id]=w;
-					w.addEventListener('close',function(){//页面关闭后可再次打开
-						_openw=null;
-						preate[id]&&(preate[id]=null);//兼容窗口的关闭
-					},false);
-				}
-			}
-			// 清除预创建页面(仅)
-			function preateClear(){
-				for(var p in preate){
-					var w=preate[p];
-					if(w&&w.showded&&!w.isVisible()){
-						w.close();
-						preate[p]=null;
-					}
-				}
-			}
-			
-			(function($, doc) {
-				mui.ready(function() {
-					//初始化城市
-					var cityPicker = new $.PopPicker();
-					cityPicker.setData([{
-						value: 'chongqing',
-						text: '重庆'
-					}, {
-						value: 'shenzhen',
-						text: '深圳'
-					}, {
-						value: 'shanghai',
-						text: '上海'
-					}]);
-					//选择城市
-					var showCityPickerButton = doc.getElementById('showCityPicker');
-					var cityResult = doc.getElementById('cityResult');
-					showCityPickerButton.addEventListener('tap', function(event) {
-						cityPicker.show(function(items) {
-							document.getElementById('city').innerText = items[0].text; //JSON.stringify(items[0]);序列化结果
-							//返回 false 可以阻止选择框的关闭
-							//return false;
-						});
-					}, false);
-				});
-			}(mui, document));
+//			(function($, doc) {
+//				mui.ready(function() {
+//					//初始化城市
+//					var cityPicker = new $.PopPicker();
+//					cityPicker.setData([{
+//						value: 'chongqing',
+//						text: '重庆'
+//					}]);
+//					//选择城市
+//					var showCityPickerButton = doc.getElementById('showCityPicker');
+//					var cityResult = doc.getElementById('cityResult');
+//					showCityPickerButton.addEventListener('tap', function(event) {
+//						cityPicker.show(function(items) {
+//							document.getElementById('city').innerText = items[0].text; //JSON.stringify(items[0]);序列化结果
+//							//返回 false 可以阻止选择框的关闭
+//							//return false;
+//						});
+//					}, false);
+//				});
+//			}(mui, document));
 		</script>
 	</body>
 

@@ -3,14 +3,14 @@
     "id": "H548E5346",/*应用的标识，创建应用时自动生成，勿手动修改*/
     "name": "茂号",/*应用名称，程序桌面图标名称*/
     "version": {
-        "name": "1.0.0",/*应用版本名称*/
+        "name": "1.0.1",/*应用版本名称*/
         "code": "83"
     },
     "description": "",/*应用描述信息*/
     "icons": {
         "72": "icon.png"
     },
-    "launch_path": "login.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+    "launch_path": "main.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
     "developer": {
         "name": "",/*开发者名称*/
         "email": "",/*开发者邮箱地址*/
@@ -106,7 +106,7 @@
     "plus": {
         "splashscreen": {
             "autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
-            "waiting": true,"delay":"100"/*是否在程序启动界面显示等待雪花，true表示显示，false表示不显示。*/
+            "waiting": false,"delay":"0"/*是否在程序启动界面显示等待雪花，true表示显示，false表示不显示。*/
         },
         "runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
         "signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
@@ -166,29 +166,29 @@
             "splashscreen": {
                 "ios": {
                     "iphone": {
-                        "default": "C:/Users/Vern/Desktop/TEMP/320-480.png", /*iPhone3启动图片选，分辨率：320x480*/
-                        "retina35": "C:/Users/Vern/Desktop/TEMP/640-960.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
-                        "retina40": "C:/Users/Vern/Desktop/TEMP/640-1136.png","retina55":"C:/Users/Vern/Desktop/TEMP/1242-2208.png","retina47":"C:/Users/Vern/Desktop/TEMP/750-1334.png"/*4.0 英寸设备(iPhone5)启动图片，分辨率：640x1136*/
+                        "default": "C:/Users/Vern/Desktop/lg/320x480.png", /*iPhone3启动图片选，分辨率：320x480*/
+                        "retina35": "C:/Users/Vern/Desktop/lg/640x960.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+                        "retina40": "C:/Users/Vern/Desktop/lg/640x1136.png","retina55":"C:/Users/Vern/Desktop/lg/1242x2208.png","retina47":"C:/Users/Vern/Desktop/lg/750x1334.png"/*4.0 英寸设备(iPhone5)启动图片，分辨率：640x1136*/
                     },
                     "ipad": {
-                        "portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
-                        "portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+                        "portrait": "C:/Users/Vern/Desktop/lg/768x1004.png", /*iPad竖屏启动图片，分辨率：768x1004*/
+                        "portrait-retina": "C:/Users/Vern/Desktop/lg/1536x2008.png",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
                         "landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
                         "landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
-                        "portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
-                        "portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+                        "portrait7": "C:/Users/Vern/Desktop/lg/768x1024.png", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+                        "portrait-retina7": "C:/Users/Vern/Desktop/lg/1536x2048.png",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
                         "landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
                         "landscape-retina7": ""/*iPad iOS7高分屏横屏启动图片，分辨率：2048x1536*/
                     }
                 },
                 "android": {
-                    "mdpi": "C:/Users/Vern/Desktop/TEMP/a-240-282.png", /*普通屏启动图片，分辨率：240x282*/
-                    "ldpi": "C:/Users/Vern/Desktop/TEMP/a-320-442.png", /*大屏启动图片，分辨率：320x442*/
-                    "hdpi": "C:/Users/Vern/Desktop/TEMP/a-480-762.png", /*高分屏启动图片，分辨率：480x762*/
-                    "xhdpi": "C:/Users/Vern/Desktop/TEMP/a-720-1242.png", /*720P高分屏启动图片，分辨率：720x1242*/
-                    "xxhdpi": "C:/Users/Vern/Desktop/TEMP/a-1080-1882.png"/*1080P高分屏启动图片，分辨率：1080x1882*/
+                    "mdpi": "C:/Users/Vern/Desktop/lg/240x282.png", /*普通屏启动图片，分辨率：240x282*/
+                    "ldpi": "C:/Users/Vern/Desktop/lg/320x442.png", /*大屏启动图片，分辨率：320x442*/
+                    "hdpi": "C:/Users/Vern/Desktop/lg/480x762.png", /*高分屏启动图片，分辨率：480x762*/
+                    "xhdpi": "C:/Users/Vern/Desktop/lg/720x1242.png", /*720P高分屏启动图片，分辨率：720x1242*/
+                    "xxhdpi": "C:/Users/Vern/Desktop/lg/1080x1882.png"/*1080P高分屏启动图片，分辨率：1080x1882*/
                 }
             }
         }
-    }
+    },"fullscreen":false
 }
