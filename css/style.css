@@ -265,7 +265,7 @@ body {
 }
 #head-img {
 	width: 40px;
-	height: 40px;
+	max-height: 40px;
 }
 #head-img1 {
 	position: absolute;
@@ -658,6 +658,24 @@ body.niceui .post-featured-image .thumbnail{
 	position: absolute;
 	left: 14px;
 	bottom: 11px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+@media only screen and (min-width: 320px) and (max-width: 320px) {
+	.collect .name{
+		width: 90px;
+	}
+}
+@media only screen and (min-width: 360px) and (max-width: 413px) {
+	.collect .name{
+		width: 120px;
+	}
+}
+@media only screen and (min-width: 414px){
+	.collect .name{
+		width: 150px;
+	}
 }
 .danger .mui-badge{
 	background-color: #dd524d;
@@ -793,6 +811,9 @@ body.niceui .post-featured-image .thumbnail{
 	font-weight: 100;
 	font-size: 20px;
 	font-weight: 100;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .header .heart{
 	position: absolute;

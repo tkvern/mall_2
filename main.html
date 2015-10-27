@@ -44,61 +44,84 @@
 					scrollIndicator: 'none'
 				};
 				
-				var subpages = [
-					{
-						id: 'home',
-						url: 'plus/home.html',
-						styles: subpage_style
-					},
-					{
-						id: 'walk',
-						url: 'plus/walk.html',
-						styles: subpage_style
-					},
-					{
-						id: 'setting',
-						url: 'plus/setting.html',
-						styles: subpage_style
+				$.init({
+					swipeBack: false,
+					statusBarBackground: '#f7f7f7',
+					gestureConfig: {
+						doubletap: true
 					}
-				];
-				
-				function preloadSubpages() {
-					var self = plus.webview.currentWebview();
-					for(var i = 0; i < subpages.length; i++) {
-						var page = $.preload(subpages[i]);
-						if(i > 0) {
-							page.hide();
-						}
-						self.append(page);
-					}
-				}
-				
-				// 为bar-item添加点击事件
-				function addEventForBarItem() {
-					var activeTabID = subpages[0].id;
-					$('.mui-bar-tab').on('tap', 'li', function(e){
-						var targetTabId = this.getAttribute('id');
-						if(targetTabId == activeTabID) {
-							return;
-						}
-						var chooseView = plus.webview.getWebviewById(targetTabId);
-						$.fire(chooseView, 'refresh');
-						plus.webview.show(targetTabId, "auto");
-						plus.webview.hide(activeTabID);
-						activeTabID = targetTabId;
-					});
-				}
+				});
 
+				var settings = app.getSettings();
+				var account = doc.getElementById('account');
+				
 				$.plusReady(function() {
-					$.init({
-						swipeBack: false,
-						statusBarBackground: '#f7f7f7',
-						gestureConfig: {
-							doubletap: true
-						}
-						//subpages: subpages
-					});
+					var showGuide = plus.storage.getItem("lauchFlag");
+					if(showGuide){
+						//有值，说明已经显示过了，无需显示；
+						//关闭splash页面；
+						plus.navigator.closeSplashscreen();
+						plus.navigator.setFullscreen(false);
+					}else{
+						//显示启动导航
+						mui.openWindow({
+							id:'guide',
+							url:'plus/guide.html',
+							show:{
+								aniShow:'fade-in'
+							},
+							waiting:{
+								autoShow:true
+							}
+						});
+					}
 					
+					var self = plus.webview.currentWebview();
+				  var subpages = [
+            {
+              id: 'home',
+              url: 'plus/home.html',
+              styles: subpage_style
+            },
+            {
+              id: 'walk',
+              url: 'plus/walk.html',
+              styles: subpage_style
+            },
+            {
+              id: 'setting',
+              url: 'plus/setting.html',
+              styles: subpage_style
+            }
+          ];
+				
+          function preloadSubpages() {
+            var self = plus.webview.currentWebview();
+            for(var i = 0; i < subpages.length; i++) {
+              var page = $.preload(subpages[i]);
+              if(i > 0) {
+                page.hide();
+              }
+              self.append(page);
+            }
+          }
+
+          // 为bar-item添加点击事件
+          function addEventForBarItem() {
+            var activeTabID = subpages[0].id;
+            $('.mui-bar-tab').on('tap', 'li', function(e){
+              var targetTabId = this.getAttribute('id');
+              if(targetTabId == activeTabID) {
+                return;
+              }
+              var chooseView = plus.webview.getWebviewById(targetTabId);
+              $.fire(chooseView, 'refresh');
+              plus.webview.show(targetTabId, "auto");
+              plus.webview.hide(activeTabID);
+              activeTabID = targetTabId;
+            });
+          }
+
 					preloadSubpages();
 					addEventForBarItem();	
 					

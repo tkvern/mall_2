@@ -21,16 +21,17 @@
 			<button id='showCityPicker' class="mui-pull-left mui-btn-link"><span id="city">重庆</span>&nbsp;<i class="fa fa-map-marker"></i></button>
 			<div id='cityResult' class="ui-alert"></div>
 		</header>
-		<div class="mui-content mui-scroll-wrapper" style="padding-top: 45px;" id="refreshContainer">
-			<div class="mui-scroll">
-				<div class="container">
-					<div class="row" id="plist">
+		<div class="mui-content">
+      <div class="mui-scroll-wrapper" style="padding-top: 45px;" id="refreshContainer">
+        <div class="mui-scroll">
+          <div class="container">
+            <div class="row" id="plist">
 
 					</div>
 				</div>
 			</div>
 		</div>
-				
+		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/mui.listpicker.js"></script>
 		<script src="../js/mui.poppicker.js"></script>
@@ -137,7 +138,7 @@
 				loadMalls();
 				addEventForMall();
 				// 隐藏滚动条
-				//plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
+				plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
 				// Android处理返回键
 				
 				//compatibleAdjust();
