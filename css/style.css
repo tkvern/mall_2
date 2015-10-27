@@ -658,6 +658,10 @@ body.niceui .post-featured-image .thumbnail{
 	position: absolute;
 	left: 14px;
 	bottom: 11px;
+	width: 90px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 .danger .mui-badge{
 	background-color: #dd524d;

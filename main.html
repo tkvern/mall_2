@@ -43,17 +43,34 @@
 					statusBarBackground: '#f7f7f7',
 					gestureConfig: {
 						doubletap: true
-					},
-					preloadPages:[{
-						url: "plus/home.html",
-					  id: "home"
-					}]
+					}
 				});
 				var settings = app.getSettings();
 				var account = doc.getElementById('account');
+				
 
 				
 				$.plusReady(function() {
+					var showGuide = plus.storage.getItem("lauchFlag");
+					if(showGuide){
+						//有值，说明已经显示过了，无需显示；
+						//关闭splash页面；
+						plus.navigator.closeSplashscreen();
+						plus.navigator.setFullscreen(false);
+					}else{
+						//显示启动导航
+						mui.openWindow({
+							id:'guide',
+							url:'plus/guide.html',
+							show:{
+								aniShow:'fade-in'
+							},
+							waiting:{
+								autoShow:true
+							}
+						});
+					}
+					
 					var self = plus.webview.currentWebview();
 					var pages = [{
 						id: 'home',
@@ -87,7 +104,6 @@
 
 					var homeButton = doc.getElementById('home');
 					var walkButton = doc.getElementById('walk');
-//					var couponsButton = doc.getElementById('coupons');
 					var settingButton = doc.getElementById('setting');
 					homeButton.addEventListener('tap', function(event) {
 						plus.webview.show('home');
@@ -101,9 +117,6 @@
 						plus.webview.hide('setting');
 						
 					});
-//					couponsButton.addEventListener('tap', function(event) {
-//						
-//					});
 					settingButton.addEventListener('tap', function(event) {
 						plus.webview.show('setting');
 						plus.webview.hide('walk');

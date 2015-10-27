@@ -14,33 +14,23 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-bar-nav">
+		<header class="mui-bar mui-navbar">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">登录</h1>
 		</header>
 		<div class="mui-content">
 			<form id='login-form' class="mui-input-group">
 				<div class="mui-input-row">
 					<label>手机</label>
-					<input id='account' type="tel" maxlength="11" class="mui-input-clear mui-input" placeholder="请输入手机号">
+					<input id='account' type="tel" maxlength="11" class="mui-input-clear mui-input" placeholder="请输入手机号" value="15574997003">
 				</div>
 				<div class="mui-input-row">
 					<label>密码</label>
-					<input id='password' type="password" maxlength="25" class="mui-input-clear mui-input" placeholder="请输入密码">
+					<input id='password' type="password" maxlength="25" class="mui-input-clear mui-input" placeholder="请输入密码" value="123456">
 				</div>
-			</form>
-			<form class="mui-input-group">
-				<ul class="mui-table-view mui-table-view-chevron">
-					<li class="mui-table-view-cell">
-						自动登录
-						<div id="autoLogin" class="mui-switch">
-							<div class="mui-switch-handle"></div>
-						</div>
-					</li>
-				</ul>
 			</form>
 			<div class="mui-content-padded">
 				<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
-				<button id='login_test' class="mui-btn mui-btn-block mui-btn-warning">游客模式</button>
 				<div class="link-area"><a id='reg'>注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
 				</div>
 			</div>
@@ -55,6 +45,7 @@
 			(function($, doc) {
 				$.init({
 					statusBarBackground: '#f7f7f7',
+					swipeBack:true,
 					preloadPages:[
 				    {
 				      url: "reg.html",
@@ -84,75 +75,38 @@
 				    },
 				    {
 				    	url: "main.html",
-				      id: "main",
+				      id: "HBuilder",
 				      subpages:[{
 					    	url: "plus/home.html",
 					      id: "home",
+								styles: {
+									top: '0px',
+									bottom: '50px'
+								},
+								waiting: {
+									autoShow: true
+				   			}
 				      }],
 							waiting: {
-								autoShow: false
+								autoShow: true
 							}
 				    }
 				  ]
 				});
 				$.plusReady(function() {
-					var showGuide = plus.storage.getItem("lauchFlag");
-					if(showGuide){
-						//有值，说明已经显示过了，无需显示；
-						//关闭splash页面；
-						plus.navigator.closeSplashscreen();
-						plus.navigator.setFullscreen(false);
-					}else{
-						//显示启动导航
-						mui.openWindow({
-							id:'guide',
-							url:'plus/guide.html',
-							show:{
-								aniShow:'fade-in'
-							},
-							waiting:{
-								autoShow:false
-							}
-						});
-					}
+					
 					plus.screen.lockOrientation("portrait-primary");
 					var settings = app.getSettings();
 					var state = app.getState();
-					var mainPage = $.preload({
-						"id": 'main',
-						"url": 'main.html'
-					});
 					var toMain = function() {
-						$.fire(mainPage, 'show', null);
-						$.openWindow({
-							id: 'main',
-							url: 'main.html',
-							show: {
-								aniShow: 'pop-in'
-							},
-							waiting: {
-								autoShow: false
-							},
-							preloadPages:[{
-								url: "plus/home.html",
-							  id: "home",
-								waiting: {
-									autoShow: false
-								}
-							}]
-						});
+						plus.webview.show('HBuilder');
 					};
-					//检查 "登录状态" 开始
-					if (settings.autoLogin){
-						toMain();
-					}
 					// close splash
 					setTimeout(function() {
 						//关闭 splash
 						plus.navigator.closeSplashscreen();
 					}, 600);
 					var loginButton = doc.getElementById('login');
-					var loginTestButton = doc.getElementById('login_test');
 					var accountBox = doc.getElementById('account');
 					var passwordBox = doc.getElementById('password');
 					var autoLoginButton = doc.getElementById("autoLogin");
@@ -171,22 +125,9 @@
 							toMain();
 						});
 					});
-					loginTestButton.addEventListener('tap', function(event) {
-						app.loginTest("游客", function(err) {
-							toMain();
-						});
-					});
 					$.enterfocus('#login-form input', function() {
 						$.trigger(loginButton, 'tap');
 					});
-					autoLoginButton.classList[settings.autoLogin ? 'add' : 'remove']('mui-active')
-					autoLoginButton.addEventListener('toggle', function(event) {
-						setTimeout(function() {
-							var isActive = event.detail.isActive;
-							settings.autoLogin = isActive;
-							app.setSettings(settings);
-						}, 50);
-					}, false);
 					regButton.addEventListener('tap', function(event) {
 						$.openWindow({
 							url: 'reg.html',
@@ -217,20 +158,6 @@
 							}
 						});
 					}, true);
-
-					var backButtonPress = 0;
-					$.back = function(event) {
-						backButtonPress++;
-						if (backButtonPress > 1) {
-							plus.runtime.quit();
-						} else {
-							plus.nativeUI.toast('再按一次退出应用');
-						}
-						setTimeout(function() {
-							backButtonPress = 0;
-						}, 1000);
-						return false;
-					};
 				});
 			}(mui, document));
 		</script>
