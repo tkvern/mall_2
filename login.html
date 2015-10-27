@@ -99,7 +99,7 @@
 					var settings = app.getSettings();
 					var state = app.getState();
 					var toMain = function() {
-						plus.webview.show('HBuilder');
+						plus.webview.close(plus.webview.currentWebview());
 					};
 					// close splash
 					setTimeout(function() {

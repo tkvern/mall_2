@@ -721,7 +721,6 @@
 		//退出操作
 		var settings = app.getSettings();
 		document.getElementById('exit').addEventListener('tap', function() {
-			var wvs = plus.webview.all();
 			settings.autoLogin = false;
 			app.setSettings(settings);
 			app.setState({});
