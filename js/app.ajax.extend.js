@@ -32,6 +32,7 @@
 			} else if(type == "error") {
 				// 未登录
 				if(xhr.status == 401) {
+					window.app.clearLoginInfo();
 					if(window.app.jumpToLoginWindow) {
 						window.app.jumpToLoginWindow.call();
 					} else {

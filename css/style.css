@@ -505,7 +505,7 @@ body {
 }
 .post{
 	position: relative;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 	padding-bottom: 40px;
 	background-color: #fff;
 	-webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
@@ -601,7 +601,7 @@ body {
 	color: #777;
 }
 .tag-ad .post-featured-image{
-	padding-top: 75%;
+	padding-top: 50%;
 }
 .post-featured-image{
 	position: relative;

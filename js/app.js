@@ -5,7 +5,7 @@
  **/
 (function($, owner) {
 	$.plusReady(function(){
-		console.log("webview's count: ", plus.webview.all().length);
+		console.log("webview ["+ plus.webview.currentWebview().id + "] count: ", plus.webview.all().length);
 	});
 	
 	owner.BASEURL = 'http://localhost:8080/api/v1/';
@@ -23,8 +23,8 @@
 				autoShow: false
 			},
 			preloadPages:[{
-				url: "plus/home.html",
-			  id: "home",
+				url: "/plus/home.html",
+			  	id: "home",
 				waiting: {
 					autoShow: false
 				}

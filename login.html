@@ -162,22 +162,25 @@
 					var forgetButton = doc.getElementById('forgetPassword');
 					
 					function validateLoginForm() {
-						var telPattern = /^1[\d]{10}$/;
-						if(!!accountBox.value.match(telPattern) == false) {
-							return '请正确填写手机号码';
+						var result;
+						result = $.Validation.validateMobile(accountBox);
+						if(!result.state) {
+							plus.nativeUI.toast(result.error);
+							return false;
 						}
-						if(passwordBox.value.length == 0) {
-							return '密码不能为空';
+						result = $.Validation.validateEmptyPassword(passwordBox);
+						if(!result.state) {
+							plus.nativeUI.toast(result.error);
+							return false;
 						}
-						return '';
+						return true;
 					}
 					
+					// 设置上次登录或者注册时输入的手机号
 					accountBox.value = app.getLastMobile();
 					
 					loginButton.addEventListener('tap', function(event) {
-						var message = validateLoginForm();
-						if(message != '') {
-							plus.nativeUI.toast(message);
+						if(!validateLoginForm()) {
 							return false;
 						}
 						var params = {

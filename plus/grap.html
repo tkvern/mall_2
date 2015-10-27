@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
@@ -13,10 +12,9 @@
 		<link rel="stylesheet" href="../css/mui.indexedlist.css" />
 		<script>
 			function imgLoaded(img) {
-        var imgWrapper = img.parentNode;
-        imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
-      }
-			
+				var imgWrapper = img.parentNode;
+				imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
+			}
 		</script>
 	</head>
 
@@ -28,96 +26,94 @@
 			<h1 class="mui-center mui-title">抢优惠</h1>
 			<button type="button" id="heart" status="0" class="mui-pull-right mui-btn-link" style="font-size: 12px; padding-right: 2px;"><i class="fa fa-heart-o fa-2x"></i></button>
 		</header>
-		<div class="mui-content" id="content">
-			<div class="mui-scroll-wrapper" style="padding-top: 60px;">
-				<div class="mui-scroll">
-					<div class="container">
-						<div class="row" id="post-list">
-							<div class="col-xs-12 col-sm-6">
-						    <article class="post tag-ad collect danger">
-						    	<h2 class="post-title" style="padding: 0px 10px;">
-						    		<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=1" onclick="clicked(this.id);">肯德基大新店</span>
-						    		<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
-						    		<span class="pull-right">剩余<span class="mui-badge">500</span>张</span>
-						    	</h2>
-					        <div class="post-featured-image">
-				            <a class="thumbnail loaded" href="#" target="_blank">
-				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
-				            </a>
-					        </div>
-					        <span class="badge type">立即抢券</span>
-					        <span class="badge price">￥50</span>
-					        <span class="badge description">满100使用</span>
-						    </article>
-							</div>
-							<div class="col-xs-12 col-sm-6">
-						    <article class="post tag-ad collect danger">
-						    	<h2 class="post-title" style="padding: 0px 10px;">
-						    		<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=1" onclick="clicked(this.id);">肯德基大新店</span>
-						    		<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
-						    		<span class="pull-right">剩余<span class="mui-badge">500</span>张</span>
-						    	</h2>
-					        <div class="post-featured-image">
-				            <a class="thumbnail loaded" href="#" target="_blank">
-				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
-				            </a>
-					        </div>
-					        <span class="badge type">立即抢券</span>
-					        <span class="badge price">￥50</span>
-					        <span class="badge description">满100使用</span>
-						    </article>
-							</div>
-							<div class="col-xs-12 col-sm-6">
-						    <article class="post tag-ad collect danger">
-						    	<h2 class="post-title" style="padding: 0px 10px;">
-						    		<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=2" onclick="clicked(this.id);">肯德基大新店</span>
-						    		<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
-						    		<span class="pull-right">剩余<span class="mui-badge">500</span>张</span>
-						    	</h2>
-					        <div class="post-featured-image">
-				            <a class="thumbnail loaded" href="#" target="_blank">
-				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
-				            </a>
-					        </div>
-					        <span class="badge type">立即抢券</span>
-					        <span class="badge price">￥50</span>
-					        <span class="badge description">满100使用</span>
-						    </article>
-							</div>
-							<div class="col-xs-12 col-sm-6">
-						    <article class="post tag-ad collect warning">
-						    	<h2 class="post-title" style="padding: 0px 10px;">
-						    		<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=3" onclick="clicked(this.id);">马云烧烤店</span>
-						    		<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
-						    		<span class="pull-right">剩余<span class="mui-badge">200</span>张</span>
-						    	</h2>
-					        <div class="post-featured-image">
-				            <a class="thumbnail loaded" href="#" target="_blank">
-				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
-				            </a>
-					        </div>
-					        <span class="badge type">未开始</span>
-					        <span class="badge price">￥50</span>
-					        <span class="badge description">满100使用</span>
-						    </article>
-							</div>
-							<div class="col-xs-12 col-sm-6">
-						    <article class="post tag-ad collect">
-						    	<h2 class="post-title" style="padding: 0px 10px;">
-						    		<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=4" onclick="clicked(this.id);">马化腾叉烧</span>
-						    		<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
-						    		<span class="pull-right">剩余<span class="mui-badge">0</span>张</span>
-						    	</h2>
-					        <div class="post-featured-image">
-				            <a class="thumbnail loaded" href="#" target="_blank">
-				              <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
-				            </a>
-					        </div>
-					        <span class="badge type">已抢完</span>
-					        <span class="badge price">￥50</span>
-					        <span class="badge description">满100使用</span>
-						    </article>
-							</div>
+		<div class="mui-content mui-scroll-wrapper" id="refreshContainer" style="padding-top: 60px;">
+			<div class="mui-scroll">
+				<div class="container">
+					<div class="row" id="post-list">
+						<div class="col-xs-12 col-sm-6">
+						<article class="post tag-ad collect danger">
+							<h2 class="post-title" style="padding: 0px 10px;">
+								<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=1" onclick="clicked(this.id);">肯德基大新店</span>
+								<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
+								<span class="pull-right">剩余<span class="mui-badge">500</span>张</span>
+							</h2>
+						<div class="post-featured-image">
+						<a class="thumbnail loaded" href="#" target="_blank">
+						  <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
+						</a>
+						</div>
+						<span class="badge type">立即抢券</span>
+						<span class="badge price">￥50</span>
+						<span class="badge description">满100使用</span>
+						</article>
+						</div>
+						<div class="col-xs-12 col-sm-6">
+						<article class="post tag-ad collect danger">
+							<h2 class="post-title" style="padding: 0px 10px;">
+								<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=1" onclick="clicked(this.id);">肯德基大新店</span>
+								<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
+								<span class="pull-right">剩余<span class="mui-badge">500</span>张</span>
+							</h2>
+						<div class="post-featured-image">
+						<a class="thumbnail loaded" href="#" target="_blank">
+						  <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
+						</a>
+						</div>
+						<span class="badge type">立即抢券</span>
+						<span class="badge price">￥50</span>
+						<span class="badge description">满100使用</span>
+						</article>
+						</div>
+						<div class="col-xs-12 col-sm-6">
+						<article class="post tag-ad collect danger">
+							<h2 class="post-title" style="padding: 0px 10px;">
+								<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=2" onclick="clicked(this.id);">肯德基大新店</span>
+								<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
+								<span class="pull-right">剩余<span class="mui-badge">500</span>张</span>
+							</h2>
+						<div class="post-featured-image">
+						<a class="thumbnail loaded" href="#" target="_blank">
+						  <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
+						</a>
+						</div>
+						<span class="badge type">立即抢券</span>
+						<span class="badge price">￥50</span>
+						<span class="badge description">满100使用</span>
+						</article>
+						</div>
+						<div class="col-xs-12 col-sm-6">
+						<article class="post tag-ad collect warning">
+							<h2 class="post-title" style="padding: 0px 10px;">
+								<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=3" onclick="clicked(this.id);">马云烧烤店</span>
+								<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
+								<span class="pull-right">剩余<span class="mui-badge">200</span>张</span>
+							</h2>
+						<div class="post-featured-image">
+						<a class="thumbnail loaded" href="#" target="_blank">
+						  <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
+						</a>
+						</div>
+						<span class="badge type">未开始</span>
+						<span class="badge price">￥50</span>
+						<span class="badge description">满100使用</span>
+						</article>
+						</div>
+						<div class="col-xs-12 col-sm-6">
+						<article class="post tag-ad collect">
+							<h2 class="post-title" style="padding: 0px 10px;">
+								<span class="pull-left mui-badge mui-ellipsis title" id="merchant.html?shop=4" onclick="clicked(this.id);">马化腾叉烧</span>
+								<span class="mui-badge">&nbsp;09-09&nbsp;10:10</span>
+								<span class="pull-right">剩余<span class="mui-badge">0</span>张</span>
+							</h2>
+						<div class="post-featured-image">
+						<a class="thumbnail loaded" href="#" target="_blank">
+						  <img src="http://static.bootcss.com/expo/img/7/b5/f9c2f01fad1f23574156e0577a06c.jpg" width="800" height="600" alt="Ghost中文网" onload="imgLoaded(this)">
+						</a>
+						</div>
+						<span class="badge type">已抢完</span>
+						<span class="badge price">￥50</span>
+						<span class="badge description">满100使用</span>
+						</article>
 						</div>
 					</div>
 				</div>
@@ -128,73 +124,34 @@
 		<script src="../js/app.js"></script>
 		<script src="../js/mui.indexedlist.js"></script>
 		<script type="text/javascript" charset="utf-8">
-			//初始化单页的区域滚动
-			mui('.mui-scroll-wrapper').scroll();
-			mui.init();
-			var as='pop-in';// 默认窗口动画
-			// 处理点击事件
-			var _openw=null;
-			function clicked(id,a,s){
-				if(_openw){return;}
-				a||(a=as);
-				_openw=preate[id];
-				if(_openw){
-					_openw.showded=true;
-					_openw.show(a,null,function(){
-						_openw=null;//避免快速点击打开多个页面
-					});
-				}else{
-					var wa=plus.nativeUI.showWaiting();
-					_openw=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
-					preate[id]=_openw;
-					_openw.addEventListener('loaded',function(){//叶面加载完成后才显示
-						setTimeout(function(){//延后显示可避免低端机上动画时白屏
-							wa.close();
-							_openw.showded=true;
-							s||_openw.show(a,null,function(){
-								_openw=null;//避免快速点击打开多个页面
-							});
-							s&&(_openw=null);//避免s模式下变量无法重置
-						},10);
-					},false);
-					_openw.addEventListener('close',function(){//页面关闭后可再次打开
-						_openw=null;
-						preate[id]&&(preate[id]=null);//兼容窗口的关闭
-					},false);
-				}
-			}
-			// 预创建二级页面
-			var preate={};
-			function preateWebviews(){
-				preateWebivew('plus/grap.html');
-				var plist=document.getElementById('plist').children;
-				// 由于启动是预创建过多Webview窗口会消耗较长的时间，所以这里限制仅创建5个
-				for( var i=0;i<plist.length&&i<2;i++){
-					var id=plist[i].id;
-					id&&(id.length>0)&&preateWebivew(id);
-				}
-			}
-			function preateWebivew(id){
-				if(!preate[id]){
-					var w=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
-					preate[id]=w;
-					w.addEventListener('close',function(){//页面关闭后可再次打开
-						_openw=null;
-						preate[id]&&(preate[id]=null);//兼容窗口的关闭
-					},false);
-				}
-			}
-			// 清除预创建页面(仅)
-			function preateClear(){
-				for(var p in preate){
-					var w=preate[p];
-					if(w&&w.showded&&!w.isVisible()){
-						w.close();
-						preate[p]=null;
-					}
-				}
-			}
 			mui.plusReady(function() {
+				var currentShop = null;
+				//初始化单页的区域滚动
+				mui('.mui-scroll-wrapper').scroll();
+				
+				var pullfresh = function() {
+					setTimeout(function() {
+						mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+					}, 3000);
+				}
+				
+				mui.init({
+					pullRefresh : {
+						container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+						down : {
+							  contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+							  contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+							  contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+							  callback :pullfresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+						}
+					}
+				});
+				
+				window.addEventListener('grapRefresh', function(e){
+					currentShop = e.detail.shop;
+					console.log('grap refresh', JSON.stringify(e.detail));
+				});
+			
 				// H5 plus事件处理
 				function plusReady(){
 					// 隐藏滚动条
