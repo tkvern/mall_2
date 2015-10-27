@@ -28,7 +28,7 @@
     		var defaultErrorHandler = function(xhr, type, error) {
     			console.log("Error: ", "type: " + type, "error:" + error, "http status:" + xhr.status);
 			if(type == "timeout") {
-				plus.nativeUI.toast('网络请求超时, 请确保网络连接正常后重试');
+				plus.nativeUI.toast('你的网络好像不给力, 请稍后重试');
 			} else if(type == "error") {
 				// 未登录
 				if(xhr.status == 401) {
