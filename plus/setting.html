@@ -128,7 +128,7 @@
 							<div class="col-xs-12 col-sm-6">
 						    <article class="post tag-ad collect danger">
 					        <div class="post-featured-image"></div>
-					        <span class="type" id="1">点击使用</span>
+					        <span class="type" id="qcode.html?code=1" onclick="clicked(this.id);">点击使用</span>
 					        <span class="name" id="merchant.html?shop=4" onclick="clicked(this.id);">肯德基(大新店)</span>
 					        <span class="time">&nbsp;09-09&nbsp;10:10</span>
 					        <span class="price"><span class="h4">￥</span>100</span>
@@ -141,7 +141,7 @@
 							<div class="col-xs-12 col-sm-6">
 						    <article class="post tag-ad collect danger">
 					        <div class="post-featured-image"></div>
-					        <span class="type" id="1">点击使用</span>
+					        <span class="type"  id="qcode.html?code=2" onclick="clicked(this.id);">点击使用</span>
 					        <span class="name" id="merchant.html?shop=4" onclick="clicked(this.id);">肯德基(大新店)</span>
 					        <span class="time">&nbsp;09-09&nbsp;10:10</span>
 					        <span class="price"><span class="h4">￥</span>100</span>
@@ -154,7 +154,7 @@
 							<div class="col-xs-12 col-sm-6">
 						    <article class="post tag-ad collect">
 					        <div class="post-featured-image"></div>
-					        <span class="type" id="1">已使用</span>
+					        <span class="type">已使用</span>
 					        <span class="name" id="merchant.html?shop=4" onclick="clicked(this.id);">肯德基(大新店)</span>
 					        <span class="time">&nbsp;09-09&nbsp;10:10</span>
 					        <span class="price"><span class="h4">￥</span>100</span>
@@ -167,7 +167,7 @@
 							<div class="col-xs-12 col-sm-6">
 						    <article class="post tag-ad collect">
 					        <div class="post-featured-image"></div>
-					        <span class="type" id="1">已过期</span>
+					        <span class="type">已过期</span>
 					        <span class="name" id="merchant.html?shop=4" onclick="clicked(this.id);">肯德基(大新店)</span>
 					        <span class="time">&nbsp;09-09&nbsp;10:10</span>
 					        <span class="price"><span class="h4">￥</span>100</span>
@@ -708,15 +708,6 @@
 				}
 			});
 		});
-		
-		//使用优惠券
-		mui('#post-list').on('tap', '.collect .type', function(event) {
-			var elem = this;
-			if(elem.innerText!="已过期" && elem.innerText!="已使用"){
-				plus.nativeUI.toast('建设中...');
-			}
-		});
-		
 		
 		//退出操作
 		var settings = app.getSettings();
