@@ -51,10 +51,7 @@
 
 				
 				$.plusReady(function() {
-					var wvs = plus.webview.all();
-					for (var i=0; i < wvs.length; i++) {
-						console.log(wvs[i].id)
-					}
+				  
 					var showGuide = plus.storage.getItem("lauchFlag");
 					if(showGuide){
 						//有值，说明已经显示过了，无需显示；
@@ -78,24 +75,24 @@
 					var self = plus.webview.currentWebview();
 					var pages = [{
 						id: 'home',
-						url: 'plus/home.html',
+						url: 'plus/index.html',
 						styles: {
 							top: '0px',
-							bottom: '50px'
+							bottom: '45px'
 						}
 					},{
 						id: 'walk',
 						url: 'plus/walk.html',
 						styles: {
 							top: '0px',
-							bottom: '50px'
+							bottom: '45px'
 						}
 					},{
 						id: 'setting',
 						url: 'plus/setting.html',
 						styles: {
 							top: '0px',
-							bottom: '50px'
+							bottom: '45px'
 						}
 					}];
 					for (var i = 0; i < 3; i++){

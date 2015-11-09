@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link rel="stylesheet" href="../css/mui.min.css" />
+		<link rel="stylesheet" href="../css/bootstrap.min.css" />
+		<link rel="stylesheet" href="../css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="../css/font-awesome.min.css" />
+		<link rel="stylesheet" href="../css/style.css" />
+		<script>
+			function imgLoaded(img) {
+        var imgWrapper = img.parentNode;
+        imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
+      }
+		</script>
+	</head>
+
+	<body>
+	  <div class="mui-scroll-wrapper">
+	    <div class="mui-scroll">
+    	  <div class="mui-navbar" style="position: absolute; overflow: hidden; height: auto;">
+          <div id="slider" class="mui-slider nav-img" >
+            <div class="mui-slider-group mui-slider-loop">
+              <!-- 额外增加的一个节点(循环轮播：第一个节点是最后一张轮播) -->
+              <div class="mui-slider-item mui-slider-item-duplicate">
+                <a href="#">
+                  <img src="../images/ad2.png">
+                </a>
+              </div>
+              <!-- 第一张 -->
+              <div class="mui-slider-item">
+                <a href="#">
+                  <img src="../images/ad1.png">
+                </a>
+              </div>
+              <!-- 第二张 -->
+              <div class="mui-slider-item">
+                <a href="#">
+                  <img src="../images/ad2.png">
+                </a>
+              </div>
+              <!-- 额外增加的一个节点(循环轮播：最后一个节点是第一张轮播) -->
+              <div class="mui-slider-item mui-slider-item-duplicate">
+                <a href="#">
+                  <img src="../images/ad1.png">
+                </a>
+              </div>
+            </div>
+            <div class="mui-slider-indicator">
+              <div class="mui-indicator mui-active"></div>
+              <div class="mui-indicator"></div>
+            </div>
+          </div>
+          <div class="mapmarker text-center">
+            <span class="fa fa-map-marker"></span>&nbsp;&nbsp;<span id="position">未开启定位</span>
+            <div class="search"><span class="search-icon fa fa-search"></span><input type="text" placeholder="有需要，找茂号"></div>
+          </div>
+        </div>
+    
+      	<div class="mui-content contant">
+      	  <div class="row">
+      	    <div class="col-xs-12 title"><h5>逛街</h5></div>
+      	    <div class="col-xs-6 shop1" id="grap.html?shop=1" onclick="clicked(this.id);">
+      	     <h5 class="text-center">智慧商城</h5>
+      	     <img src="../images/maidelong.png" width="100%"/>
+            </div>
+            <div class="col-xs-6 shop2" id="grap.html?shop=2" onclick="clicked(this.id);">
+             <h5 class="text-center">走街串巷</h5>
+             <img src="../images/zoujie.png" width="80%"/>
+            </div>
+            <div class="col-xs-6 line"></div>
+            <div class="col-xs-6 shop3" id="grap.html?shop=3" onclick="clicked(this.id);">
+             <h5 class="text-center">茂号商城</h5>
+             <img src="../images/maohao.png" width="80%"/>
+            </div>
+      	  </div>
+      	  <div class="row">
+            <div class="col-xs-12 title"><h5>美食</h5></div>
+      	    <div class="col-xs-3 text-center icon">
+      	      <img src="../images/huoguo.png" width="80%"/>
+      	      <p>火锅</p>
+      	    </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/zaocan.png" width="80%"/>
+              <p>早餐</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/tianping.png" width="80%"/>
+              <p>甜品</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/yexiao.png" width="80%"/>
+              <p>夜宵</p>
+            </div>
+      	  </div>
+          <div class="row">
+            <div class="col-xs-12 title"><h5>休闲娱乐</h5></div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/ktv.png" width="80%"/>
+              <p>KTV</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/zuliao.png" width="80%"/>
+              <p>足疗按摩</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/dianyin.png" width="80%"/>
+              <p>电影</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/bar.png" width="80%"/>
+              <p>Bar</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 title"><h5>便民服务</h5></div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/jiaofei.png" width="80%"/>
+              <p>生活缴费</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/chongzhi.png" width="80%"/>
+              <p>手机充值</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/jiazhen.png" width="80%"/>
+              <p>家政服务</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/fanwu.png" width="80%"/>
+              <p>租房</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 title"><h5>咨询服务</h5></div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/falu.png" width="80%"/>
+              <p>法律咨询</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/yiliao.png" width="80%"/>
+              <p>医疗咨询</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/peixun.png" width="80%"/>
+              <p>培训</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/liuxue.png" width="80%"/>
+              <p>留学</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 title"><h5>金融理财</h5></div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/gupiao.png" width="80%"/>
+              <p>股票</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/jijin.png" width="80%"/>
+              <p>基金</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/daikuan.png" width="80%"/>
+              <p>贷款</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/licai.png" width="80%"/>
+              <p>家庭理财</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 title"><h5>出行</h5></div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/piaowu.png" width="80%"/>
+              <p>票务</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/zuche.png" width="80%"/>
+              <p>租车</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/zushu.png" width="80%"/>
+              <p>住宿</p>
+            </div>
+            <div class="col-xs-3 text-center icon">
+              <img src="../images/lvxin.png" width="80%"/>
+              <p>旅行</p>
+            </div>
+          </div>
+      	</div>
+    	</div>
+  	</div>
+		<script src="../js/mui.min.js"></script>
+		<script>
+		  var slider = mui("#slider");
+		  slider.slider({
+        interval: 5000
+      });
+      mui('.mui-scroll-wrapper').scroll();
+      // H5 plus事件处理
+      var as='pop-in';// 默认窗口动画
+      function plusReady(){
+        // 隐藏滚动条
+        plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
+        // Android处理返回键
+        
+        compatibleAdjust();
+      }
+      if(window.plus){
+        plusReady();
+      }else{
+        document.addEventListener('plusready',plusReady,false);
+      }
+      // DOMContentLoaded事件处理
+      var _domReady=false;
+      document.addEventListener('DOMContentLoaded',function(){
+        _domReady=true;
+        compatibleAdjust();
+      },false);
+      var _adjust=false;
+      function compatibleAdjust(){
+        if(_adjust||!window.plus||!_domReady){
+          return;
+        }
+        _adjust=true;
+        // 预创建二级窗口
+      //  preateWebviews();
+        // 关闭启动界面
+        setTimeout(function(){
+          plus.navigator.closeSplashscreen();
+        },500);
+      }
+      
+      function preateWebivew(id){
+        if(!preate[id]){
+          var w=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
+          preate[id]=w;
+          w.addEventListener('close',function(){//页面关闭后可再次打开
+            _openw=null;
+            preate[id]&&(preate[id]=null);//兼容窗口的关闭
+          },false);
+        }
+      }
+      // 处理点击事件
+      var _openw=null;
+      function clicked(id,a,s){
+        if(_openw){return;}
+        a||(a=as);
+        _openw=preate[id];
+        if(_openw){
+          _openw.showded=true;
+          _openw.show(a,null,function(){
+            _openw=null;//避免快速点击打开多个页面
+          });
+        }else{
+          var wa=plus.nativeUI.showWaiting();
+          _openw=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
+          preate[id]=_openw;
+          _openw.addEventListener('loaded',function(){//叶面加载完成后才显示
+            setTimeout(function(){//延后显示可避免低端机上动画时白屏
+              wa.close();
+              _openw.showded=true;
+              s||_openw.show(a,null,function(){
+                _openw=null;//避免快速点击打开多个页面
+              });
+              s&&(_openw=null);//避免s模式下变量无法重置
+            },10);
+          },false);
+          _openw.addEventListener('close',function(){//页面关闭后可再次打开
+            _openw=null;
+            preate[id]&&(preate[id]=null);//兼容窗口的关闭
+          },false);
+        }
+      }
+      // 预创建二级页面
+      var preate={};
+      function preateWebviews(){
+        preateWebivew('plus/grap.html');
+        var plist=document.getElementById('plist').children;
+        // 由于启动是预创建过多Webview窗口会消耗较长的时间，所以这里限制仅创建5个
+        for( var i=0;i<plist.length&&i<2;i++){
+          var id=plist[i].id;
+          id&&(id.length>0)&&preateWebivew(id);
+        }
+      }
+      function preateWebivew(id){
+        if(!preate[id]){
+          var w=plus.webview.create(id,id,{scrollIndicator:'none',scalable:false,popGesture:'hide'},{preate:true});
+          preate[id]=w;
+          w.addEventListener('close',function(){//页面关闭后可再次打开
+            _openw=null;
+            preate[id]&&(preate[id]=null);//兼容窗口的关闭
+          },false);
+        }
+      }
+      // 清除预创建页面(仅)
+      function preateClear(){
+        for(var p in preate){
+          var w=preate[p];
+          if(w&&w.showded&&!w.isVisible()){
+            w.close();
+            preate[p]=null;
+          }
+        }
+      }
+      mui('.row').on('tap', '.icon', function(event) {
+        plus.nativeUI.toast('正在建设中...');
+      });
+		</script>
+	</body>
+
+</html>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>mall_2</name>
+	<name>mall_app</name>
 	<comment>Create By HBuilder</comment>
 	<projects>
 	</projects>
@@ -22,7 +22,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1444879903075</id>
+			<id>1444618466708</id>
 			<name></name>
 			<type>10</type>
 			<matcher>
