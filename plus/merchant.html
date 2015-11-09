@@ -38,7 +38,7 @@
 			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 				<span class="mui-icon mui-icon-left-nav"></span>返回
 			</button>
-			<h1 class="mui-center mui-title">商铺优惠</h1>			
+			<h1 class="mui-center mui-title">优惠</h1>			
 		</header>
 		<div class="mui-content">
 			<div class="mui-scroll-wrapper" style="padding-top: 45px;">
@@ -131,6 +131,9 @@
 			//初始化单页的区域滚动
 			mui('.mui-scroll-wrapper').scroll();
 			mui.init();
+			document.addEventListener('shopEnter', function(e){
+			  console.log(JSON.stringify(e.detail));
+			});
 			mui.plusReady(function() {
 				// H5 plus事件处理
 				function plusReady(){

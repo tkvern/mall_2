@@ -493,9 +493,9 @@ body {
 }
 
 /* main */
-.mui-content {
+/*.mui-content {
 	padding-top: 60px!important;
-}
+}*/
 .scontent{
 	padding-top: 60px!important;
 }
@@ -833,4 +833,8 @@ body.niceui .post-featured-image .thumbnail{
 /* home */
 .mui-content.mui-scroll-wrapper .container{
 	z-index: 1;
+}
+
+.mui-navbar~.mui-content .mui-pull-top-pocket {
+    top: 44px;
 }

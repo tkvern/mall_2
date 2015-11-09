@@ -4,11 +4,13 @@
  * 请注意将相关方法调整成 “基于服务端Service” 的实现。
  **/
 (function($, owner) {
+  owner.Template = {};
+  
 	$.plusReady(function(){
 		console.log("webview ["+ plus.webview.currentWebview().id + "] count: ", plus.webview.all().length);
 	});
 	
-	owner.BASEURL = 'http://localhost:8080/api/v1/';
+	owner.BASEURL = 'http://192.168.1.16:8080/api/v1/';
 	/**
 	 *  基础功能
 	 */
@@ -36,7 +38,9 @@
 	 * ajax 调用地址
 	 */
 	owner.apiUrl = function(uri) {
-		if(uri.startsWith('/')) {
+	  if(uri.startsWith('http://') || uri.startsWith('https://')) {
+	     return uri; 
+	  } else if(uri.startsWith('/')) {
 			uri = uri.splice(1);
 		}
 		return owner.BASEURL + uri;
