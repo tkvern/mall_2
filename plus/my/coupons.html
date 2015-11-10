@@ -20,66 +20,30 @@
         <span class="mui-icon mui-icon-left-nav"></span>返回
       </button>
 		</header>
-		<div class="main mui-content">
-			<div class="mui-content-padded" style="display: none;"></div>
-			<div class="container" style="margin-top: 14px;">
-				<div class="row" id="post-list">
-					<div class="col-xs-12 col-sm-6">
-            <article class="post tag-ad collect danger">
-              <div class="post-featured-image"></div>
-              <span class="type" id="1">使用</span>
-              <span class="name" id="merchant.html?shop=4" onclick="clicked(this.id);">肯德基(大新店)</span>
-              <span class="time">&nbsp;09-09&nbsp;10:10</span>
-              <span class="price"><span class="h4">￥</span>100</span>
-              <span class="description">满100使用</span>
-              <span class="dash"></span>
-              <span class="stop top"></span>
-              <span class="stop bottom"></span>
-            </article>
+		<div class="main mui-content mui-scroll-wrapper" id="refreshContainer">
+			<div class="mui-scroll">
+        <div class="container" style="margin-top: 14px;" id="plist">
+          <div class="row">
+            
           </div>
-          <div class="col-xs-12 col-sm-6">
-            <article class="post tag-ad collect danger">
-              <div class="post-featured-image"></div>
-              <span class="type" id="1">使用</span>
-              <span class="name" id="merchant.html?shop=4" onclick="clicked(this.id);">肯德基(大新店)</span>
-              <span class="time">&nbsp;09-09&nbsp;10:10</span>
-              <span class="price"><span class="h4">￥</span>100</span>
-              <span class="description">满100使用</span>
-              <span class="dash"></span>
-              <span class="stop top"></span>
-              <span class="stop bottom"></span>
-            </article>
-          </div>
-          <div class="col-xs-12 col-sm-6">
-            <article class="post tag-ad collect">
-              <div class="post-featured-image"></div>
-              <span class="type" id="1">已用</span>
-              <span class="name" id="merchant.html?shop=4" onclick="clicked(this.id);">肯德基(大新店)</span>
-              <span class="time">&nbsp;09-09&nbsp;10:10</span>
-              <span class="price"><span class="h4">￥</span>100</span>
-              <span class="description">满100使用</span>
-              <span class="dash"></span>
-              <span class="stop top"></span>
-              <span class="stop bottom"></span>
-            </article>
-          </div>
-          <div class="col-xs-12 col-sm-6">
-            <article class="post tag-ad collect">
-              <div class="post-featured-image"></div>
-              <span class="type" id="1">已过期</span>
-              <span class="name" id="merchant.html?shop=4" onclick="clicked(this.id);">肯德基(大新店)</span>
-              <span class="time">&nbsp;09-09&nbsp;10:10</span>
-              <span class="price"><span class="h4">￥</span>100</span>
-              <span class="description">满100使用</span>
-              <span class="dash"></span>
-              <span class="stop top"></span>
-              <span class="stop bottom"></span>
-            </article>
-          </div>
-				</div>
-			</div>
+        </div>
+      </div>
 		</div>
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/app.js"></script>
+		<script src="../../js/app.ajax.extend.js"></script>
+		<script src="../../js/templates/common.template.js"></script>
+		<script src="../../js/templates/coupon.template.js"></script>
+		<script src="../../js/page.js"></script>
+		<script src="../../js/plus/my/coupons.js"></script>
+		<script>
+		  new window.app.UserCouponsPage({
+		    'dataKey': 'user_coupons',
+        'pullRefreshContainerId': '#refreshContainer',
+        'itemsContainerId': '#plist',
+        'pullUp': true,
+        'pullDown': true 
+		  }).start();
+		</script>
 	</body>
 </html>

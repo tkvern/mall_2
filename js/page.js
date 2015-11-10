@@ -97,7 +97,7 @@
     },
     pullDownRefresh: function() {
       var self = this;
-      var apiUrl = self.getInitUrl();
+      var apiUrl = app.apiUrl(self.getInitUrl());
       console.log('pull down url:', apiUrl);
       $.ajax({
         'url': apiUrl,
@@ -122,7 +122,7 @@
       }
       console.log('pull up url: ', self.getNextUrl);
       $.ajax({
-        'url': self.getNextUrl(), 
+        'url': app.apiUrl(self.getNextUrl()), 
         'success': function(data) {
           var items = data[self.options['dataKey']];
           self.appendItems(items);
@@ -158,6 +158,7 @@
     appendItems: function(items) {
       console.log('append items');
       var container = this.getItemsContainer();
+      console.log(container);
       container.appendChild(this.itemsFregment(items, this.data.length));
       for(var i = 0; i < items.length; i++) {
         this.data.push(items[i]);

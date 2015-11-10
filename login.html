@@ -43,7 +43,7 @@
 		<script src="js/mui.enterfocus.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/app.ajax.extend.js"></script>
-		<script src="js/service.js"></script>
+		<script src="js/field.validates.js"></script>
 		<script>
 			(function($, doc) {
 				$.init({
@@ -147,9 +147,14 @@
 								password: passwordBox.value
 							}
 						};
-						$.MaoAPI.login(params, function(data){
-							app.rememberLoginUser(data.access_token.token, data.access_token.user);
-							toMain();
+						$.ajax({
+						  url: app.apiUrl('authorizations'),
+						  type: 'POST',
+						  data: params,
+						  success: function(data) {
+                app.rememberLoginUser(data.access_token.token, data.access_token.user);
+                toMain();
+						  }
 						});
 					});
 

@@ -14,7 +14,7 @@
       if(app.isLogin()) {
         $('#action')[0].text = '退出登录'
       } else {
-        $('#action')[0].text = '立即登录'
+        console.log('not logged in');
       }
     },
     initSingPage: function() {
