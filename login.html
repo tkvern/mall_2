@@ -14,7 +14,7 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-navbar">
+		<header class="mui-bar mui-navbar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">登录</h1>
 		</header>
@@ -22,11 +22,11 @@
 			<form id='login-form' class="mui-input-group">
 				<div class="mui-input-row">
 					<label>手机</label>
-					<input id='account' type="tel" maxlength="11" class="mui-input-clear mui-input" placeholder="请输入手机号" value="15574997003">
+					<input id='account' type="tel" maxlength="11" class="mui-input-clear mui-input" placeholder="请输入手机号">
 				</div>
 				<div class="mui-input-row">
 					<label>密码</label>
-					<input id='password' type="password" maxlength="25" class="mui-input-clear mui-input" placeholder="请输入密码" value="123456">
+					<input id='password' type="password" maxlength="25" class="mui-input-clear mui-input" placeholder="请输入密码">
 				</div>
 			</form>
 
@@ -97,7 +97,6 @@
 				  ]
 				});
 				$.plusReady(function() {
-					
 					plus.screen.lockOrientation("portrait-primary");
 					var settings = app.getSettings();
 					var state = app.getState();
@@ -151,9 +150,7 @@
 						$.MaoAPI.login(params, function(data){
 							app.rememberLoginUser(data.access_token.token, data.access_token.user);
 							toMain();
-						}).onerror = function() {
-							
-						};
+						});
 					});
 
 					$.enterfocus('#login-form input', function() {
