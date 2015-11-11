@@ -48,6 +48,7 @@
       }
       
       $.extend($.ajaxSettings, {
+          timeout: 10000,
           beforeSend: function(xhr, settings) {
             console.log('before send');
             if(app.isLogin()) {
