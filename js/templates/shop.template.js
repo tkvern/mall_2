@@ -16,4 +16,20 @@
             '</article>' 
         );
   }
+  T.collectShopTableViewTemplate = function(items, idStart) {
+    if(!idStart) {
+      idStart = 0;
+    }
+    var fragment, li, index;
+    fragment = document.createDocumentFragment();
+    for(var i = 0; i < items.length; i++) {
+      index = idStart + i;
+      li = document.createElement('div');
+      li.className = "mui-table-view-cell";
+      li.id = 'shop:' +  index;
+      li.innerHTML = items[i].title;
+      fragment.appendChild(li);
+    }
+    return fragment;
+  }
 })(mui, window.app.Template);

@@ -7,8 +7,8 @@
     addEventForShopTap: function() {
       var  self = this;
       $(this.options['itemsContainerId']).on('tap', 'article', function() {
-        var shopId = parseInt(this.id.split(':')[1]);
-        var item = self.data[shopId];
+        var shopIndex = parseInt(this.id.split(':')[1]);
+        var item = self.data[shopIndex];
         var targetView = plus.webview.getWebviewById('plus/merchant');
         targetView.show();
         $.fire(targetView, 'pageEnter', {shop: item});
@@ -26,8 +26,8 @@
       this.startPullDown();
       this.addEventForShopTap();
     },
-    itemsFregment: function(items, idStart) {
-      return T.createRowBasedFregment(items, T.cardShopTemplate, idStart);
+    itemsFragment: function(items, idStart) {
+      return T.createRowBasedFragment(items, T.cardShopTemplate, idStart);
     }
   });
 })(mui, window.app, window.app.Template);

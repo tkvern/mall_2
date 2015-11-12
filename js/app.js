@@ -41,7 +41,7 @@
 	  if(uri.startsWith('http://') || uri.startsWith('https://')) {
 	     return uri; 
 	  } else if(uri.startsWith('/')) {
-			uri = uri.splice(1);
+			uri = uri.slice(1);
 		}
 		return owner.BASEURL + uri;
 	}

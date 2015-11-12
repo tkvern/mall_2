@@ -1,5 +1,5 @@
 (function($, T){
-   T.createRowBasedFregment = function(objects, subCreator, idStart) {
+   T.createRowBasedFragment = function(objects, subCreator, idStart) {
      var use_start = true;
     if(idStart == null || idStart == undefined) {
       use_start = false;

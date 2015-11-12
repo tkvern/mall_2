@@ -44,9 +44,9 @@
         });
       }, false);
     },
-    itemsFregment: function(items, idStart) {
+    itemsFragment: function(items, idStart) {
       console.log('index start:', idStart);
-      return T.createRowBasedFregment(items, T.cardMallTemplate, idStart);
+      return T.createRowBasedFragment(items, T.cardMallTemplate, idStart);
     }
   });
 })(mui, window.app, window.app.Template);

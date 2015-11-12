@@ -74,15 +74,19 @@
       $.init(initOptions);
     },
     startPullDown: function() {
+      console.log(this.target, 'start pulling down');
       this.getWillRefreshContainers().pullRefresh().pulldownLoading();
     },
     endPullDown: function() {
+      console.log(this.target, 'end pulling down');
       this.getWillRefreshContainers().pullRefresh().endPulldownToRefresh();
     },
     startPullUp: function() {
+      console.log(this.target, 'start pulling up');
       this.getWillRefreshContainers().pullRefresh().pullupLoading();
     },
     endPullUp: function(flag) {
+      console.log(this.target, 'end pulling up');
       this.getWillRefreshContainers().pullRefresh().endPullupToRefresh(flag);
     },
     getWillRefreshContainers: function() {
@@ -123,7 +127,7 @@
       var self = this;
       if(!self.hasMore) {
         console.log('no more')
-        self.endPullUp(!self.hasMore);
+        self.endPullUp(true);
         return;
       }
       console.log('pull up url: ', self.getNextUrl());
@@ -174,9 +178,9 @@
     },
     updateList: function(items) {
       var container = this.getItemsContainer();
-      container.appendChild(this.itemsFregment(items, this.data.length));
+      container.appendChild(this.itemsFragment(items, this.data.length));
     },
-    itemsFregment: function(items, idStart) {
+    itemsFragment: function(items, idStart) {
       return document.createDocumentFragment();
     }
   });
@@ -190,8 +194,8 @@
         'dataKey': 'data',
         'pullRefreshContainerId': '#refreshContainer',
         'itemsContainerId': '#itemContainer',
-        'pullUp': true,
-        'pullDown': true,
+        'needPullUp': true,
+        'needPullDown': true,
         'windowInitOptions': {}
       }
       $.extend(true, this.options, options);
@@ -219,42 +223,55 @@
         indicators: true, //是否显示滚动条
         deceleration:deceleration
       });
+      var refreshOpitions = {
+        down: {
+          callback: false 
+        },
+        up: {
+          offset: 200,
+          contentdown: '',
+          callback: false
+        }
+      };
+      if(self.options['needPullDown']) {
+        refreshOpitions.down.callback = function() {
+          self.pullDownRefresh();
+        }
+      } 
+      if(self.options['needPullUp']) {
+        refreshOpitions.up.callback = function() {
+          self.pullUpRefresh();
+        }
+      }
       $.each(document.querySelectorAll(self.options['pullRefreshContainerId']), function(index, pullRefreshEl) {
-        $(pullRefreshEl).pullToRefresh({
-          down: {
-            auto: false,
-            callback: function() {
-              self.pullDownRefresh();
-            }
-          },
-          up: {
-            auto: false,
-            contentdown: '',
-            callback: function() {
-              self.pullUpRefresh();
-            }
-          }
-        });
+        $(pullRefreshEl).pullToRefresh(refreshOpitions);
       });
     },
     startPullDown: function() {
+      console.log(this.target, 'start pulling down');
       this.getWillRefreshContainers().pullToRefresh().pullDownLoading();
     },
     endPullDown: function() {
+      console.log(this.target, 'end pulling down');
       this.getWillRefreshContainers().pullToRefresh().endPullDownToRefresh();
     },
     startPullUp: function() {
+      console.log(this.target, 'start pulling up');
       this.getWillRefreshContainers().pullToRefresh().pullUpLoading();
     },
     endPullUp: function(flag) {
+      console.log(this.target, 'end pulling up', flag);
       this.getWillRefreshContainers().pullToRefresh().endPullUpToRefresh(flag);
+    },
+    refresh: function() {
+      this.getWillRefreshContainers().pullToRefresh().refresh(true);
     },
     getWillRefreshContainers: function() {
       var pullDownContainerId = this.options['pullRefreshContainerId'];
       return $(pullDownContainerId);
     },
     getNextUrl: function() {
-      return this.nextUrl[this.target] ? app.apiUrl(this.nextUrl[this.target]) : this.getInitUrl();
+      return this.nextUrl[this.target] ? this.nextUrl[this.target] : this.getInitUrl();
     },
     getInitUrl: function() {
       return this.options['apiUrl'] || '';
@@ -277,8 +294,10 @@
         'url': apiUrl,
         'success': function(data) {
           var items = data[self.getDataKey()];
+          console.log(JSON.stringify(items));
           self.clearItems();
           self.appendItems(items);
+          self.refresh();
           self.judgeMore(data.meta);
         },
         'complete': function() {
@@ -287,8 +306,9 @@
       });
     },
     pullUpRefresh: function() {
+      console.log(this.target, '==== start pulling up ====');
       var self = this;
-      if(!self.hasMore[self.target]) {
+      if(false === self.hasMore[self.target]) {
         console.log('no more')
         self.endPullUp(true);
         return;
@@ -298,11 +318,11 @@
         'url': app.apiUrl(self.getNextUrl()), 
         'success': function(data) {
           var items = data[self.getDataKey()];
-          self.appendItems(items);
           self.judgeMore(data.meta);
+          self.appendItems(items);
         },
         'complete': function() {
-          console.log('finish pull up refresh');
+          console.log('finish pull up refresh', self.hasMore[self.target]);
           self.endPullUp(!self.hasMore[self.target]);
         }
       });
@@ -341,12 +361,16 @@
     },
     updateList: function(items) {
       var container = this.getItemsContainer();
-      container.appendChild(this.itemsFregment(items, this.data.length));
+      container.appendChild(this.itemsFragment(items, this.getCurrentDataRef().length));
     },
-    itemsFregment: function(items, idStart) {
+    itemsFragment: function(items, idStart) {
       return document.createDocumentFragment();
     }
   });    
+  
+  var PullRefreshPage = PullWithTabPage.extend({
+    
+  });
 
   app.Page = Page;
   app.PullPage = PullPage;

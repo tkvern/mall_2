@@ -3,8 +3,8 @@
     getInitUrl: function() {
       return app.apiUrl('malls/' + this.currentItem.id + '/coupons');
     },
-    itemsFregment: function(items, idStart) {
-      return T.createRowBasedFregment(items, T.couponTemplate, idStart);
+    itemsFragment: function(items, idStart) {
+      return T.createRowBasedFragment(items, T.couponTemplate, idStart);
     },
     plusReady: function() {
       console.log('plusReady:', this.nextUrl);

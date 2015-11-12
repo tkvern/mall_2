@@ -77,10 +77,11 @@
     },
     logout: function() {
       $.ajax({
-        url: app.apiUrl('/user/token'),
+        url: app.apiUrl('user/token'),
         type: 'DELETE',
-        complete: function() {
+        success: function() {
           app.clearLoginInfo();
+          app.jumpToLoginWindow(); 
         }
       });
     }

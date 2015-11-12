@@ -6,8 +6,8 @@
     getInitUrl: function() {
       return 'user/coupons';
     },
-    itemsFregment: function(items, idStart) {
-      return T.createRowBasedFregment(items, T.userCouponTemplate, idStart)
+    itemsFragment: function(items, idStart) {
+      return T.createRowBasedFragment(items, T.userCouponTemplate, idStart)
     }
   });
 })(mui, window.app, window.app.Template);

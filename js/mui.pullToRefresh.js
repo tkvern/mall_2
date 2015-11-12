@@ -329,6 +329,7 @@
 			if (this.loading || this.finished) {
 				return;
 			}
+			console.log('pull up inner');
 			this.loading = true;
 			this.isDraggingUp = false;
 			this.pullUpTips.classList.remove(CLASS_HIDDEN);

@@ -1,13 +1,9 @@
 (function($, app, T){
   app.UserCollectPage = app.PullWithTabPage.extend({
-//  init: function(options) {
-//    this._super(options);
-//    this.data = {
-//      shops: [],
-//      malls: []
-//    }
-//    this.nextUrl = {}
-//  },
+    init: function(options) {
+      this._super(options);
+      this.mfirst = true
+    },
     plain: function() {
       this.target = 'shops';
       this.addEventForSlider();
@@ -25,12 +21,11 @@
 //    return this.hasMore;
 //  }, 
     getInitUrl: function() {
-      return 'user/' + this.target;
+      return 'user/' + this.target + '?size=30';
     },
-    getNextUrl: function() {
-      console.log('here ==> ', this.nextUrl);
-      return this.nextUrl[this.target] ? app.apiUrl(this.nextUrl[this.target]) : this.getInitUrl();
-    },
+//  getNextUrl: function() {
+//    return this.nextUrl[this.target] ? this.nextUrl[this.target] : this.getInitUrl();
+//  },
     getItemsContainer: function() {
       var id = this.target + 'Container'
       return document.getElementById(id);
@@ -42,7 +37,7 @@
 //    return this.data[this.target];
 //  },
     getWillRefreshContainers: function() {
-      var pullDownContainerId = '#' + this.target + 'Container';
+      var pullDownContainerId = '#' + this.target + 'Scroll';
       console.log('=======', pullDownContainerId, '=========');
       return $(pullDownContainerId);
     },
@@ -50,13 +45,14 @@
 //    this.clearList();
 //    this.data[this.target] = [];
 //  },
-//  itemsFregment: function(items, idStart) {
-//    if(this.target == 'shops') {
-//      return T.createRowBasedFregment(items, T.userCouponTemplate, idStart)
-//    } else {
-//      return;
-//    }
-//  },
+    itemsFragment: function(items, idStart) {
+      console.log('collect===', items.length);
+      if(this.target == 'shops') {
+        return T.collectShopTableViewTemplate(items, idStart);
+      } else {
+        return T.collectMallTableViewTemplate(items, idStart);
+      }
+    },
     addEventForSlider: function() {
       var self = this;
       document.getElementById('slider').addEventListener('slide', function(e) {
@@ -65,6 +61,10 @@
           self.target = 'shops';
         } else {
           self.target = 'malls';
+          if(self.mfirst) {
+            self.mfirst = false;
+            self.startPullDown();
+          } 
         }
         console.log(self.target, '===>', slideNumber);
       });
@@ -73,8 +73,6 @@
 })(mui, window.app, window.app.Template);
 
 new window.app.UserCollectPage({
-'pullRefreshContainerId': '.mui-slider-group .mui-scroll',
-'itemsContainerId': '#plist',
-'pullUp': true,
-'pullDown': true
+  'pullRefreshContainerId': '.mui-slider-group .mui-scroll',
+  'needPullUp': false
 }).start();
