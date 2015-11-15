@@ -17,6 +17,26 @@
         );
   }
   
+  T.brandMallTemplate = function(mall) {
+    var header_img, header_content, 
+
+    header_img = '<div class="header_img">' + 
+                 '<img src="' + mall.image_url + '" />' +
+                 '</div>';
+
+    header_content = 
+      '<div class="container">' +
+         '<div class="row">' + 
+            '<div class="col-xs-12">' + 
+            '<div class="logotxt text-left"><h2><a href="#">' + mall.name + '</a></h2></div>' +
+            '<div class="heart" id="heart" status="0"><i class="fa fa-heart-o fa-2x"></i></div>' +  
+          '</div>' + 
+        '</div>' +
+      '</div>';
+      
+    return header_img + header_content;
+  }
+  
   T.collectMallTableViewTemplate = function(items, idStart) {
     if(!idStart) {
       idStart = 0;

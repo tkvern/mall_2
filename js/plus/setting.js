@@ -12,6 +12,9 @@
     },
     initActionText: function() {
       if(app.isLogin()) {
+        var mobile = app.getCurrentUser().mobile;
+        document.getElementById('account1').innerHTML = mobile; 
+        document.getElementById('account2').innerHTML = mobile; 
         $('#action')[0].text = '退出登录'
       } else {
         console.log('not logged in');
@@ -53,10 +56,10 @@
     addEventForAction: function() {
       var self = this;
       document.getElementById('action').addEventListener('tap', function(e) {
-        if(this.text == '立即登录') {
-          self.login();
-        } else {
+        if(app.isLogin()) {
           self.logout();
+        } else {
+          self.login();
         }
       });
     },
@@ -79,9 +82,10 @@
       $.ajax({
         url: app.apiUrl('user/token'),
         type: 'DELETE',
-        success: function() {
+        complete: function() {
           app.clearLoginInfo();
           app.jumpToLoginWindow(); 
+          plus.webview.currentWebview().reload(true);
         }
       });
     }

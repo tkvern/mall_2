@@ -154,6 +154,7 @@
 						  success: function(data) {
                 app.rememberLoginUser(data.access_token.token, data.access_token.user);
                 toMain();
+                plus.webview.getWebviewById('setting').reload(true);
 						  }
 						});
 					});

@@ -20,6 +20,7 @@
           return;
         }
         self.currentItem = mall;
+        document.getElementById('brand').innerHTML = T.brandMallTemplate(self.currentItem);
         self.clearItems();
         $(self.options['pullRefreshContainerId']).pullRefresh().pulldownLoading();       
       });

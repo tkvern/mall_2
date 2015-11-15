@@ -1,5 +1,5 @@
 (function($, app, T) {
-  var MerchantPage = app.PullWithTabPage.extend({
+  var MerchantPage = app.PullPage.extend({
     getInitUrl: function() {
       return app.apiUrl('shops/' + this.currentItem.id + '/coupons');
     },
@@ -21,6 +21,7 @@
         }
         self.currentItem = shop;
         self.clearItems();
+        document.getElementById('brand').innerHTML = T.brandShopTemplate(self.currentItem);
         $(self.options['pullRefreshContainerId']).pullRefresh().pulldownLoading();       
       });
     },
