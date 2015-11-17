@@ -50,8 +50,9 @@
       $.extend($.ajaxSettings, {
           timeout: 10000,
           beforeSend: function(xhr, settings) {
-            console.log('before send');
+            console.log('before send:', app.isLogin());
             if(app.isLogin()) {
+              console.log('X-ACCESS-TOKEN:', app.getAccessToken());
               xhr.setRequestHeader('X-ACCESS-TOKEN', app.getAccessToken());
             }
             var completeHandler = settings.complete;

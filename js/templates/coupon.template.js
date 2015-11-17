@@ -1,4 +1,9 @@
 (function($, T) {
+  function show_date(date) {
+    var d = new Date(date);
+    return (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes();
+  }
+  
   T.couponTemplate = function(coupon, id) {
     if(id == null || id == undefined) {
       id = coupon.id;
@@ -23,9 +28,9 @@
     return (
       '<article class="post tag-ad collect ' + arcticleClass + '">' + 
         '<div class="post-featured-image"></div>' + 
-        '<span class="type" id="1">' + statusText + '</span>' +
+        '<span class="type" id="coupon:'+ coupon.id + '">' + statusText + '</span>' +
         '<span class="name" id="merchant.html?shop=3" onclick="clicked(this.id);">'+ coupon.title +'</span>' +
-        '<span class="time">&nbsp;09-09&nbsp;10:10</span>' + 
+        '<span class="time">' + show_date(coupon.grabe_date) + '</span>' + 
         '<span class="count">剩<span class="badge">' + coupon.left_count + '</span>张</span>' +
         '<span class="price">' + couponText + '</span>' + 
         '<span class="description">满' + coupon.min_consumption + '使用</span>' + 
@@ -35,11 +40,13 @@
       '</article>'
     );
   },
+
   T.userCouponTemplate = function(userCoupon, id) {
     var coupon = userCoupon.coupon;
     var statusText, couponText ;
     var articleClass = "";
     if(coupon.expired) {
+      articleClass = 'warning'
       statusText = '过期';
     } else if (userCoupon.has_used > 0) {
       statusText = '已用';
@@ -54,11 +61,11 @@
     }
     
     return (
-      '<article class="post tag-ad collect "'+ articleClass +'">' + 
+      '<article class="post tag-ad collect '+ articleClass +'">' + 
         '<div class="post-featured-image"></div>' + 
-        '<span class="type" id="userCoupon:1">' + statusText + '</span>' +
+        '<span class="type" id="index:'+ userCoupon.id +'">' + statusText + '</span>' +
         '<span class="name">'+ coupon.title +'</span>' +
-        '<span class="time">'+ coupon.end_date +'</span>' + 
+        '<span class="time">'+ show_date(coupon.end_date) +'</span>' + 
         '<span class="price">' + couponText + '</span>' + 
         '<span class="description">满' + coupon.min_consumption + '使用</span>' + 
         '<span class="dash"></span>' + 

@@ -49,16 +49,29 @@
     if(!idStart) {
       idStart = 0;
     }
-    var fragment, li, index;
+    var fragment, li, index, ul;
+    ul = document.createElement('ul');
+    ul.className='mui-table-view';
     fragment = document.createDocumentFragment();
+    fragment.appendChild(ul);
     for(var i = 0; i < items.length; i++) {
-      index = idStart + i;
-      li = document.createElement('div');
-      li.className = "mui-table-view-cell";
-      li.id = 'shop:' +  index;
-      li.innerHTML = items[i].title;
-      fragment.appendChild(li);
+      li = sliderCellForShop(items[i], idStart + i);
+      ul.appendChild(li);
     }
     return fragment;
+  }
+
+  function sliderCellForShop(shop, id) {
+    var li = document.createElement('li');
+    li.className = 'mui-table-view-cell';
+    li.id = '/grap.html?shop=' + shop.id;
+    li.innerHTML = 
+      '<div class="mui-slider-right mui-disabled">' + 
+        '<a class="mui-btn mui-btn-red">取消关注</a>' + 
+      '</div>' + 
+      '<div class="mui-slider-handle">' + 
+        shop.title + 
+      '</div>';
+    return li;
   }
 })(mui, window.app.Template);

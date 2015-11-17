@@ -26,15 +26,21 @@
       });
     },
     addEventForCouponGrap: function() {
-      mui('#post-list').on('tap', '.collect .type', function(event) {
-        var elem = this;
-        if(elem.innerText!="已抢" && elem.innerText!="未开始" && elem.innerText!="已抢完"){
-          elem.className = elem.className.replace("badge-danger", "badge-success");
-          var parent = elem.parentNode;
-          parent.className = parent.className.replace("danger", "success");
-          elem.innerText = "已抢";
-          plus.nativeUI.toast('抢券成功！');
-        }
+      mui('#coupon-list').on('tap', '.collect.danger .type', function(event) {
+        console.log(this.innerHTML);
+        var couponId = this.id.split(':')[1];
+        plus.nativeUI.showWaiting('抢劵中');
+        $.ajax({
+          url: app.apiUrl('coupons/' + couponId + '/grab'),
+          type: 'POST',
+          success: function(data) {
+            plus.nativeUI.closeWaiting();
+            plus.nativeUI.toast(data.message || data.error, {duration: 'long'});
+          },
+          error: function() {
+            plus.nativeUI.closeWaiting();
+          }
+        });
       });
     },
     addEventForConcernOrUnconcern: function() {
