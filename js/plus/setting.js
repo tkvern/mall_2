@@ -16,7 +16,7 @@
         var mobile = app.getCurrentUser().mobile;
         document.getElementById('account1').innerHTML = mobile; 
         document.getElementById('account2').innerHTML = mobile; 
-        $('#action')[0].text = '退出登录'
+        $('#action')[0].innerText = '退出登录';
       } else {
       }
     },
