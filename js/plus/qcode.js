@@ -1,14 +1,12 @@
 (function($, app, T) {
   app.QcodePage = app.Page.extend({
     plusReady: function() {
-      //plus.nativeUI.showWaiting();
       this.requestForDetail();
       this.renderQCode();
     },
     requestForDetail: function() {
       var w = plus.webview.currentWebview();
       var userCoupon = w.userCoupon;
-      console.log(userCoupon);
       var shopId = userCoupon.coupon.shop_id;
       var self = this;
       $.ajax({
@@ -17,7 +15,6 @@
           self._renderBrand(data.shop);
         },
         complete: function() {
-          //plus.nativeUI.closeWaiting();
         }
       })
     }, 

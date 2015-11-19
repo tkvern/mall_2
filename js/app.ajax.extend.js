@@ -26,9 +26,8 @@
         * type: "timeout", "error", "abort", "parsererror"
         */
       var defaultErrorHandler = function(xhr, type, error) {
-        console.log("Error: ", "type: " + type, "error:" + error, "http status:" + xhr.status);
         if(type == "timeout") {
-          plus.nativeUI.toast('你的网络好像不给力, 请稍后重试');
+          plus.nativeUI.toast('网络错误, 请稍后重试');
         } else if(type == "error") {
         // 未登录
           if(xhr.status == 401) {
@@ -42,7 +41,6 @@
             plus.nativeUI.toast($.parseJSON(xhr.responseText).error);
           }
         } else {
-          console.log(type, error, xhr.status);
           plus.nativeUI.toast('未知错误');
         }
       }
@@ -50,14 +48,11 @@
       $.extend($.ajaxSettings, {
           timeout: 10000,
           beforeSend: function(xhr, settings) {
-            console.log('before send:', app.isLogin());
             if(app.isLogin()) {
-              console.log('X-ACCESS-TOKEN:', app.getAccessToken());
               xhr.setRequestHeader('X-ACCESS-TOKEN', app.getAccessToken());
             }
             var completeHandler = settings.complete;
             settings.complete = function(/* xhr, status */ ) {
-              console.log(arguments[1] + arguments[0].responseText);
               if(completeHandler) {
                 completeHandler.apply(settings.context, arguments);
               }

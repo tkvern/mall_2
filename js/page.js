@@ -96,19 +96,15 @@
       }
     },
     startPullDown: function() {
-      console.log('start pulling down');
       this.getWillRefreshContainers().pullRefresh().pulldownLoading();
     },
     endPullDown: function() {
-      console.log('end pulling down');
       this.getWillRefreshContainers().pullRefresh().endPulldownToRefresh();
     },
     startPullUp: function() {
-      console.log('start pulling up');
       this.getWillRefreshContainers().pullRefresh().pullupLoading();
     },
     endPullUp: function(flag) {
-      console.log('end pulling up');
       this.getWillRefreshContainers().pullRefresh().endPullupToRefresh(flag);
     },
     getWillRefreshContainers: function() {
@@ -130,7 +126,6 @@
     pullDownRefresh: function() {
       var self = this;
       var apiUrl = app.apiUrl(self.getInitUrl());
-      console.log('pull down url:' + apiUrl);
       $.ajax({
         'url': apiUrl,
         'success': function(data) {
@@ -151,11 +146,9 @@
     pullUpRefresh: function() {
       var self = this;
       if(!self.hasMore) {
-        console.log('no more')
         self.endPullUp(true);
         return;
       }
-      console.log('pull up url: '+  self.getNextUrl());
       $.ajax({
         'url': app.apiUrl(self.getNextUrl()), 
         'success': function(data) {
@@ -167,7 +160,6 @@
           }
         },
         'complete': function() {
-          console.log('finish pull up refresh');
           self.endPullUp(!self.hasMore);
         }
       });
@@ -188,7 +180,6 @@
       return $(itemContainerId)[0]; 
     },
     clearItems: function() {
-      console.log('clear items');
       this.clearList();
       this.data = []; 
     }, 
@@ -199,7 +190,6 @@
       }
     },
     appendItems: function(items) {
-      console.log('append items');
       this.updateList(items);
       var dataRef = this.getCurrentDataRef();
       for(var i = 0; i < items.length; i++) {
@@ -278,19 +268,15 @@
       });
     },
     startPullDown: function() {
-      console.log(this.target, 'start pulling down');
       this.getWillRefreshContainers().pullToRefresh().pullDownLoading();
     },
     endPullDown: function() {
-      console.log(this.target, 'end pulling down');
       this.getWillRefreshContainers().pullToRefresh().endPullDownToRefresh();
     },
     startPullUp: function() {
-      console.log(this.target, 'start pulling up');
       this.getWillRefreshContainers().pullToRefresh().pullUpLoading();
     },
     endPullUp: function(flag) {
-      console.log(this.target, 'end pulling up', flag);
       this.getWillRefreshContainers().pullToRefresh().endPullUpToRefresh(flag);
     },
     refresh: function() {
@@ -319,12 +305,10 @@
     pullDownRefresh: function() {
       var self = this;
       var apiUrl = app.apiUrl(self.getInitUrl());
-      console.log('pull down url:', apiUrl);
       $.ajax({
         'url': apiUrl,
         'success': function(data) {
           var items = data[self.getDataKey()];
-//        console.log(JSON.stringify(items));
           self.clearItems();
           self.appendItems(items);
           self.refresh();
@@ -336,14 +320,11 @@
       });
     },
     pullUpRefresh: function() {
-      console.log(this.target, '==== start pulling up ====');
       var self = this;
       if(false === self.hasMore[self.target]) {
-        console.log('no more')
         self.endPullUp(true);
         return;
       }
-      console.log('pull up url: ', self.getNextUrl());
       $.ajax({
         'url': app.apiUrl(self.getNextUrl()), 
         'success': function(data) {
@@ -352,7 +333,6 @@
           self.appendItems(items);
         },
         'complete': function() {
-          console.log('finish pull up refresh', self.hasMore[self.target]);
           self.endPullUp(!self.hasMore[self.target]);
         }
       });
@@ -371,7 +351,6 @@
       return $(itemContainerId)[0]; 
     },
     clearItems: function() {
-      console.log('clear items');
       this.clearList();
       this.data[this.target] = []; 
     }, 
@@ -382,7 +361,6 @@
       }
     },
     appendItems: function(items) {
-      console.log('append items');
       this.updateList(items);
       var dataRef = this.getCurrentDataRef();
       for(var i = 0; i < items.length; i++) {

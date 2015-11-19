@@ -3,7 +3,6 @@
     getInitUrl: function() {
       var id = plus.webview.currentWebview().id;
       return app.apiUrl(id);
-//    return app.apiUrl('malls/' + this.currentItem.id + '/coupons');
     },
     itemsFragment: function(items, idStart) {
       return T.createRowBasedFragment(items, T.couponTemplate, idStart);
@@ -23,7 +22,6 @@
       }
     },
     plusReady: function() {
-      console.log('plusReady:'+  this.getNextUrl());
       this.addEventForCouponGrap();
       this.addEventForConcernOrUnconcern();
       document.getElementById('brand').innerHTML = T.brandMallTemplate(this.currentItem);
@@ -57,7 +55,6 @@
             type: 'POST',
             success: function() {
               heart.status = 1;
-              console.log(heart.className);
               heart.innerHTML = "<i class='fa fa-heart fa-2x'></i>";
               plus.nativeUI.toast('收藏成功');   
             }
@@ -69,7 +66,6 @@
             type: 'DELETE',
             success: function() {
               heart.status = 0;
-              console.log(heart.className);
               heart.innerHTML = "<i class='fa fa-heart-o fa-2x'></i>";
               plus.nativeUI.toast('已取消收藏');
             }

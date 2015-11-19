@@ -7,13 +7,10 @@
   owner.Template = {};
   
 	$.plusReady(function(){
-		//console.log("webview ["+ plus.webview.currentWebview().id + "] count: " + plus.webview.all().length);
 	});
 
-    owner.IMAGEHOST = 'http://192.168.1.16:8080/';
-    owner.BASEURL = 'http://192.168.1.16:8080/api/v1/';
-//	owner.IMAGEHOST = 'http://121.201.58.39/';
-//	owner.BASEURL = 'http://121.201.58.39/api/v1/';
+	owner.IMAGEHOST = 'http://121.201.58.39/';
+	owner.BASEURL = 'http://121.201.58.39/api/v1/';
 	/**
 	 *  基础功能
 	 */
@@ -69,7 +66,6 @@
 		localStorage.setItem("currentUser", JSON.stringify(user));
 		//记录最后登录的手机号
 		localStorage.setItem("lastMobile", user.mobile);
-		console.log('记录登录信息');
 	}
 	
 	/*
@@ -99,7 +95,6 @@
 	owner.clearLoginInfo = function() {
 		localStorage.removeItem("accessToken");
 		localStorage.removeItem("currentUser");
-		console.log('删除登录信息');
 	}
 	
 	/*

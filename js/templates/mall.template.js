@@ -4,7 +4,6 @@
       id = mall.id;
     }
     return ( 
-//          '<article class="post tag-ad" id="mall:' + id +  '">' +
             '<article class="post tag-ad" id="/plus/grap.html#malls/' + mall.id +  '/coupons" data-index="'+ id + '">' +
               '<h2 class="post-title">' +  
                 '<a target="_blank">' + mall.name + '</a>' + 
@@ -23,7 +22,6 @@
     var location = mall.lng + ',' + mall.lat + ',\'' + mall.name + '\'';
 
     header_img = '<div class="header_img">' + 
-//               '<img src="' + app.imageUrl(mall.image_url) + '" />' +
                  '</div>';
 
     header_content = 
@@ -40,11 +38,10 @@
 						  ' onclick="navigateWithMap(' + location + ')">' +
 						  '<i class="fa fa-map-marker"></i>'+ mall.address + '</a><span></span>'+ 
 						'</h2>' +
-            '<div class="heart" id="heart" status="0"><i class="fa fa-heart-o fa-2x"></i></div>' +  
+            '<div class="heart" id="heart" status="0"></div>' +  
           '</div>' + 
         '</div>' +
       '</div>';
-    console.log('header_content:' + header_content); 
     return header_img + header_content;
   }
   
@@ -67,7 +64,6 @@
   function sliderCellForMall(mall, id) {
     var li = document.createElement('li');
     li.className = 'mui-table-view-cell';
-//  li.id = '/grap.html?shop=' + mall.id + '&index:' +id;
     li.id = '/plus/grap.html#malls/' + mall.id + '/coupons';
     li.setAttribute('data-index', id);
     li.innerHTML = 

@@ -10,7 +10,6 @@
         var targetUrl = this.id;
         var dataIndex = this.getAttribute('data-index');
         var _item = self.data[parseInt(dataIndex)];
-        console.log('====' + _item);
         mui.openWindow({
           url: targetUrl,
           show: {

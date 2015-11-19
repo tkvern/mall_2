@@ -22,7 +22,6 @@
       }
     },
     plusReady: function() {
-      console.log('plusReady:', this.nextUrl);
       document.getElementById('brand').innerHTML = T.brandShopTemplate(this.currentItem);
       this.addEventForCouponGrap();
       this.addEventForConcernOrUnconcern();
@@ -58,7 +57,6 @@
             type: 'POST',
             success: function() {
               heart.status = 1;
-              console.log(heart.className);
               heart.innerHTML = "<i class='fa fa-heart fa-2x'></i>";
               plus.nativeUI.toast('收藏成功');   
             }
@@ -70,7 +68,6 @@
             type: 'DELETE',
             success: function() {
               heart.status = 0;
-              console.log(heart.className);
               heart.innerHTML = "<i class='fa fa-heart-o fa-2x'></i>";
               plus.nativeUI.toast('已取消收藏');
             }

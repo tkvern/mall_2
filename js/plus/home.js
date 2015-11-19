@@ -4,7 +4,6 @@
       return app.apiUrl('cities/cq/malls');
     },
     plusReady: function() {
-//    this.preload();
       this.startPullDown();
       this.addEventForMallTap();
     }, 
@@ -23,7 +22,6 @@
         var targetUrl = this.id;
         var dataIndex = this.getAttribute('data-index');
         var _item = self.data[parseInt(dataIndex)];
-        console.log('====' + targetUrl);
         mui.openWindow({
           url: targetUrl,
           show: {
@@ -42,7 +40,6 @@
       });
     },
     itemsFragment: function(items, idStart) {
-      console.log('index start:', idStart);
       return T.createRowBasedFragment(items, T.cardMallTemplate, idStart);
     }
   });
