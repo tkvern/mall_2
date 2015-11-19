@@ -8,21 +8,11 @@
     plusReady: function() {
       this.fetchCollectShops();
       this.fetchCollectMalls();
-      this.preload();
       this.addEventForCancelShop();
       this.addEventForCancelMall();
       this.addEventForShopTap();
       this.addEventForMallTap();
     }, 
-    preload: function() {
-      if(plus.webview.getWebviewById('plus/grap')) {
-        return;
-      }
-      $.preload({
-        url: '/plus/grap.html',
-        id: 'plus/grap'
-      })
-    },
     fetchCollectShops: function() {
       var self = this;
       $.ajax({
@@ -62,7 +52,7 @@
       var self = this;
       $('#shopsContent').on('tap', '.mui-slider-right a', function(){
         var li = this.parentNode.parentNode;
-        var shopIndex = parseInt(li.id.split(':')[1]);
+        var shopIndex = parseInt(li.getAttribute('data-index'));
         shop =  self.shops[shopIndex];
         $.ajax({
           url: app.apiUrl('shops/' + shop.id + '/unconcern'),
@@ -82,18 +72,30 @@
       var self = this;
       $('#shopsContent').on('tap', 'li .mui-slider-handle', function(){
         var li = this.parentNode;
-        var shopIndex = parseInt(li.id.split(':')[1]);
+        var shopIndex = parseInt(li.getAttribute('data-index'));
         var shop = self.shops[shopIndex];
-        var targetView = plus.webview.getWebviewById('plus/merchant');
-        targetView.show();
-        $.fire(targetView, 'pageEnter', {shop: shop});
+        mui.openWindow({
+          url: li.id,
+          show: {
+            aniShow: 'pop-in'
+          },
+          styles: {
+            popGesture: 'hide'
+          },
+          waiting: {
+            autoShow: true
+          },
+          extras: {
+            item: shop
+          }
+        });
       });
     },
     addEventForCancelMall: function() {
       var self = this;
       $('#mallsContent').on('tap', '.mui-slider-right a', function(){
         var li = this.parentNode.parentNode;
-        var mallIndex = parseInt(li.id.split(':')[1]);
+        var mallIndex = parseInt(li.getAttribute('data-index'));
         mall = self.malls[mallIndex];
         $.ajax({
           url: app.apiUrl('malls/' + mall.id + '/unconcern'),
@@ -113,11 +115,23 @@
       var self = this;
       $('#mallsContent').on('tap', 'li .mui-slider-handle', function(){
         var li = this.parentNode;
-        var mallIndex = parseInt(li.id.split(':')[1]);
+        var mallIndex = parseInt(li.getAttribute('data-index'));
         var mall = self.malls[mallIndex];
-        var targetView = plus.webview.getWebviewById('plus/grap');
-        targetView.show();
-        $.fire(targetView, 'pageEnter', {mall: mall});
+        mui.openWindow({
+          url: li.id,
+          show: {
+            aniShow: 'pop-in'
+          },
+          styles: {
+            popGesture: 'hide'
+          },
+          waiting: {
+            autoShow: true
+          },
+          extras: {
+            item: mall
+          }
+        });
       });
     }
   });

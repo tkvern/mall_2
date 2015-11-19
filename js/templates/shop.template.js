@@ -4,7 +4,7 @@
       id = shop.id;
     }
     return ( 
-            '<article class="post tag-ad" id="shop:' + id +  '">' +
+            '<article class="post tag-ad" id="/plus/merchant.html#shops/' + shop.id +  '/coupons" data-index="'+ id + '">' +
               '<h2 class="post-title">' +  
                 '<a target="_blank">' + shop.title + '</a>' + 
               '</h2>' +
@@ -26,7 +26,6 @@
     var location = shop.lng + ',' + shop.lat + ',' + shop.title;
 
     header_img = '<div class="header_img">' + 
-//                '<img src="' + app.imageUrl(shop.image_url) + '" />' +
                  '</div>';
 
     header_content = 
@@ -67,7 +66,8 @@
   function sliderCellForShop(shop, id) {
     var li = document.createElement('li');
     li.className = 'mui-table-view-cell';
-    li.id = '/grap.html?shop_id=' + shop.id + '#index:' + id;
+    li.id = '/plus/merchant.html#shops/' + shop.id + '/coupons';
+    li.setAttribute('data-index', id);
     li.innerHTML = 
       '<div class="mui-slider-right mui-disabled">' + 
         '<a class="mui-btn mui-btn-red">取消关注</a>' + 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <link rel="stylesheet" href="../css/mui.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="../css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/mui.indexedlist.css" />
+    <script>
+      function imgLoaded(img) {
+        var imgWrapper = img.parentNode;
+        imgWrapper.className += imgWrapper.className ? ' loaded' : 'loaded';
+      }
+    </script>
+  </head>
+
+  <body class="niceui">
+    <div class="mui-content mui-scroll-wrapper" id="refreshContainer">
+      <div class="mui-scroll">
+        <div class="header" id="brand"></div>
+        <div class="container" id="coupon-list">
+          <div class="row">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../js/mui.min.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/app.ajax.extend.js"></script>
+    <script src="../js/mui.indexedlist.js"></script>
+    <script src="../js/page.js"></script>
+    <script src="../js/templates/common.template.js"></script>
+    <script src="../js/templates/mall.template.js"></script>
+    <script src="../js/templates/coupon.template.js"></script>
+    <script src="../js/plus/grap.js"></script>
+    <script>
+      new window.app.GrapPage({
+        'apiUrl': 'malls/1/coupons',
+        'dataKey': 'coupons',
+        'pullRefreshContainerId': '#refreshContainer',
+        'itemsContainerId': '#coupon-list'
+      }).start();
+    </script>
+  </body>
+
+</html>

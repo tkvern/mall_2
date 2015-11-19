@@ -20,7 +20,6 @@
       var self = this;
       $('#plist').on('tap', '.collect.danger .type', function() {
         var index = parseInt(this.id.split(':')[1]);
-        console.log('index:', index);
         $.openWindow({
           url: '/plus/qcode.html',
           waiting: {

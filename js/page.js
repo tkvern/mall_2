@@ -4,6 +4,7 @@
       this.options = {};
       $.extend(true, this.options, options);
       this.pageInit();
+
     },
     getOption: function(optionName) {
       return this.options[optionName];
@@ -15,6 +16,11 @@
         self.pageReady();
       });
       $.plusReady(function(){
+        var view = plus.webview.currentWebview();
+        var pview = view.parent()
+        if(pview && pview.item) {
+          self.currentItem = pview.item;
+        }
         self.plusReady();
       });
     },
@@ -37,9 +43,8 @@
         'windowInitOptions': {}
       }
       $.extend(true, this.options, options);
-      console.log(JSON.stringify(this.options));
       this.pageInit();
-      this.nextUrl = this.options['apiUrl'];
+      this.nextUrl = null;
       this.currentItem = null;
       this.hasMore = true;
       this.refreshing = false;
@@ -74,8 +79,10 @@
       $.extend(pullRefreshOptions, initOptions['pullRefresh'] || {});
       
       initOptions['pullRefresh'] = pullRefreshOptions;
-      console.log(JSON.stringify(initOptions));
       $.init(initOptions);
+      if (!self.options['pullUp']) {
+        return;
+      }
       if (mui.os.plus) {
         mui.plusReady(function() {
           setTimeout(function() {
@@ -89,19 +96,19 @@
       }
     },
     startPullDown: function() {
-      console.log(this.target, 'start pulling down');
+      console.log('start pulling down');
       this.getWillRefreshContainers().pullRefresh().pulldownLoading();
     },
     endPullDown: function() {
-      console.log(this.target, 'end pulling down');
+      console.log('end pulling down');
       this.getWillRefreshContainers().pullRefresh().endPulldownToRefresh();
     },
     startPullUp: function() {
-      console.log(this.target, 'start pulling up');
+      console.log('start pulling up');
       this.getWillRefreshContainers().pullRefresh().pullupLoading();
     },
     endPullUp: function(flag) {
-      console.log(this.target, 'end pulling up');
+      console.log('end pulling up');
       this.getWillRefreshContainers().pullRefresh().endPullupToRefresh(flag);
     },
     getWillRefreshContainers: function() {
@@ -148,13 +155,16 @@
         self.endPullUp(true);
         return;
       }
-      console.log('pull up url: ', self.getNextUrl());
+      console.log('pull up url: '+  self.getNextUrl());
       $.ajax({
         'url': app.apiUrl(self.getNextUrl()), 
         'success': function(data) {
           var items = data[self.getDataKey()];
           self.appendItems(items);
           self.judgeMore(data.meta);
+          if($.isFunction(self.afterLoading)) {
+            self.afterLoading();
+          }
         },
         'complete': function() {
           console.log('finish pull up refresh');

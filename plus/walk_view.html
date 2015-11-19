@@ -18,35 +18,32 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-navbar">
-		  <button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
-        <span class="mui-icon mui-icon-left-nav"></span>返回</button>
-			<h1 class="mui-title">走街串巷</h1>
-		</header>
-		<div class="mui-content mui-scroll-wrapper scontent" id="refreshContainer">
+		<div class="mui-content mui-scroll-wrapper scontent" id="refreshContainer" style="padding-top: 20px!important;">
 		  <div class="mui-scroll">
         <div class="container" id="plist">
           <div class="row">
+            
           </div>
         </div>
       </div>
 		</div>
 		<script src="../js/mui.min.js"></script>
-    <script src="../js/app.js"></script>
-    <script>
-      (function($, doc) {
-        mui.init({
-          subpages:[{
-            url:'walk_with_back_view.html',
-            id:'walk_with_back_view',
-            styles:{
-              top: '45px',
-              bottom: '0px',
-            }
-          }]
-        });
-      }(mui, document));
-    </script>
+		<script src="../js/app.ajax.extend.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/templates/common.template.js"></script>
+		<script src="../js/templates/shop.template.js"></script>
+		<script src="../js/page.js"></script>
+		<script src="../js/plus/walk.js"></script>
+		<script>
+		  new window.app.WalkPage({
+        'dataKey': 'shops',
+        'pullRefreshContainerId': '#refreshContainer',
+        'itemsContainerId': '#plist',
+        'pullUp': true,
+        'pullDown': true
+      }).start()
+		</script>
+		
 	</body>
 
 </html>
