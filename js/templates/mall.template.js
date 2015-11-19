@@ -19,7 +19,7 @@
   
   T.brandMallTemplate = function(mall) {
     var header_img, header_content; 
-    var location = mall.lng + ',' + mall.lat + ',"' + mall.name + '"';
+    var location = mall.lng + ',' + mall.lat + ',\'' + mall.name + '\'';
 
     header_img = '<div class="header_img">' + 
 //               '<img src="' + app.imageUrl(mall.image_url) + '" />' +
@@ -29,7 +29,7 @@
       '<div class="container">' +
          '<div class="row">' + 
             '<div class="col-xs-12">' + 
-            '<div class="logotxt text-left"><h2><a href="#">' + mall.name + '</a></h2></div>' +
+            '<div class="logotxt text-left"><h2><a>' + mall.name + '</a></h2></div>' +
 						'<h2 class="shop-phone text-left">'+
 						  '<a href="tel:'+ mall.phone_number +'">' + 
 						    '<i class="fa fa-phone"></i>' + mall.phone_number + 
