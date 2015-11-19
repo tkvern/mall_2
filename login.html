@@ -14,21 +14,23 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-navbar">
-			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<header class="mui-bar mui-navbar mui-bar-nav">
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+        <span class="mui-icon mui-icon-left-nav"></span></button>
 			<h1 class="mui-title">登录</h1>
 		</header>
-		<div class="mui-content">
+		<div class="mui-content scontent">
 			<form id='login-form' class="mui-input-group">
 				<div class="mui-input-row">
 					<label>手机</label>
-					<input id='account' type="tel" maxlength="11" class="mui-input-clear mui-input" placeholder="请输入手机号" value="15574997003">
+					<input id='account' type="tel" maxlength="11" class="mui-input-clear mui-input" placeholder="请输入手机号">
 				</div>
 				<div class="mui-input-row">
 					<label>密码</label>
-					<input id='password' type="password" maxlength="25" class="mui-input-clear mui-input" placeholder="请输入密码" value="123456">
+					<input id='password' type="password" maxlength="25" class="mui-input-clear mui-input" placeholder="请输入密码">
 				</div>
 			</form>
+
 			<div class="mui-content-padded">
 				<button id='login' class="mui-btn mui-btn-block mui-btn-primary">登录</button>
 				<div class="link-area"><a id='reg'>注册账号</a> <span class="spliter">|</span> <a id='forgetPassword'>忘记密码</a>
@@ -41,6 +43,8 @@
 		<script src="js/mui.min.js"></script>
 		<script src="js/mui.enterfocus.js"></script>
 		<script src="js/app.js"></script>
+		<script src="js/app.ajax.extend.js"></script>
+		<script src="js/field.validates.js"></script>
 		<script>
 			(function($, doc) {
 				$.init({
@@ -74,7 +78,7 @@
 							}
 				    },
 				    {
-				    	url: "main.html",
+				    	  url: "main.html",
 				      id: "HBuilder",
 				      subpages:[{
 					    	url: "plus/home.html",
@@ -86,21 +90,24 @@
 								waiting: {
 									autoShow: true
 				   			}
-				      }],
-							waiting: {
-								autoShow: true
-							}
+				     }],
+						 waiting: {
+							 autoShow: true
+						 }
 				    }
 				  ]
 				});
 				$.plusReady(function() {
-					
 					plus.screen.lockOrientation("portrait-primary");
 					var settings = app.getSettings();
 					var state = app.getState();
 					var toMain = function() {
 						plus.webview.close(plus.webview.currentWebview());
 					};
+					//检查 "登录状态" 开始
+					if (app.isLogin()){
+						toMain();
+					}
 					// close splash
 					setTimeout(function() {
 						//关闭 splash
@@ -112,22 +119,51 @@
 					var autoLoginButton = doc.getElementById("autoLogin");
 					var regButton = doc.getElementById('reg');
 					var forgetButton = doc.getElementById('forgetPassword');
+					
+					function validateLoginForm() {
+						var result;
+						result = $.Validation.validateMobile(accountBox);
+						if(!result.state) {
+							plus.nativeUI.toast(result.error);
+							return false;
+						}
+						result = $.Validation.validateEmptyPassword(passwordBox);
+						if(!result.state) {
+							plus.nativeUI.toast(result.error);
+							return false;
+						}
+						return true;
+					}
+					
+					// 设置上次登录或者注册时输入的手机号
+					accountBox.value = app.getLastMobile();
+					
 					loginButton.addEventListener('tap', function(event) {
-						var loginInfo = {
-							account: accountBox.value,
-							password: passwordBox.value
-						};
-						app.login(loginInfo, function(err) {
-							if (err) {
-								plus.nativeUI.toast(err);
-								return;
+						if(!validateLoginForm()) {
+							return false;
+						}
+						var params = {
+							session: {
+								mobile: accountBox.value,
+								password: passwordBox.value
 							}
-							toMain();
+						};
+						$.ajax({
+						  url: app.apiUrl('authorizations'),
+						  type: 'POST',
+						  data: params,
+						  success: function(data) {
+                app.rememberLoginUser(data.access_token.token, data.access_token.user);
+                toMain();
+                plus.webview.getWebviewById('setting').reload(true);
+						  }
 						});
 					});
+
 					$.enterfocus('#login-form input', function() {
 						$.trigger(loginButton, 'tap');
 					});
+
 					regButton.addEventListener('tap', function(event) {
 						$.openWindow({
 							url: 'reg.html',

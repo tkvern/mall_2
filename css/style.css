@@ -240,8 +240,11 @@ body {
 .mui-page .mui-table-view:last-child {
 	margin-bottom: 30px;
 }
-.mui-table-view {
+.mt-20 {
 	margin-top: 20px;
+}
+.mt-40{
+  margin-top: 40px;
 }
 .mui-table-view:after {
 	height: 0;
@@ -493,9 +496,9 @@ body {
 }
 
 /* main */
-.mui-content {
+/*.mui-content {
 	padding-top: 60px!important;
-}
+}*/
 .scontent{
 	padding-top: 60px!important;
 }
@@ -549,7 +552,7 @@ body.niceui .post-featured-image .thumbnail{
 }
 .post{
 	position: relative;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 	padding-bottom: 40px;
 	background-color: #fff;
 	-webkit-box-shadow: 0 1px 2px 0 rgba(0,0,0,0.1);
@@ -709,7 +712,7 @@ body.niceui .post-featured-image .thumbnail{
 	color: #777;
 }
 .tag-ad .post-featured-image{
-	padding-top: 75%;
+	padding-top: 50%;
 }
 .post-featured-image{
 	position: relative;
@@ -835,6 +838,9 @@ body.niceui .post-featured-image .thumbnail{
 	z-index: 1;
 }
 
+.mui-navbar~.mui-content .mui-pull-top-pocket {
+    top: 44px;
+}
 /* index */
 .nav-img{
   margin-top: -25px;
@@ -935,6 +941,7 @@ body.niceui .post-featured-image .thumbnail{
 }
 .contant .row .icon p{
   font-size: 11px;
+  margin-top: 4px;
 }
 .contant .row .shop1{
   height: 50%;

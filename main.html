@@ -12,15 +12,15 @@
 		<link rel="stylesheet" href="css/style.css" />
 		<script>
 			function imgLoaded(img) {
-        var imgWrapper = img.parentNode;
-        imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
-      }
+				var imgWrapper = img.parentNode;
+				imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
+			}
 		</script>
 	</head>
 
 	<body>
 		<nav class="mui-bar mui-bar-tab">
-		  <li class="mui-tab-item mui-active" id="home">
+		  	<li class="mui-tab-item mui-active" id="home">
 				<span class="mui-icon fa fa-home fa-2x"></span>
 				<span class="mui-tab-label">首页</span>
 			</li>
@@ -38,6 +38,12 @@
 		<script src="js/app.js"></script>
 		<script>
 			(function($, doc) {
+				var subpage_style = {
+					top: '0px',
+					bottom: '50px',
+					scrollIndicator: 'none'
+				};
+				
 				$.init({
 					swipeBack: false,
 					statusBarBackground: '#f7f7f7',
@@ -45,13 +51,11 @@
 						doubletap: true
 					}
 				});
+
 				var settings = app.getSettings();
 				var account = doc.getElementById('account');
 				
-
-				
 				$.plusReady(function() {
-				  
 					var showGuide = plus.storage.getItem("lauchFlag");
 					if(showGuide){
 						//有值，说明已经显示过了，无需显示；
@@ -73,56 +77,53 @@
 					}
 					
 					var self = plus.webview.currentWebview();
-					var pages = [{
-						id: 'home',
-						url: 'plus/index.html',
-						styles: {
-							top: '0px',
-							bottom: '45px'
-						}
-					},{
-						id: 'walk',
-						url: 'plus/walk.html',
-						styles: {
-							top: '0px',
-							bottom: '45px'
-						}
-					},{
-						id: 'setting',
-						url: 'plus/setting.html',
-						styles: {
-							top: '0px',
-							bottom: '45px'
-						}
-					}];
-					for (var i = 0; i < 3; i++){
-						var sub = plus.webview.create(pages[i].url, pages[i].id, pages[i].styles);
-						if (i > 0){
-							sub.hide();
-						}
-						self.append(sub);
-					}
+				  var subpages = [
+            {
+              id: 'home',
+              url: 'plus/index.html',
+              styles: subpage_style
+            },
+            {
+              id: 'walk',
+              url: 'plus/walk.html',
+              styles: subpage_style
+            },
+            {
+              id: 'setting',
+              url: 'plus/setting.html',
+              styles: subpage_style
+            }
+          ];
+				
+          function preloadSubpages() {
+            var self = plus.webview.currentWebview();
+            for(var i = 0; i < subpages.length; i++) {
+              var page = $.preload(subpages[i]);
+              if(i > 0) {
+                page.hide();
+              }
+              self.append(page);
+            }
+          }
 
-					var homeButton = doc.getElementById('home');
-					var walkButton = doc.getElementById('walk');
-					var settingButton = doc.getElementById('setting');
-					homeButton.addEventListener('tap', function(event) {
-						plus.webview.show('home');
-						plus.webview.hide('walk');
-						plus.webview.hide('setting');
-						
-					});
-					walkButton.addEventListener('tap', function(event) {
-						plus.webview.show('walk');
-						plus.webview.hide('home');
-						plus.webview.hide('setting');
-						
-					});
-					settingButton.addEventListener('tap', function(event) {
-						plus.webview.show('setting');
-						plus.webview.hide('walk');
-						plus.webview.hide('home');
-					});
+          // 为bar-item添加点击事件
+          function addEventForBarItem() {
+            var activeTabID = subpages[0].id;
+            $('.mui-bar-tab').on('tap', 'li', function(e){
+              var targetTabId = this.getAttribute('id');
+              if(targetTabId == activeTabID) {
+                return;
+              }
+              var chooseView = plus.webview.getWebviewById(targetTabId);
+              $.fire(chooseView, 'refresh');
+              plus.webview.show(targetTabId, "auto");
+              plus.webview.hide(activeTabID);
+              activeTabID = targetTabId;
+            });
+          }
+
+					preloadSubpages();
+					addEventForBarItem();	
 					
 					$.oldBack = mui.back;
 					var backButtonPress = 0;
