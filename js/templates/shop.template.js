@@ -1,4 +1,4 @@
-(function($, T) {
+(function($, app, T) {
   T.cardShopTemplate = function(shop, id) {
     if(id == null || id == undefined) {
       id = shop.id;
@@ -10,7 +10,7 @@
               '</h2>' +
               '<div class="post-featured-image">' + 
               '<a class="thumbnail " target="_blank">' + 
-                '<img class="mui-media-object"  src="' + shop.image_url + '" width="100%" height="400" alt="">' +
+                '<img class="mui-media-object"  src="' + app.imageUrl(shop.image_url) + '" width="100%" height="400" alt="">' +
               '</a>' +
               '</div>' +
             '</article>' 
@@ -23,9 +23,10 @@
         business_hour;
         
     business_hour = shop.business_hour_start + ' - ' + shop.business_hour_end;
+    var location = shop.lng + ',' + shop.lat + ',' + shop.title;
 
     header_img = '<div class="header_img">' + 
-                  '<img src="' + shop.image_url + '" />' +
+//                '<img src="' + app.imageUrl(shop.image_url) + '" />' +
                  '</div>';
 
     header_content = 
@@ -33,10 +34,12 @@
          '<div class="row">' + 
             '<div class="col-xs-12">' + 
             '<div class="logotxt text-left"><h2><a href="#">' + shop.title + '</a></h2></div>' +
-            '<div class="heart" id="heart" status="0"><i class="fa fa-heart-o fa-2x"></i></div>' +  
+            '<div class="heart" id="heart" status="0"></div>' +  
 						'<h2 class="shop-phone text-left"><a href="tel:'+ shop.phone_number +'">' + 
 						  '<i class="fa fa-phone"></i>' + shop.phone_number + '</a><span></span></h2>' +
-            '<h2 class="shop-phone text-left"><i class="fa fa-map-marker"></i>' + shop.address + '</a><span></span></h2>' + 
+            '<h2 class="shop-phone text-left" onclick="navigateWithMap(' + location + ')">' +
+              '<i class="fa fa-map-marker"></i>' + shop.address + '</a>' +
+            '</h2>' +
             '<h2 class="shop-phone text-left"><a href=""><i class="fa fa-clock-o"></i>' + business_hour + '</a><span></span></h2>' + 
           '</div>' + 
         '</div>' +
@@ -64,7 +67,7 @@
   function sliderCellForShop(shop, id) {
     var li = document.createElement('li');
     li.className = 'mui-table-view-cell';
-    li.id = '/grap.html?shop=' + shop.id;
+    li.id = '/grap.html?shop_id=' + shop.id + '#index:' + id;
     li.innerHTML = 
       '<div class="mui-slider-right mui-disabled">' + 
         '<a class="mui-btn mui-btn-red">取消关注</a>' + 
@@ -74,4 +77,4 @@
       '</div>';
     return li;
   }
-})(mui, window.app.Template);
+})(mui, window.app, window.app.Template);

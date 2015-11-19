@@ -1,4 +1,4 @@
-(function($, T) {
+(function($, app,  T) {
   function show_date(date) {
     var d = new Date(date);
     return (d.getMonth() + 1) + '-' + d.getDate() + ' ' + d.getHours() + ':' + d.getMinutes();
@@ -10,7 +10,10 @@
     }
     var statusText, couponText ;
     var arcticleClass = "danger";
-    if(coupon.left_count <= 0) {
+    if(coupon.user_grabed) {
+      arcticleClass = 'success';
+      statusText = '已抢';
+    } else if(coupon.left_count <= 0) {
       arcticleClass = "";
       statusText = '完';
     } else if (coupon.seconds_until_grab > 0) {
@@ -63,7 +66,7 @@
     return (
       '<article class="post tag-ad collect '+ articleClass +'">' + 
         '<div class="post-featured-image"></div>' + 
-        '<span class="type" id="index:'+ userCoupon.id +'">' + statusText + '</span>' +
+        '<span class="type" id="index:'+ id +'">' + statusText + '</span>' +
         '<span class="name">'+ coupon.title +'</span>' +
         '<span class="time">'+ show_date(coupon.end_date) +'</span>' + 
         '<span class="price">' + couponText + '</span>' + 
@@ -74,4 +77,4 @@
       '</article>'
     );
   }
-})(mui, window.app.Template);
+})(mui, window.app, window.app.Template);

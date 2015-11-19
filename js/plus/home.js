@@ -12,6 +12,9 @@
       this.addCityPicker();
     }, 
     preload: function() {
+      if(plus.webview.getWebviewById('plus/grap')) {
+        return;
+      }
       $.preload({
         url: '/plus/grap.html',
         id: 'plus/grap'

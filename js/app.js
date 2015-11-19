@@ -10,6 +10,7 @@
 		console.log("webview ["+ plus.webview.currentWebview().id + "] count: ", plus.webview.all().length);
 	});
 	
+	owner.IMAGEHOST = 'http://192.168.1.16:8080/';
 	owner.BASEURL = 'http://192.168.1.16:8080/api/v1/';
 	/**
 	 *  基础功能
@@ -44,6 +45,18 @@
 			uri = uri.slice(1);
 		}
 		return owner.BASEURL + uri;
+	}
+	
+	/*
+	 * 图片地址
+	 */
+	owner.imageUrl = function(uri) {
+	  if(uri.startsWith('http://') || uri.startsWith('https://')) {
+	     return uri; 
+	  } else if(uri.startsWith('/')) {
+			uri = uri.slice(1);
+		}
+		return owner.IMAGEHOST + uri;
 	}
 	
 	/*

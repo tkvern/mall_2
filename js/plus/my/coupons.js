@@ -13,12 +13,13 @@
     addEventForUseCoupon: function() {
       var self = this;
       $('#plist').on('tap', '.collect.danger .type', function() {
-        var index = this.id.split('=')[1]
+        var index = parseInt(this.id.split(':')[1]);
+        console.log('index:', index);
         $.openWindow({
           url: '/plus/qcode.html',
           waiting: {
-            autoShow: false 
-          }
+            autoShow: true
+          },
           extras: {
             userCoupon: self.data[index]
           }

@@ -44,7 +44,7 @@
 			<div class="mui-scroll-wrapper" style="padding-top: 45px;">
 				<div class="mui-scroll">
 					<div class="header">
-						<div class="header_img">
+						<!--<div class="header_img">
 							<img src="../images/spk.png" />
 						</div>
 					  <div class="container">
@@ -57,12 +57,12 @@
                   <h2 class="shop-phone text-left"><a href=""><i class="fa fa-clock-o"></i>09:00&nbsp;-&nbsp;22:00</a><span></span></h2>
                  </div>
 					   	</div>
-						</div>
+						</div>-->
 					</div>
 					<div class="container" style="margin-top:15%;">
 						<div class="row">
 							<div class="col-xs-8 col-xs-offset-2 text-center">
-								<h5>使用码(<span id="charcode">28372835623</span>)</h5>
+								<!--<h5>使用码(<span id="charcode"></span>)</h5>-->
 								<div class="img-thumbnail" style="padding: 10px;">
 								  <div id="qrcode"></div>
 								</div>
@@ -87,6 +87,9 @@
 		<script src="../js/templates/shop.template.js"></script>
 		<script src="../js/page.js"></script>
 		<script src="../js/plus/qcode.js"></script>
+		<script>
+		  new window.app.QcodePage().start();
+		</script>
 		<!--<script type="text/javascript" charset="utf-8">
 		<script>
       var qrcode = new QRCode(document.getElementById("qrcode"), {

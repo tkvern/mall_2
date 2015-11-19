@@ -9,6 +9,9 @@
       this.addEventForCouponsTap();
       this.addEventForCollectTap();
       this.addEventForAction();
+      this.goToRate();
+      this.checkUpdate();
+      this.showWelcom();
     },
     initActionText: function() {
       if(app.isLogin()) {
@@ -88,8 +91,56 @@
           plus.webview.currentWebview().reload(true);
         }
       });
+    },
+    goToRate: function() {
+      document.getElementById("rate").addEventListener('tap', function() {
+        if (mui.os.ios) {
+          location.href = 'https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=682211190&pageNumber=0&sortOrdering=2&type=&mt=8';
+        } else if (mui.os.android) {
+          plus.runtime.openURL("market://details?id=io.dcloud.HelloMUI", function(e) {
+            plus.runtime.openURL("market://details?id=io.dcloud.HelloMUI", function(e) {
+              mui.alert("360手机助手和应用宝，你一个都没装，暂时无法评分，感谢支持");
+            }, "com.qihoo.appstore");
+          }, "com.tencent.android.qqdownloader");
+        }
+      });
+    },
+    checkUpdate: function() {
+      document.getElementById("update").addEventListener('tap', function() {
+        var server = "http://www.dcloud.io/check/update"; //获取升级描述文件服务器地址
+        mui.getJSON(server, {
+          "appid": plus.runtime.appid,
+          "version": plus.runtime.version,
+          "imei": plus.device.imei
+        }, function(data) {
+          if (data.status) {
+            plus.ui.confirm(data.note, function(i) {
+              if (0 == i) {
+                plus.runtime.openURL(data.url);
+              }
+            }, data.title, ["立即更新", "取　　消"]);
+          } else {
+            mui.toast('茂号已是最新版本~')
+          }
+        });
+      });
+    },
+    showWelcom: function() {
+      document.getElementById("welcome").addEventListener('tap', function(e) {
+        //显示启动导航
+        mui.openWindow({
+          id: 'guide',
+          url: 'guide.html',
+          show: {
+            aniShow: 'fade-in',
+            duration: 300
+          },
+          waiting: {
+            autoShow: false
+          }
+        });
+      });
     }
   });
 })(mui, window.app)
 
-new window.app.SettingPage().start();

@@ -43,6 +43,7 @@
       this.hasMore = true;
       this.refreshing = false;
       this.data = [];
+      this.meta = null;
     },
     pageInit: function() {
       var self = this;
@@ -116,6 +117,9 @@
           self.clearItems();
           self.appendItems(items);
           self.judgeMore(data.meta);
+          if($.isFunction(self.afterLoading)) {
+            self.afterLoading();
+          }
 //        $(self.options['pullRefreshContainerId']).pullRefresh().refresh(true);
         },
         'complete': function() {
@@ -145,6 +149,7 @@
       });
     },
     judgeMore: function(meta) {
+      this.meta = meta
       if(meta && meta.links && meta.links.next) {
         this.nextUrl = meta.links.next;
         this.hasMore = true;
@@ -294,7 +299,7 @@
         'url': apiUrl,
         'success': function(data) {
           var items = data[self.getDataKey()];
-          console.log(JSON.stringify(items));
+//        console.log(JSON.stringify(items));
           self.clearItems();
           self.appendItems(items);
           self.refresh();
