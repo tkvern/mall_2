@@ -15,7 +15,7 @@
 		},
 		validateEmptyPassword: function(element) {
 			return {
-				state: element.value.length == 0,
+				state: element.value.length != 0,
 				error: '密码不能为空'
 			}
 		},

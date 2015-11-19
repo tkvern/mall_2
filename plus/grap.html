@@ -15,6 +15,19 @@
 				var imgWrapper = img.parentNode;
 				imgWrapper.className += imgWrapper.className? ' loaded' : 'loaded';
 			}
+			function navigateWithMap(latitude, longitude, title) {
+        // 设置目标位置坐标点和其实位置坐标点
+        plus.geolocation.getCurrentPosition( function(position){
+          var src = new plus.maps.Point(position.latitude, position.longitude)
+          var dst = new plus.maps.Point(latitude,longitude);
+          // 调用系统地图显示 
+          plus.maps.openSysMap( dst, title, src );
+        }, function ( e ) {
+          plus.nativeUI.toast( "获取位置信息失败："+ e.message );
+          var dst = new plus.maps.Point(latitude,longitude);
+          plus.maps.openSysMap( dst, title, null );
+        } );
+      }
 		</script>
 	</head>
 
@@ -23,179 +36,35 @@
 			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
 				<span class="mui-icon mui-icon-left-nav"></span>返回
 			</button>
-			<h1 class="mui-center mui-title">抢优惠</h1>
+			<h1 class="mui-center mui-title">商场</h1>
 		</header>
-		<div class="mui-content">
-		<div class="mui-scroll-wrapper" style="padding-top: 45px;" id="refreshContainer">
+		<div class="mui-content mui-scroll-wrapper" style="padding-top: 45px;" id="refreshContainer">
 			<div class="mui-scroll">
-				<div class="header">
-					<div class="header_img">
-						<img src="../images/dazhu.jpg" />
-					</div>
-				  <div class="container">
-					<div class="row">
-					  <div class="col-xs-12">
-						  <div class="logotxt text-left"><h2><a href="#">大足印象</a></h2></div>
-						  <div class="heart" id="heart" status="0"><i class="fa fa-heart-o fa-2x"></i></div>
-						  <h2 class="shop-phone text-left"><a href="tel:0788-88888"><i class="fa fa-phone"></i>0788-88888</a><span></span></h2>
-						  <h2 class="shop-phone text-left" onclick="navigateWithMap(39.906016,116.3977, '大足印象')"><i class="fa fa-map-marker"></i>重庆市火星村2号</a><span></span></h2>
-						  <h2 class="shop-phone text-left"><a href=""><i class="fa fa-clock-o"></i>09:00&nbsp;-&nbsp;22:00</a><span></span></h2>
-						</div>
-					  </div>
-					</div>
+				<div class="header" id="brand">
 				</div>
-				<div class="container" style="margin-top:20px;">
-					<div class="row" id="post-list">
-						<div class="col-xs-12 col-sm-6">
-						<article class="post tag-ad collect danger">
-						<div class="post-featured-image"></div>
-						<span class="type" id="1">抢</span>
-						<span class="name" id="merchant.html?shop=1" onclick="clicked(this.id);">肯德基(大新店)</span>
-						<span class="time">&nbsp;09-09&nbsp;10:10</span>
-						<span class="count">剩<span class="badge">500</span>张</span>
-						<span class="price"><span class="h4">￥</span>100</span>
-						<span class="description">满100使用</span>
-						<span class="dash"></span>
-						<span class="stop top"></span>
-						<span class="stop bottom"></span>
-						</article>
-						</div>
-						<div class="col-xs-12 col-sm-6">
-						<article class="post tag-ad collect danger">
-						<div class="post-featured-image"></div>
-						<span class="type" id="1">抢</span>
-						<span class="name" id="merchant.html?shop=2" onclick="clicked(this.id);">肯德基(大新店)</span>
-						<span class="time">&nbsp;09-09&nbsp;10:10</span>
-						<span class="count">剩<span class="badge">500</span>张</span>
-						<span class="price"><span class="h4"></span>7折</span>
-						<span class="description">满100使用</span>
-						<span class="dash"></span>
-						<span class="stop top"></span>
-						<span class="stop bottom"></span>
-						</article>
-						</div>
-						<div class="col-xs-12 col-sm-6">
-						<article class="post tag-ad collect danger">
-						<div class="post-featured-image"></div>
-						<span class="type" id="1">抢</span>
-						<span class="name" id="merchant.html?shop=3" onclick="clicked(this.id);">肯德基(大新店)</span>
-						<span class="time">&nbsp;09-09&nbsp;10:10</span>
-						<span class="count">剩<span class="badge">500</span>张</span>
-						<span class="price"><span class="h4">￥</span>100</span>
-						<span class="description">满100使用</span>
-						<span class="dash"></span>
-						<span class="stop top"></span>
-						<span class="stop bottom"></span>
-						</article>
-						</div>
-						<div class="col-xs-12 col-sm-6">
-						<article class="post tag-ad collect danger">
-						<div class="post-featured-image"></div>
-						<span class="type" id="1">抢</span>
-						<span class="name" id="merchant.html?shop=4" onclick="clicked(this.id);">肯德基(大新店)</span>
-						<span class="time">&nbsp;09-09&nbsp;10:10</span>
-						<span class="count">剩<span class="badge">500</span>张</span>
-						<span class="price"><span class="h4">￥</span>100</span>
-						<span class="description">满100使用</span>
-						<span class="dash"></span>
-						<span class="stop top"></span>
-						<span class="stop bottom"></span>
-						</article>
-						</div>
+				<div class="container" style="margin-top:20px;" id="coupon-list">
+					<div class="row">
+						
 					</div>
 				</div>
 			</div>
 		</div>
-		</div>
 		<script src="../js/mui.min.js"></script>
 		<script src="../js/app.js"></script>
+		<script src="../js/app.ajax.extend.js"></script>
 		<script src="../js/mui.indexedlist.js"></script>
-		<script type="text/javascript" charset="utf-8">
-			mui.plusReady(function() {
-				var currentShop = null;
-				//初始化单页的区域滚动
-				mui('.mui-scroll-wrapper').scroll();
-				
-				var pullfresh = function() {
-					setTimeout(function() {
-						mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
-					}, 3000);
-				}
-				
-				mui.init({
-					pullRefresh : {
-						container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-						down : {
-							  contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-							  contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-							  contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-							  callback :pullfresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-						}
-					}
-				});
-				
-				window.addEventListener('grapRefresh', function(e){
-					currentShop = e.detail.shop;
-					console.log('grap refresh', JSON.stringify(e.detail));
-				});
-			
-				// H5 plus事件处理
-				function plusReady(){
-					// 隐藏滚动条
-					plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
-					// Android处理返回键
-					
-					compatibleAdjust();
-				}
-				if(window.plus){
-					plusReady();
-				}else{
-					document.addEventListener('plusready',plusReady,false);
-				}
-				// DOMContentLoaded事件处理
-				var _domReady=false;
-				document.addEventListener('DOMContentLoaded',function(){
-					_domReady=true;
-					compatibleAdjust();
-				},false);
-				var _adjust=false;
-				function compatibleAdjust(){
-					if(_adjust||!window.plus||!_domReady){
-						return;
-					}
-					_adjust=true;
-
-					// 预创建二级窗口
-				//	preateWebviews();
-					// 关闭启动界面
-					setTimeout(function(){
-						plus.navigator.closeSplashscreen();
-					},500);
-				}
-				var heart = document.getElementById('heart');
-				heart.addEventListener('click', function(event){
-					if (heart.status == 0){
-						heart.status = 1;
-						heart.innerHTML = "<i class='fa fa-heart-o fa-2x'></i>";
-						plus.nativeUI.toast('已取消收藏！');
-					} else {
-						heart.status = 0;
-						heart.innerHTML = "<i class='fa fa-heart fa-2x'></i>";
-						plus.nativeUI.toast('收藏成功！');
-					}
-				});
-				//抢券
-				mui('#post-list').on('tap', '.collect .type', function(event) {
-					var elem = this;
-					if(elem.innerText!="已抢" && elem.innerText!="未开始" && elem.innerText!="已抢完"){
-						elem.className = elem.className.replace("badge-danger", "badge-success");
-						var parent = elem.parentNode;
-						parent.className = parent.className.replace("danger", "success");
-						elem.innerText = "已抢";
-						plus.nativeUI.toast('抢券成功！');
-					}
-				});
-			});
+		<script src="../js/page.js"></script>
+		<script src="../js/templates/common.template.js" ></script>
+		<script src="../js/templates/mall.template.js"></script>
+		<script src="../js/templates/coupon.template.js"></script> 
+		<script src="../js/plus/grap.js"></script>
+		<script>
+		  new window.app.GrapPage({
+        'apiUrl': 'malls/1/coupons',
+        'dataKey': 'coupons',
+        'pullRefreshContainerId': '#refreshContainer',
+        'itemsContainerId': '#coupon-list'
+      }).start();
 		</script>
 	</body>
 

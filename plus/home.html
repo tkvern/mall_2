@@ -16,181 +16,41 @@
 	</head>
 
 	<body>
-		<header class="mui-bar mui-navbar">
+		<nav class="mui-bar mui-navbar" >
 			<h1 class="mui-title">茂号</h1>
-			<button id='showCityPicker' class="mui-pull-left mui-btn-link"><span id="city">重庆</span>&nbsp;<i class="fa fa-map-marker"></i></button>
+      <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left">返回</a>
+			<button id='showCityPicker' class="mui-pull-right mui-btn-link"><span id="city">重庆</span>&nbsp;<i class="fa fa-map-marker"></i></button>
 			<div id='cityResult' class="ui-alert"></div>
-		</header>
-		<div class="mui-content">
-      <div class="mui-scroll-wrapper" style="padding-top: 45px;" id="refreshContainer">
-        <div class="mui-scroll">
-          <div class="container">
-            <div class="row" id="plist">
-
-					</div>
-				</div>
-			</div>
-		</div>
+		</nav>
+		<div class="mui-content mui-scroll-wrapper scontent" id="refreshContainer">
+		  <div class="mui-scroll">
+        <div class="container" id="plist">
+          <div class="row">
+            
+          </div>
+        </div>
+		  </div>
 		</div>
 		<script src="../js/mui.min.js"></script>
+		<script src="../js/app.js"></script>
+		<script src="../js/app.ajax.extend.js"></script>
 		<script src="../js/mui.listpicker.js"></script>
 		<script src="../js/mui.poppicker.js"></script>
-		<script src="../js/app.js"></script>
+		<script src="../js/templates/mall.template.js"></script>
+		<script src="../js/templates/common.template.js"></script>
+		<script src="../js/page.js"></script>
+		<script src="../js/plus/home.js"></script>
+		<script>
+		  new window.app.HomePage({
+        'dataKey': 'malls',
+        'pullRefreshContainerId': '#refreshContainer',
+        'itemsContainerId': '#plist',
+        'pullDown': true,
+        'pullUp':false
+      }).start()
+		</script>
 		<!--<script src="../js/mui.lazyload.js"></script>
 		<script src="../js/mui.lazyload.img.js"></script>-->
-		<script>
-			mui('.mui-scroll-wrapper').scroll();
-			function mallTemplate(mall) {
-				return ( 
-					'<article class="post tag-ad" id="shop:' + mall.id +  '">' +
-						'<h2 class="post-title">' +  
-							'<a target="_blank">' + mall.name + '</a>' + 
-						'</h2>' +
-						'<div class="post-featured-image">' + 
-						'<a class="thumbnail " target="_blank">' + 
-						  '<img class="mui-media-object"  src="' + mall.image_url + '" width="100%" height="400" alt="">' +
-						'</a>' +
-						'</div>' +
-					'</article>'
-				);
-			}
-			
-			var createFragment = function(malls) {
-				var fragment = document.createDocumentFragment();
-				var div;
-				for (var i = 0; i < malls.length; i++) {
-					div = document.createElement('div');
-					div.className = 'col-xs-12 col-md-6';
-					div.innerHTML = mallTemplate(malls[i]);
-					fragment.appendChild(div);
-				}
-				return fragment;
-			};
-			
-			function loadMalls() {
-				console.log('loadmalls scroll');
-				var malls = [
-					{id: 1, name: '大足印象', image_url: 'http://p1.pccoo.cn/sell/20130822/201308220948223913s.jpg'},
-					{id: 2, name: '洋人街', image_url: 'http://images.517best.com/UploadFiles/images/s/20131127/188023855320131127112217881351671.jpg'},
-					{id: 3, name: '大足印象', image_url: 'http://p1.pccoo.cn/sell/20130822/201308220948223913s.jpg'},
-					{id: 4, name: '洋人街', image_url: 'http://images.517best.com/UploadFiles/images/s/20131127/188023855320131127112217881351671.jpg'},
-					{id: 5, name: '大足印象', image_url: 'http://p1.pccoo.cn/sell/20130822/201308220948223913s.jpg'},
-					{id: 6, name: '洋人街', image_url: 'http://images.517best.com/UploadFiles/images/s/20131127/188023855320131127112217881351671.jpg'},
-					{id: 7, name: '大足印象', image_url: '../images/mall-holder.png'},
-					{id: 8, name: '洋人街', image_url: '../images/mall-holder.png'}
-				];
-				mui.get(
-					window.app.apiUrl('cities/cq/malls'),
-					null,
-					function(data) {
-						//malls = data.malls;
-						window.MallData = {};
-						for(var i = 0; i < malls.length; i++) {
-							window.MallData[malls[i].id] = malls[i];
-						}
-						mui('#plist')[0].appendChild(createFragment(malls));
-						
-//						mui(document).imageLazyload({
-//							placeholder: '../images/mall-holder.png',
-//							duration: 50
-//						});
-						malls = null;
-					}
-				);
-			}
-			
-			function addEventForMall() {
-				mui('#plist').on('tap', 'article', function() {
-					console.log('tap on', this.id);
-					var targetView = plus.webview.getWebviewById('plus/grap');
-					targetView.show();
-					var shopId = parseInt(this.id.split(':')[1]);
-					mui.fire(targetView, 'grapRefresh', {shop: window.MallData[shopId]});
-				});
-			}
-			
-			function refresh() {
-				console.log('refresh');
-				loadMalls();
-				setTimeout(function() {
-						mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
-					}, 3000);
-			}
-			// H5 plus事件处理
-			mui.plusReady(function(){
-				
-			//function plusReady(){
-				mui.init({
-				  pullRefresh : {
-					container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-					down : {
-					  contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
-					  contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
-					  contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
-					  callback : refresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-					}
-				  }
-				});
-				mui.preload({
-					id: 'plus/grap',
-					url: '/plus/grap.html'
-				})
-				loadMalls();
-				addEventForMall();
-				// 隐藏滚动条
-				plus.webview.currentWebview().setStyle({scrollIndicator:'none'});
-				// Android处理返回键
-				
-				//compatibleAdjust();
-			//}
-			})
-
-//			if(window.plus){
-//				plusReady();
-//			}else{
-//				document.addEventListener('plusready',plusReady,false);
-//			}
-			// DOMContentLoaded事件处理
-//			var _domReady=false;
-//			document.addEventListener('DOMContentLoaded',function(){
-//				_domReady=true;
-//				compatibleAdjust();
-//			},false);
-//			var _adjust=false;
-//			function compatibleAdjust(){
-//				if(_adjust||!window.plus||!_domReady){
-//					return;
-//				}
-//				_adjust=true;
-//				// 预创建二级窗口
-//			//	preateWebviews();
-//				// 关闭启动界面
-//				setTimeout(function(){
-//					plus.navigator.closeSplashscreen();
-//				},500);
-//			}
-			
-//			(function($, doc) {
-//				mui.ready(function() {
-//					//初始化城市
-//					var cityPicker = new $.PopPicker();
-//					cityPicker.setData([{
-//						value: 'chongqing',
-//						text: '重庆'
-//					}]);
-//					//选择城市
-//					var showCityPickerButton = doc.getElementById('showCityPicker');
-//					var cityResult = doc.getElementById('cityResult');
-//					showCityPickerButton.addEventListener('tap', function(event) {
-//						cityPicker.show(function(items) {
-//							document.getElementById('city').innerText = items[0].text; //JSON.stringify(items[0]);序列化结果
-//							//返回 false 可以阻止选择框的关闭
-//							//return false;
-//						});
-//					}, false);
-//				});
-//			}(mui, document));
-		</script>
 	</body>
 
 </html>

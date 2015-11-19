@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" href="../../css/mui.min.css" />
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="../../css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
+    <link rel="stylesheet" href="../../css/mui.indexedlist.css" />
+	</head>
+
+	<body class="niceui">
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">我的优惠券</h1>
+			<button type="button" class="mui-left mui-action-back mui-btn  mui-btn-link mui-btn-nav mui-pull-left">
+        <span class="mui-icon mui-icon-left-nav"></span>返回
+      </button>
+		</header>
+		<div class="main mui-content mui-scroll-wrapper" id="refreshContainer">
+			<div class="mui-scroll">
+        <div class="container" style="margin-top: 14px;" id="plist">
+          <div class="row">
+            
+          </div>
+        </div>
+      </div>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/app.js"></script>
+		<script src="../../js/app.ajax.extend.js"></script>
+		<script src="../../js/templates/common.template.js"></script>
+		<script src="../../js/templates/coupon.template.js"></script>
+		<script src="../../js/page.js"></script>
+		<script src="../../js/plus/my/coupons.js"></script>
+		<script>
+		  new window.app.UserCouponsPage({
+		    'dataKey': 'user_coupons',
+        'pullRefreshContainerId': '#refreshContainer',
+        'itemsContainerId': '#plist',
+        'pullUp': true,
+        'pullDown': true 
+		  }).start();
+		</script>
+	</body>
+</html>
