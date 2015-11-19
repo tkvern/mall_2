@@ -39,9 +39,9 @@
 	 * ajax 调用地址
 	 */
 	owner.apiUrl = function(uri) {
-	  if(uri.startsWith('http://') || uri.startsWith('https://')) {
+	  if(uri.indexOf('http://') == 0 || uri.indexOf('https://') == 0) {
 	     return uri; 
-	  } else if(uri.startsWith('/')) {
+	  } else if(uri.indexOf('/') == 0) {
 			uri = uri.slice(1);
 		}
 		return owner.BASEURL + uri;
@@ -51,9 +51,9 @@
 	 * 图片地址
 	 */
 	owner.imageUrl = function(uri) {
-	  if(uri.startsWith('http://') || uri.startsWith('https://')) {
+	  if(uri.indexOf('http://') == 0  || uri.indexOf('https://') == 0) {
 	     return uri; 
-	  } else if(uri.startsWith('/')) {
+	  } else if(uri.indexOf('/') == 0) {
 			uri = uri.slice(1);
 		}
 		return owner.IMAGEHOST + uri;

@@ -23,7 +23,6 @@
     },
     plusReady: function() {
       this.preload();
-      this.startPullDown();
       this.addEventForShopTap();
     },
     itemsFragment: function(items, idStart) {

@@ -57,7 +57,7 @@
             }
             var completeHandler = settings.complete;
             settings.complete = function(/* xhr, status */ ) {
-              console.log(arguments[1], arguments[0].responseText);
+              console.log(arguments[1] + arguments[0].responseText);
               if(completeHandler) {
                 completeHandler.apply(settings.context, arguments);
               }

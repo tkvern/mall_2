@@ -37,6 +37,7 @@
         'windowInitOptions': {}
       }
       $.extend(true, this.options, options);
+      console.log(JSON.stringify(this.options));
       this.pageInit();
       this.nextUrl = this.options['apiUrl'];
       this.currentItem = null;
@@ -71,8 +72,21 @@
         }
       }
       $.extend(pullRefreshOptions, initOptions['pullRefresh'] || {});
+      
       initOptions['pullRefresh'] = pullRefreshOptions;
+      console.log(JSON.stringify(initOptions));
       $.init(initOptions);
+      if (mui.os.plus) {
+        mui.plusReady(function() {
+          setTimeout(function() {
+            self.startPullUp();
+          }, 1000);
+        });
+      } else {
+        mui.ready(function() {
+          self.startPullUp();
+        });
+      }
     },
     startPullDown: function() {
       console.log(this.target, 'start pulling down');
@@ -109,7 +123,7 @@
     pullDownRefresh: function() {
       var self = this;
       var apiUrl = app.apiUrl(self.getInitUrl());
-      console.log('pull down url:', apiUrl);
+      console.log('pull down url:' + apiUrl);
       $.ajax({
         'url': apiUrl,
         'success': function(data) {
@@ -147,6 +161,7 @@
           self.endPullUp(!self.hasMore);
         }
       });
+      
     },
     judgeMore: function(meta) {
       this.meta = meta
