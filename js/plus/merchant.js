@@ -1,7 +1,7 @@
 (function($, app, T) {
   var MerchantPage = app.PullPage.extend({
     getInitUrl: function() {
-      return app.apiUrl('shops/' + this.currentItem.id + '/coupons');
+      return app.apiUrl('shops/' + this.currentItem.id + '/coupons?size=10');
     },
     itemsFragment: function(items, idStart) {
       return T.createRowBasedFragment(items, T.couponTemplate, idStart);
@@ -14,6 +14,10 @@
       } else {
         heart.status = 0;
         heart.innerHTML = "<i class='fa fa-heart-o fa-2x'></i>";
+      }
+      if(this.data.length < 1) {
+        var content = document.getElementById('coupon-list');
+        content.innerHTML = "<p class='text-center'>商家没有可抢的优惠劵~~</p>"
       }
     },
     plusReady: function() {

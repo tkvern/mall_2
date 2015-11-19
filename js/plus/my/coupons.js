@@ -10,6 +10,12 @@
     itemsFragment: function(items, idStart) {
       return T.createRowBasedFragment(items, T.userCouponTemplate, idStart)
     },
+    afterLoading: function() {
+      if(this.data.length < 1) {
+        var content = document.getElementById('plist');
+        content.innerHTML = "<p class='text-center'>还没有优惠劵,赶紧去逛逛吧</p>"
+      }
+    },
     addEventForUseCoupon: function() {
       var self = this;
       $('#plist').on('tap', '.collect.danger .type', function() {

@@ -39,7 +39,7 @@
               plus.nativeUI.toast('请登录');
             }
           } else {
-            plus.nativeUI.toast($.parseJSON(xhr.responseText).message);
+            plus.nativeUI.toast($.parseJSON(xhr.responseText).error);
           }
         } else {
           console.log(type, error, xhr.status);

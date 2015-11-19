@@ -10,8 +10,8 @@
 		console.log("webview ["+ plus.webview.currentWebview().id + "] count: ", plus.webview.all().length);
 	});
 	
-	owner.IMAGEHOST = 'http://192.168.1.16:8080/';
-	owner.BASEURL = 'http://192.168.1.16:8080/api/v1/';
+	owner.IMAGEHOST = 'http://121.201.58.39/';
+	owner.BASEURL = 'http://121.201.58.39/api/v1/';
 	/**
 	 *  基础功能
 	 */

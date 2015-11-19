@@ -16,9 +16,8 @@
         heart.innerHTML = "<i class='fa fa-heart-o fa-2x'></i>";
       }
       if(this.data.length < 1) {
-        console.log(this.data);
         var content = document.getElementById('coupon-list');
-        content.innerHTML = "<p class='text-center'>商家没有可抢的优惠劵~~</p>"
+        content.innerHTML = "<p class='text-center'>商城没有可抢的优惠劵~~</p>"
       }
     },
     plusReady: function() {

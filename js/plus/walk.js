@@ -1,7 +1,7 @@
 (function($, app, T) {
   app.WalkPage = app.PullPage.extend({
     getInitUrl: function() {
-      var url = 'cities/cq/shops';
+      var url = 'cities/cq/shops?size=5';
       return app.apiUrl(url);
     },
     addEventForShopTap: function() {
