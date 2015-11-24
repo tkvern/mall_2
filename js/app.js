@@ -11,6 +11,7 @@
 
 	owner.IMAGEHOST = 'http://121.201.58.39/';
 	owner.BASEURL = 'http://121.201.58.39/api/v1/';
+	
 	/**
 	 *  基础功能
 	 */

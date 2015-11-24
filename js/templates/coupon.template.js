@@ -32,7 +32,7 @@
       '<article class="post tag-ad collect ' + arcticleClass + '">' + 
         '<div class="post-featured-image"></div>' + 
         '<span class="type" id="coupon:'+ coupon.id + '">' + statusText + '</span>' +
-        '<span class="name" id="merchant.html?shop=3" onclick="clicked(this.id);">'+ coupon.title +'</span>' +
+        '<span class="name">'+ coupon.shop_name +'</span>' +
         '<span class="time">' + show_date(coupon.grabe_date) + '</span>' + 
         '<span class="count">剩<span class="badge">' + coupon.left_count + '</span>张</span>' +
         '<span class="price">' + couponText + '</span>' + 
@@ -67,7 +67,7 @@
       '<article class="post tag-ad collect '+ articleClass +'">' + 
         '<div class="post-featured-image"></div>' + 
         '<span class="type" id="index:'+ id +'">' + statusText + '</span>' +
-        '<span class="name">'+ coupon.title +'</span>' +
+        '<span class="name">'+ coupon.shop_name +'</span>' +
         '<span class="time">'+ show_date(coupon.end_date) +'</span>' + 
         '<span class="price">' + couponText + '</span>' + 
         '<span class="description">满' + coupon.min_consumption + '使用</span>' + 

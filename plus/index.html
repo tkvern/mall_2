@@ -62,8 +62,8 @@
               <!--<span class="search-icon fa fa-search"></span>
               <input type="text" placeholder="有需要，找茂号">-->
               <div class="input-group">
-                <input class="form-control" type="text" placeholder="有需要，找茂号">
-                <span class="input-group-addon"><span class="search-icon fa fa-search"></span></span>
+                <input class="form-control" type="text" placeholder="有需要，找茂号" id="query">
+                <span class="input-group-addon" id="go"><span class="search-icon fa fa-search"></span></span>
               </div>
             </div>
           </div>
@@ -319,7 +319,29 @@
       mui('.row').on('tap', '.icon', function(event) {
         plus.nativeUI.toast('正在建设中...');
       });
+      
+      mui('#go')[0].addEventListener('tap', function() {
+        var queryInput = mui('#query')[0];
+        var queryText = queryInput.value;
+        if(queryText != '') {
+          mui.openWindow({
+            url: '/plus/walk_with_back.html',
+            show: {
+              aniShow: 'pop-in'
+            },
+            styles: {
+              popGesture: 'hide'
+            },
+            waiting: {
+              autoShow: true
+            },
+            extras: {
+              query: queryText
+            }
+          });
+        }
+        queryInput.value = '';
+      });
 		</script>
 	</body>
-
 </html>

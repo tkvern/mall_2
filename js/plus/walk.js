@@ -1,7 +1,15 @@
 (function($, app, T) {
   app.WalkPage = app.PullPage.extend({
     getInitUrl: function() {
+      var query = null;
+      var pview = plus.webview.currentWebview().parent();
+      if(pview && pview.query) {
+        query = pview.query;
+      }
       var url = 'cities/cq/shops?size=5';
+      if(query) {
+        url = url + '&q=' + encodeURIComponent(query);
+      }
       return app.apiUrl(url);
     },
     addEventForShopTap: function() {
