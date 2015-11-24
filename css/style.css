@@ -882,19 +882,13 @@ body.niceui .post-featured-image .thumbnail{
 .mapmarker .search{
   margin-top: 5px;
 }
-.mapmarker .search .search-icon{
-  position: absolute;
-  color: darkgray;
-  padding-top: 8px;
-  padding-left: 10px;
+.mapmarker .search .search-icon, .mapmarker .search .input-group-addon{
+  border: 0px;
+  opacity: 0.9;
 }
 .mapmarker .search input[type=text]{
+  opacity: 0.8;
   border: 0px;
-  height: 30px;
-  line-height: 18px;
-  padding: 2px 10px 2px 30px;
-  border-radius: 15px;
-  color: #929292;
 }
 .contant{
   padding-top:0px!important;
